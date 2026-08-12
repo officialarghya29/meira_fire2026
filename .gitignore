@@ -1,0 +1,26 @@
+# --- Python ---
+.venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+
+# --- Notebooks ---
+.ipynb_checkpoints/
+
+# --- LaTeX build artifacts (source .tex/.bib under latex/ are tracked) ---
+latex/*.aux
+latex/*.bbl
+latex/*.blg
+latex/*.log
+latex/*.out
+latex/*.toc
+latex/*.fls
+latex/*.fdb_latexmk
+latex/*.synctex.gz
+latex/main.pdf
+
+# --- OS / editors ---
+.DS_Store
+*.swp
+.idea/
+.vscode/

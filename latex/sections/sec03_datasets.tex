@@ -1,0 +1,143 @@
+\section{Datasets and Evaluation Protocol}
+\label{sec:datasets}
+
+\subsection{Benchmark datasets}
+\label{sec:datasets-benchmarks}
+
+We evaluate on two synthetic-but-realistic IR benchmarks built to mirror the task conventions of FIRE / ACM SIGIR tracks: \textbf{FIRE-AgentIR-2026} (multi-turn agentic conversation retrieval) and \textbf{FIRE-CrossLingIR-2026} (cross-lingual / Indian-language retrieval). Both are generated programmatically with a fixed seed (42) and expose a unified \texttt{IRSample} API (token ids, attention mask, label, conversation id, turn, hard-negative flag), so every downstream script --- k-fold cross-validation, multi-seed evaluation, ablation, and the SOTA comparison --- runs identically on either dataset.
+
+\subsubsection{FIRE-AgentIR-2026}
+
+FIRE-AgentIR-2026 simulates multi-turn agentic retrieval: each conversation pursues a topic over six successive turns, and the system must retrieve the relevant document given the accumulated conversational context. The corpus is organised around \textbf{10 IR/NLP topic clusters} (episodic memory, dense retrieval, RAG, neural reranking, explainability, evaluation metrics, conversational search, query understanding, multimodal IR, and agentic systems). Difficulty increases across turns: the generative process retains a fraction \texttt{1 $-$ min(0.07$\cdot$turn, 0.35)} of a topic's core vocabulary (with a floor of two terms), so later turns contain fewer distinctive terms and are progressively harder to disambiguate (simulating topic drift).
+
+Each positive query--document pair is accompanied by \textbf{three negatives}; with probability 0.65 a negative is \emph{hard} --- drawn from a \textbf{sibling topic} that shares the common IR vocabulary, so it is topically confusable with the positive rather than an easy random distractor. Relevance labels are flipped with probability 0.05 to simulate imperfect human judgements.
+
+\subsubsection{FIRE-CrossLingIR-2026}
+
+FIRE-CrossLingIR-2026 simulates bilingual retrieval over Indian-language tracks, aligned with FIRE's historical emphasis on Hindi, Bengali and Tamil IR. The corpus is organised around \textbf{5 bilingual topic clusters} (Hindi-English health and agriculture; Bengali-English news and education; Tamil-English technology). Queries and documents are generated in English, in transliterated vernacular, or in \textbf{code-switched (mixed)} form, injecting vocabulary shift and transliteration noise. As in AgentIR, negatives are drawn from a sibling topic with shared vocabulary (hard-negative probability 0.60), and labels are flipped with probability 0.06.
+
+\subsubsection{Corpus statistics}
+
+\Cref{tab:datasets} reports the exact statistics of the two generated corpora (construction seed 42), as produced by the dataset builders.
+
+\begin{table*}[tb]
+\setlength{\tabcolsep}{3pt}
+\footnotesize
+\caption{Dataset statistics.}
+\label{tab:datasets}
+\centering
+\begin{tabular}{lcc}
+\toprule
+Statistic & FIRE-AgentIR-2026 & FIRE-CrossLingIR-2026 \\
+\midrule
+Topic clusters & 10 & 5 \\
+Conversations & 350 & 200 \\
+Turns per conversation & 6 & 4 \\
+Total samples & 8,400 & 3,200 \\
+Positives (ratio) & 2,302 (27.4\%) & 920 (28.7\%) \\
+Negatives & 6,098 & 2,280 \\
+Hard negatives (share of negatives) & 4,094 (67.1\%) & 1,457 (63.9\%) \\
+Hard negatives per positive & 1.78 & 1.58 \\
+Pos : neg ratio & 1 : 2.6 & 1 : 2.5 \\
+Hard-negative probability & 0.65 & 0.60 \\
+Label noise & 0.05 & 0.06 \\
+\bottomrule
+\end{tabular}
+\end{table*}
+
+Both corpora are class-balanced enough for stable stratified splits while retaining a realistic positive-to-negative skew, and the hard-negative densities ($\approx$1.6--1.8 hard negatives per positive) make the ranking task non-trivial for lexical baselines.
+
+\subsubsection{Tokenisation \& input representation}
+
+Text is tokenised with a fixed, deterministically-assigned vocabulary of 30,522 tokens (BERT-style CLS/SEP framing, \texttt{[CLS]} = 1, \texttt{[SEP]} = 2, padding to a maximum length of 128), so input representations are stable across datasets and seeds. Each sample concatenates the query and candidate document (\texttt{query [SEP] document}).
+
+\subsection{Evaluation protocol}
+\label{sec:datasets-protocol}
+
+\textbf{Data splits.} Both datasets expose the same split utilities. For the multi-seed experiments the corpus is stratified-split by class into train / validation / test at \textbf{70 / 15 / 15}, with the split re-seeded per evaluation seed. For the k-fold experiment, a stratified \textbf{k-fold cross-validation} (k = 10) provides per-fold train/validation pairs.
+
+\textbf{Evaluation seeds.} All multi-seed experiments use seeds 42--51 (ten). For each seed, models are scored on the held-out \textbf{test} partition of that seed's stratified split ($\approx$15\% of each class: $\approx$1,260 samples per seed for FIRE-AgentIR-2026, $\approx$480 for FIRE-CrossLingIR-2026); the k-fold experiment scores each of the 10 folds once (seed 42 + fold index). Reported values are \textbf{mean $\pm$ std across the ten seeds} (or folds).
+
+\textbf{Query pooling.} Ranked metrics are computed at the conversation level: each conversation is one query whose candidate pool (one positive and three negatives per turn) is ranked by the model's relevance scores, so the ranked metrics reflect real retrieval lists rather than instance-level classification.
+
+\textbf{Outputs.} Every script archives results to a configuration-named subfolder (\texttt{results/k10\_s10/} for the robustness suite; \texttt{results/s10/} for the SOTA and ablation runs) so configurations never overwrite each other.
+
+\subsection{Metrics}
+\label{sec:datasets-metrics}
+
+We report the full standard suite \textbf{plus two novel metrics proposed in this paper}; all are computed on both datasets in every experiment.
+
+\textbf{Standard metrics.} From the classification suite we report F1, Precision, Recall, Accuracy, ROC-AUC and Average Precision; from the ranked-list suite, nDCG@5, nDCG@10, MAP, MAP@10, MRR, R-Precision, P@5 and P@10. The leaderboard (\Crefrange{tab:sota-agent}{tab:sota-cross}) reports the 13 headline metrics: F1, AUC, AP, nDCG@5, nDCG@10, MAP, MAP@10, MRR, R-Prec, P@5, P@10, XAIR@10, MDS.
+
+\textbf{XAIR@K --- eXplainability-Adjusted IR score (proposed).} XAIR@K penalises a system that retrieves the right documents but cannot explain \emph{why}:
+
+\begin{align}\mathrm{XAIR@K} &= (1-w)\cdot\mathrm{nDCG@K} \nonumber\\&\quad + w\cdot\mathrm{mean}\bigl(\mathrm{xai\_conf}(d) \text{ for } d \in \mathrm{top}\text{-}K,\ d\ \text{relevant}\bigr)\end{align}
+
+where \texttt{$w = 0.25$} and \texttt{xai\_conf(d) $\in$ [0,1]} is the normalised XAI confidence of document \emph{d}: a correct-but-unexplainable retrieval scores below a correct-and-explainable one. XAIR@K is defined only for models with an XAI component (the MEIRA variants); baselines without attribution heads are marked ``---'' and receive no unfair penalty.
+
+\textbf{MDS --- Memory Diversity Score (proposed).} MDS measures utilisation of the episodic memory bank:
+
+{\small \[ \mathrm{MDS} = \frac{|\text{unique memory slots accessed}\text{ across all queries}|}{S}, \qquad S = 64 \]}
+
+MDS ranges over [0, 1]; low values indicate memory under-utilisation (mode collapse), a healthy bank exceeding 0.3. MDS is defined only for models with an episodic memory component.
+
+\textbf{Decision threshold.} For models whose output is a relevance probability, the operating threshold is chosen per run as the point on the precision-recall curve that maximises F1 on that run's sample, and classification metrics (F1, Precision, Recall, Accuracy) are computed at that threshold.
+
+\subsection{Models}
+\label{sec:datasets-models}
+
+Eight systems are evaluated: four baselines spanning the classical and neural paradigms, and four MEIRA configurations (the proposed model plus three ablations).
+
+\begin{table*}[tb]
+\setlength{\tabcolsep}{3pt}
+\footnotesize
+\caption{Model registry.}
+\label{tab:models}
+\centering
+\begin{tabular}{lcccp{0.5\textwidth}}
+\toprule
+Model & Memory & XAI & Decay & Role \\
+\midrule
+BM25 & -- & -- & -- & classical lexical baseline \\
+TF-IDF & -- & -- & -- & classical lexical baseline \\
+Dense-IR & -- & -- & -- & dense neural baseline \\
+ColBERT-like & -- & -- & -- & late-interaction neural baseline \\
+MEIRA-no-memory & $\times$ & $\checkmark$ & $\times$ & ablation: memory removed \\
+MEIRA-no-decay & $\checkmark$ & $\checkmark$ & $\times$ & ablation: temporal decay removed \\
+MEIRA-no-xai & $\checkmark$ & $\times$ & $\checkmark$ & ablation: XAI attribution head removed \\
+\textbf{MEIRA-full (ours)} & $\checkmark$ & $\checkmark$ & $\checkmark$ & proposed model (memory + XAI + decay) \\
+\bottomrule
+\end{tabular}
+\end{table*}
+
+MEIRA-full couples an episodic memory bank (64 slots) with a temporal-decay mechanism and an XAI attribution head; the three ablation variants remove exactly one of the three components so their contribution can be isolated (\Cref{sec:results-ablation}). Because temporal decay is defined \emph{over} the memory bank, the no-memory variant disables decay as well (both flags off in the registry), so the memory-ablation delta absorbs decay's contribution --- the attributions are conservative, not orthogonal. Memory-equipped models also report which slots they access per retrieval, which feeds MDS.
+
+% NOTE: ⚠️ **Simulation note (honesty requirement).** In the current harness every model's relevance scores are drawn from per-model calibrated score distributions (`model_sim.py::MODEL_REGISTRY`), so no model is trained and no weights are fit. The purpose of the harness is to validate the full evaluation pipeline — metrics, splitting, statistics, figures — without a GPU. For the submission, replace `simulate_model()` with real forward passes from the trained checkpoints; the protocol above and every downstream script are unchanged.
+
+\subsection{Statistical analysis}
+\label{sec:datasets-stats}
+
+All significance claims are computed from the ten-seed evaluation data with \textbf{paired two-sided t-tests} (across the ten seeds; $df = 9$) over every pair of the eight models --- 28 pairwise comparisons per dataset $\times$ metric. Because the t-tests are not independent, p-values are reported \textbf{Holm-Bonferroni corrected} (primary), with \textbf{Bonferroni} ($\times$28) as the conservative stress-test and an \textbf{$\alpha$-sensitivity sweep} over $\alpha \in \{0.01, 0.05, 0.10\}$ to show that conclusions do not hinge on the threshold. Full details, tables, and the defensible-claims list are in \Cref{sec:rob}; the pairwise matrices and $\alpha$-sweep data are archived in \texttt{results/\allowbreak\{\}k10\_s10/\allowbreak\{\}significance\_matrix\_*\_\{holm,bonferroni\}.\allowbreak\{\}json/\allowbreak\{\}.\allowbreak\{\}md} and \texttt{results/k10\_s10/alpha\_sweep.json/.md}.
+
+% ==== DRAFTING METADATA (was: 3.6 Defensible claims) ====
+
+%
+% 1. **The two benchmarks exercise the intended difficulty regimes.** Both
+%    corpora have ≈1.6–1.8 hard negatives per positive drawn from sibling
+%    topics, making the ranking task non-trivial for lexical baselines (BM25,
+%    TF-IDF lag the neural systems in the leaderboard).
+% 2. **The evaluation protocol is fully specified and reproducible.**
+%    Deterministic corpora (seed 42), ten evaluation seeds (42–51), stratified
+%    70/15/15 splits, conversation-level query pooling, and per-run
+%    F1-optimal thresholds are all defined above; any re-implementation should
+%    reproduce the reported numbers exactly.
+% 3. **Two novel metrics are well-defined and interpretable.** XAIR@K (w =
+%    0.25 interpolation of nDCG@K with mean XAI confidence over relevant
+%    top-K hits) and MDS (fraction of the 64-slot memory bank used) are the
+%    paper's measurement contributions, both defined only where their
+%    preconditions hold (XAI component / memory component respectively).
+% 4. **Hedge:** the models are currently simulated; every claim in this section
+%    is a claim about the *harness*, and results must be regenerated from real
+%    checkpoints before submission (see status note above).
+%
+% ---

@@ -1,0 +1,274 @@
+% paper_references.bib
+% BibTeX export of the 20 references verified in paper_related_work_draft.md
+% (verification pass August 2026). DOIs, page ranges, and arXiv IDs were
+% confirmed against publisher pages (ACM DL, ACL Anthology, AAAI OJS,
+% ScienceDirect, Now Publishers, NIST, CEUR-WS, arXiv).
+% Entries are grouped by Related-Work subsection (mirroring the draft's
+% RW1-RW5 + statistics); keys are descriptive author-year names. All 20
+% references of the draft are present, in the same data as the draft.
+
+% ---- 1. Classical & neural retrieval -------------------------------------
+
+@article{salton1988termweighting,
+  author  = {Salton, Gerard and Buckley, Christopher},
+  title   = {Term-Weighting Approaches in Automatic Text Retrieval},
+  journal = {Information Processing \& Management},
+  volume  = {24},
+  number  = {5},
+  pages   = {513--523},
+  year    = {1988},
+  doi     = {10.1016/0306-4573(88)90021-0}
+}
+
+@article{robertson2009probabilistic,
+  author  = {Robertson, Stephen and Zaragoza, Hugo},
+  title   = {The Probabilistic Relevance Framework: {BM25} and Beyond},
+  journal = {Foundations and Trends in Information Retrieval},
+  volume  = {3},
+  number  = {4},
+  pages   = {333--389},
+  year    = {2009},
+  doi     = {10.1561/1500000019}
+}
+
+@inproceedings{karpukhin2020dense,
+  author    = {Karpukhin, Vladimir and O\u{g}uz, Barlas and Min, Sewon and
+               Lewis, Patrick and Wu, Ledell and Edunov, Sergey and
+               Chen, Danqi and Yih, Wen-tau},
+  title     = {Dense Passage Retrieval for Open-Domain Question Answering},
+  booktitle = {Proceedings of the 2020 Conference on Empirical Methods in
+               Natural Language Processing (EMNLP)},
+  pages     = {6769--6781},
+  year      = {2020},
+  doi       = {10.18653/v1/2020.emnlp-main.550}
+}
+
+@inproceedings{khattab2020colbert,
+  author    = {Khattab, Omar and Zaharia, Matei},
+  title     = {{ColBERT}: Efficient and Effective Passage Search via
+               Contextualized Late Interaction over {BERT}},
+  booktitle = {Proceedings of the 43rd International ACM SIGIR Conference on
+               Research and Development in Information Retrieval (SIGIR)},
+  pages     = {39--48},
+  year      = {2020},
+  doi       = {10.1145/3397271.3401075}
+}
+
+@inproceedings{lewis2020retrieval,
+  author    = {Lewis, Patrick and Perez, Ethan and Piktus, Aleksandra and
+               Petroni, Fabio and Karpukhin, Vladimir and Goyal, Naman and
+               K{\"u}ttler, Heinrich and Lewis, Mike and Yih, Wen-tau and
+               Rockt{\"a}schel, Tim and Riedel, Sebastian and Kiela, Douwe},
+  title     = {Retrieval-Augmented Generation for Knowledge-Intensive
+               {NLP} Tasks},
+  booktitle = {Advances in Neural Information Processing Systems 33 (NeurIPS)},
+  pages     = {9459--9474},
+  year      = {2020},
+  eprint    = {2005.11401},
+  archiveprefix = {arXiv},
+  primaryclass = {cs.CL}
+}
+
+% ---- 2. Agentic & conversational IR --------------------------------------
+
+@inproceedings{dalton2020cast,
+  author    = {Dalton, Jeffrey and Xiong, Chenyan and Callan, Jamie},
+  title     = {{TREC} {CAsT} 2019: The Conversational Assistance Track
+               Overview},
+  booktitle = {Proceedings of the Twenty-Eighth Text REtrieval Conference
+               (TREC 2019)},
+  publisher = {National Institute of Standards and Technology (NIST)},
+  note      = {NIST Special Publication 500-335},
+  year      = {2020},
+  eprint    = {2003.13624},
+  archiveprefix = {arXiv},
+  primaryclass = {cs.IR}
+}
+
+% FIRE proceedings: cite the edition relevant to the submission. The most
+% recent confirmed edition (FIRE 2025, 17th) is given; FIRE 2024 = CEUR-WS
+% Vol-4054, FIRE 2023 = CEUR-WS Vol-3681.
+@proceedings{fire2025proceedings,
+  editor    = {Ghosh, Kripabandhu and Mandl, Thomas and Pal, Sukomal and
+               Majumdar, Srijoni and Chakraborty, Anirban},
+  title     = {Working Notes of {FIRE} 2025 - Forum for Information Retrieval
+               Evaluation},
+  series    = {CEUR Workshop Proceedings},
+  volume    = {4173},
+  publisher = {CEUR-WS.org},
+  year      = {2025}
+}
+
+@misc{zhang2024agentic,
+  author        = {Zhang, Weinan and Liao, Junwei and Li, Ning and
+                   Du, Kounianhua and Lin, Jianghao},
+  title         = {Agentic Information Retrieval},
+  year          = {2024},
+  note          = {Perspective paper; v4, 23 February 2025},
+  eprint        = {2410.09713},
+  archiveprefix = {arXiv},
+  primaryclass  = {cs.IR}
+}
+
+@misc{zhang2025websearch,
+  author        = {Zhang, Weizhi and Li, Yangning and Bei, Yuanchen and
+                   Luo, Junyu and Wan, Guancheng and Yang, Liangwei and
+                   Xie, Chenxuan and Yang, Yuyao and Huang, Wei-Chieh and
+                   Miao, Chunyu and Zou, Henry Peng and Luo, Xiao and
+                   Zhao, Yusheng and Chen, Yankai and Chan, Chunkit and
+                   Zhou, Peilin and Zhang, Xinyang and Zhang, Chenwei and
+                   Shang, Jingbo and Zhang, Ming and Song, Yangqiu and
+                   King, Irwin and Yu, Philip S.},
+  title         = {From Web Search towards Agentic Deep Research:
+                   Incentivizing Search with Reasoning Agents},
+  year          = {2025},
+  note          = {v3, 3 July 2025},
+  eprint        = {2506.18959},
+  archiveprefix = {arXiv},
+  primaryclass  = {cs.IR}
+}
+
+@inproceedings{zhang2024usimagent,
+  author    = {Zhang, Erhan and Wang, Xingzhu and Gong, Peiyuan and
+               Lin, Yankai and Mao, Jiaxin},
+  title     = {{USimAgent}: Large Language Models for Simulating Search
+               Users},
+  booktitle = {Proceedings of the 47th International ACM SIGIR Conference on
+               Research and Development in Information Retrieval (SIGIR)},
+  pages     = {2687--2692},
+  year      = {2024},
+  note      = {Short paper},
+  doi       = {10.1145/3626772.3657963},
+  eprint    = {2403.09142},
+  archiveprefix = {arXiv},
+  primaryclass = {cs.IR}
+}
+
+% ---- 3. Memory-augmented LLMs and retrieval -------------------------------
+
+@misc{packer2023memgpt,
+  author        = {Packer, Charles and Wooders, Sarah and Lin, Kevin and
+                   Fang, Vivian and Patil, Shishir G. and Stoica, Ion and
+                   Gonzalez, Joseph E.},
+  title         = {{MemGPT}: Towards {LLMs} as Operating Systems},
+  year          = {2023},
+  eprint        = {2310.08560},
+  archiveprefix = {arXiv},
+  primaryclass  = {cs.LG}
+}
+
+@inproceedings{park2023generative,
+  author    = {Park, Joon Sung and O'Brien, Joseph C. and Cai, Carrie J. and
+               Morris, Meredith Ringel and Liang, Percy and
+               Bernstein, Michael S.},
+  title     = {Generative Agents: Interactive Simulacra of Human Behavior},
+  booktitle = {Proceedings of the 36th Annual ACM Symposium on User Interface
+               Software and Technology (UIST)},
+  articleno = {2},
+  pages     = {1--22},
+  year      = {2023},
+  doi       = {10.1145/3586183.3606763}
+}
+
+@inproceedings{zhong2024memorybank,
+  author    = {Zhong, Wanjun and Guo, Lianghong and Gao, Qiqi and Ye, He and
+               Wang, Yanlin},
+  title     = {{MemoryBank}: Enhancing Large Language Models with Long-Term
+               Memory},
+  booktitle = {Proceedings of the AAAI Conference on Artificial Intelligence
+               (AAAI)},
+  volume    = {38},
+  number    = {17},
+  pages     = {19724--19731},
+  year      = {2024},
+  doi       = {10.1609/aaai.v38i17.29946}
+}
+
+% ---- 4. Explainable & trustworthy IR -------------------------------------
+
+@misc{anand2022explainable,
+  author        = {Anand, Avishek and Lyu, Lijun and Idahl, Maximilian and
+                   Wang, Yumeng and Wallat, Jonas and Zhang, Zijian},
+  title         = {Explainable Information Retrieval: A Survey},
+  year          = {2022},
+  eprint        = {2211.02405},
+  archiveprefix = {arXiv},
+  primaryclass  = {cs.IR}
+}
+
+@article{zhao2024explainability,
+  author  = {Zhao, Haiyan and Chen, Hanjie and Yang, Fan and Liu, Ninghao and
+             Deng, Huiqi and Cai, Hengyi and Wang, Shuaiqiang and Yin, Dawei
+             and Du, Mengnan},
+  title   = {Explainability for Large Language Models: A Survey},
+  journal = {ACM Transactions on Intelligent Systems and Technology},
+  volume  = {15},
+  number  = {2},
+  articleno = {20},
+  pages   = {1--38},
+  year    = {2024},
+  doi     = {10.1145/3639372}
+}
+
+@misc{bilal2025llms,
+  author        = {Bilal, Ahsan and Ebert, David and Lin, Beiyu},
+  title         = {{LLMs} for Explainable {AI}: A Comprehensive Survey},
+  year          = {2025},
+  note          = {Manuscript states intended submission to ACM TIST},
+  eprint        = {2504.00125},
+  archiveprefix = {arXiv},
+  primaryclass  = {cs.AI}
+}
+
+% ---- 5. Hard negatives, evaluation practice, and the proposed metrics ----
+
+@inproceedings{wischounig2026negative,
+  author    = {Wischounig, Laurin and Abdallah, Abdelrahman and
+               Jatowt, Adam},
+  title     = {Negative Sampling Techniques in Dense Retrieval: A Survey},
+  booktitle = {Findings of the Association for Computational Linguistics:
+               EACL 2026},
+  pages     = {3003--3020},
+  year      = {2026},
+  doi       = {10.18653/v1/2026.findings-eacl.157},
+  eprint    = {2603.18005},
+  archiveprefix = {arXiv},
+  primaryclass = {cs.IR}
+}
+
+@misc{li2024llmsjudges,
+  author        = {Li, Haitao and Dong, Qian and Chen, Junjie and Su, Huixue
+                   and Zhou, Yujia and Ai, Qingyao and Ye, Ziyi and
+                   Liu, Yiqun},
+  title         = {{LLMs}-as-Judges: A Comprehensive Survey on {LLM}-based
+                   Evaluation Methods},
+  year          = {2024},
+  eprint        = {2412.05579},
+  archiveprefix = {arXiv},
+  primaryclass  = {cs.IR}
+}
+
+@inproceedings{farzi2024exam,
+  author    = {Farzi, Naghmeh and Dietz, Laura},
+  title     = {{EXAM++}: {LLM}-based Answerability Metrics for {IR}
+               Evaluation},
+  booktitle = {Proceedings of the First Workshop on Large Language Models for
+               Evaluation in Information Retrieval (LLM4Eval)},
+  series    = {CEUR Workshop Proceedings},
+  volume    = {3752},
+  pages     = {31--50},
+  year      = {2024},
+  url       = {https://ceur-ws.org/Vol-3752/}
+}
+
+% ---- Statistics (cited by the robustness protocol) ------------------------
+
+@article{holm1979simple,
+  author  = {Holm, Sture},
+  title   = {A Simple Sequentially Rejective Multiple Test Procedure},
+  journal = {Scandinavian Journal of Statistics},
+  volume  = {6},
+  number  = {2},
+  pages   = {65--70},
+  year    = {1979}
+}

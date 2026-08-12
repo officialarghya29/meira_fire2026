@@ -1,0 +1,924 @@
+{
+  "config": {
+    "k": 10,
+    "seeds": [
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51
+    ],
+    "models": [
+      "BM25",
+      "TF-IDF",
+      "Dense-IR",
+      "ColBERT-like",
+      "MEIRA-no-memory",
+      "MEIRA-no-decay",
+      "MEIRA-no-xai",
+      "MEIRA-full"
+    ],
+    "metrics": [
+      "F1",
+      "nDCG@10",
+      "MAP",
+      "MRR"
+    ],
+    "correction": "bonferroni"
+  },
+  "datasets": {
+    "FIRE-AgentIR-2026": {
+      "rank": {
+        "F1": {
+          "MEIRA-full": 1.0,
+          "MEIRA-no-xai": 2.0,
+          "MEIRA-no-decay": 3.0,
+          "ColBERT-like": 4.0,
+          "MEIRA-no-memory": 5.0,
+          "Dense-IR": 6.0,
+          "BM25": 7.0,
+          "TF-IDF": 8.0
+        },
+        "nDCG@10": {
+          "MEIRA-full": 1.0,
+          "MEIRA-no-xai": 2.0,
+          "MEIRA-no-decay": 3.0,
+          "ColBERT-like": 4.0,
+          "MEIRA-no-memory": 5.0,
+          "Dense-IR": 6.0,
+          "BM25": 7.0,
+          "TF-IDF": 8.0
+        },
+        "MAP": {
+          "MEIRA-full": 1.0,
+          "MEIRA-no-xai": 2.0,
+          "MEIRA-no-decay": 3.0,
+          "ColBERT-like": 4.0,
+          "MEIRA-no-memory": 5.0,
+          "Dense-IR": 6.0,
+          "BM25": 7.0,
+          "TF-IDF": 8.0
+        },
+        "MRR": {
+          "MEIRA-full": 1.0,
+          "MEIRA-no-xai": 2.0,
+          "MEIRA-no-decay": 3.0,
+          "ColBERT-like": 4.0,
+          "MEIRA-no-memory": 5.0,
+          "Dense-IR": 6.0,
+          "BM25": 7.0,
+          "TF-IDF": 8.0
+        }
+      },
+      "means": {
+        "F1": {
+          "BM25": 0.4907,
+          "TF-IDF": 0.4798,
+          "Dense-IR": 0.6499,
+          "ColBERT-like": 0.7396,
+          "MEIRA-no-memory": 0.7161,
+          "MEIRA-no-decay": 0.748,
+          "MEIRA-no-xai": 0.7772,
+          "MEIRA-full": 0.8263
+        },
+        "nDCG@10": {
+          "BM25": 0.8097,
+          "TF-IDF": 0.8066,
+          "Dense-IR": 0.9012,
+          "ColBERT-like": 0.9368,
+          "MEIRA-no-memory": 0.9303,
+          "MEIRA-no-decay": 0.9406,
+          "MEIRA-no-xai": 0.9508,
+          "MEIRA-full": 0.9686
+        },
+        "MAP": {
+          "BM25": 0.7325,
+          "TF-IDF": 0.7277,
+          "Dense-IR": 0.858,
+          "ColBERT-like": 0.9091,
+          "MEIRA-no-memory": 0.8996,
+          "MEIRA-no-decay": 0.9147,
+          "MEIRA-no-xai": 0.9293,
+          "MEIRA-full": 0.9543
+        },
+        "MRR": {
+          "BM25": 0.5056,
+          "TF-IDF": 0.5044,
+          "Dense-IR": 0.5879,
+          "ColBERT-like": 0.6169,
+          "MEIRA-no-memory": 0.6118,
+          "MEIRA-no-decay": 0.6199,
+          "MEIRA-no-xai": 0.6284,
+          "MEIRA-full": 0.6437
+        }
+      },
+      "stds": {
+        "F1": {
+          "BM25": 0.0161,
+          "TF-IDF": 0.0168,
+          "Dense-IR": 0.0165,
+          "ColBERT-like": 0.0132,
+          "MEIRA-no-memory": 0.0137,
+          "MEIRA-no-decay": 0.0121,
+          "MEIRA-no-xai": 0.0129,
+          "MEIRA-full": 0.0145
+        },
+        "nDCG@10": {
+          "BM25": 0.0149,
+          "TF-IDF": 0.0155,
+          "Dense-IR": 0.0146,
+          "ColBERT-like": 0.0121,
+          "MEIRA-no-memory": 0.0138,
+          "MEIRA-no-decay": 0.0108,
+          "MEIRA-no-xai": 0.0097,
+          "MEIRA-full": 0.008
+        },
+        "MAP": {
+          "BM25": 0.0198,
+          "TF-IDF": 0.0212,
+          "Dense-IR": 0.0202,
+          "ColBERT-like": 0.0167,
+          "MEIRA-no-memory": 0.0192,
+          "MEIRA-no-decay": 0.0149,
+          "MEIRA-no-xai": 0.0134,
+          "MEIRA-full": 0.0112
+        },
+        "MRR": {
+          "BM25": 0.0173,
+          "TF-IDF": 0.0183,
+          "Dense-IR": 0.0187,
+          "ColBERT-like": 0.0205,
+          "MEIRA-no-memory": 0.0214,
+          "MEIRA-no-decay": 0.019,
+          "MEIRA-no-xai": 0.02,
+          "MEIRA-full": 0.0204
+        }
+      },
+      "adjacency": {
+        "F1": [
+          {
+            "higher": "MEIRA-full",
+            "lower": "MEIRA-no-xai",
+            "diff": 0.0491,
+            "t": 26.7673,
+            "p_raw": 0.0,
+            "p": 0.0,
+            "significant_raw": true,
+            "significant": true
+          },
+          {
+            "higher": "MEIRA-no-xai",
+            "lower": "MEIRA-no-decay",
+            "diff": 0.0292,
+            "t": 18.4451,
+            "p_raw": 0.0,
+            "p": 0.0,
+            "significant_raw": true,
+            "significant": true
+          },
+          {
+            "higher": "MEIRA-no-decay",
+            "lower": "ColBERT-like",
+            "diff": 0.0084,
+            "t": 19.4984,
+            "p_raw": 0.0,
+            "p": 0.0,
+            "significant_raw": true,
+            "significant": true
+          },
+          {
+            "higher": "ColBERT-like",
+            "lower": "MEIRA-no-memory",
+            "diff": 0.0235,
+            "t": 22.7472,
+            "p_raw": 0.0,
+            "p": 0.0,
+            "significant_raw": true,
+            "significant": true
+          },
+          {
+            "higher": "MEIRA-no-memory",
+            "lower": "Dense-IR",
+            "diff": 0.0662,
+            "t": 27.592,
+            "p_raw": 0.0,
+            "p": 0.0,
+            "significant_raw": true,
+            "significant": true
+          },
+          {
+            "higher": "Dense-IR",
+            "lower": "BM25",
+            "diff": 0.1592,
+            "t": 117.714,
+            "p_raw": 0.0,
+            "p": 0.0,
+            "significant_raw": true,
+            "significant": true
+          },
+          {
+            "higher": "BM25",
+            "lower": "TF-IDF",
+            "diff": 0.0109,
+            "t": 10.6839,
+            "p_raw": 0.0,
+            "p": 0.0001,
+            "significant_raw": true,
+            "significant": true
+          }
+        ],
+        "nDCG@10": [
+          {
+            "higher": "MEIRA-full",
+            "lower": "MEIRA-no-xai",
+            "diff": 0.0178,
+            "t": 13.4089,
+            "p_raw": 0.0,
+            "p": 0.0,
+            "significant_raw": true,
+            "significant": true
+          },
+          {
+            "higher": "MEIRA-no-xai",
+            "lower": "MEIRA-no-decay",
+            "diff": 0.0102,
+            "t": 14.8312,
+            "p_raw": 0.0,
+            "p": 0.0,
+            "significant_raw": true,
+            "significant": true
+          },
+          {
+            "higher": "MEIRA-no-decay",
+            "lower": "ColBERT-like",
+            "diff": 0.0038,
+            "t": 3.4682,
+            "p_raw": 0.0071,
+            "p": 0.1979,
+            "significant_raw": true,
+            "significant": false
+          },
+          {
+            "higher": "ColBERT-like",
+            "lower": "MEIRA-no-memory",
+            "diff": 0.0065,
+            "t": 8.4615,
+            "p_raw": 0.0,
+            "p": 0.0004,
+            "significant_raw": true,
+            "significant": true
+          },
+          {
+            "higher": "MEIRA-no-memory",
+            "lower": "Dense-IR",
+            "diff": 0.0291,
+            "t": 18.3394,
+            "p_raw": 0.0,
+            "p": 0.0,
+            "significant_raw": true,
+            "significant": true
+          },
+          {
+            "higher": "Dense-IR",
+            "lower": "BM25",
+            "diff": 0.0915,
+            "t": 21.559,
+            "p_raw": 0.0,
+            "p": 0.0,
+            "significant_raw": true,
+            "significant": true
+          },
+          {
+            "higher": "BM25",
+            "lower": "TF-IDF",
+            "diff": 0.0031,
+            "t": 3.2222,
+            "p_raw": 0.0105,
+            "p": 0.2927,
+            "significant_raw": true,
+            "significant": false
+          }
+        ],
+        "MAP": [
+          {
+            "higher": "MEIRA-full",
+            "lower": "MEIRA-no-xai",
+            "diff": 0.025,
+            "t": 14.3103,
+            "p_raw": 0.0,
+            "p": 0.0,
+            "significant_raw": true,
+            "significant": true
+          },
+          {
+            "higher": "MEIRA-no-xai",
+            "lower": "MEIRA-no-decay",
+            "diff": 0.0146,
+            "t": 14.963,
+            "p_raw": 0.0,
+            "p": 0.0,
+            "significant_raw": true,
+            "significant": true
+          },
+          {
+            "higher": "MEIRA-no-decay",
+            "lower": "ColBERT-like",
+            "diff": 0.0056,
+            "t": 3.7675,
+            "p_raw": 0.0044,
+            "p": 0.1241,
+            "significant_raw": true,
+            "significant": false
+          },
+          {
+            "higher": "ColBERT-like",
+            "lower": "MEIRA-no-memory",
+            "diff": 0.0095,
+            "t": 8.596,
+            "p_raw": 0.0,
+            "p": 0.0003,
+            "significant_raw": true,
+            "significant": true
+          },
+          {
+            "higher": "MEIRA-no-memory",
+            "lower": "Dense-IR",
+            "diff": 0.0416,
+            "t": 19.8305,
+            "p_raw": 0.0,
+            "p": 0.0,
+            "significant_raw": true,
+            "significant": true
+          },
+          {
+            "higher": "Dense-IR",
+            "lower": "BM25",
+            "diff": 0.1255,
+            "t": 22.037,
+            "p_raw": 0.0,
+            "p": 0.0,
+            "significant_raw": true,
+            "significant": true
+          },
+          {
+            "higher": "BM25",
+            "lower": "TF-IDF",
+            "diff": 0.0048,
+            "t": 3.9457,
+            "p_raw": 0.0034,
+            "p": 0.0946,
+            "significant_raw": true,
+            "significant": false
+          }
+        ],
+        "MRR": [
+          {
+            "higher": "MEIRA-full",
+            "lower": "MEIRA-no-xai",
+            "diff": 0.0153,
+            "t": 10.6124,
+            "p_raw": 0.0,
+            "p": 0.0001,
+            "significant_raw": true,
+            "significant": true
+          },
+          {
+            "higher": "MEIRA-no-xai",
+            "lower": "MEIRA-no-decay",
+            "diff": 0.0085,
+            "t": 12.057,
+            "p_raw": 0.0,
+            "p": 0.0,
+            "significant_raw": true,
+            "significant": true
+          },
+          {
+            "higher": "MEIRA-no-decay",
+            "lower": "ColBERT-like",
+            "diff": 0.003,
+            "t": 2.7205,
+            "p_raw": 0.0236,
+            "p": 0.6605,
+            "significant_raw": true,
+            "significant": false
+          },
+          {
+            "higher": "ColBERT-like",
+            "lower": "MEIRA-no-memory",
+            "diff": 0.0051,
+            "t": 6.3903,
+            "p_raw": 0.0001,
+            "p": 0.0035,
+            "significant_raw": true,
+            "significant": true
+          },
+          {
+            "higher": "MEIRA-no-memory",
+            "lower": "Dense-IR",
+            "diff": 0.0239,
+            "t": 14.1109,
+            "p_raw": 0.0,
+            "p": 0.0,
+            "significant_raw": true,
+            "significant": true
+          },
+          {
+            "higher": "Dense-IR",
+            "lower": "BM25",
+            "diff": 0.0823,
+            "t": 19.7927,
+            "p_raw": 0.0,
+            "p": 0.0,
+            "significant_raw": true,
+            "significant": true
+          },
+          {
+            "higher": "BM25",
+            "lower": "TF-IDF",
+            "diff": 0.0012,
+            "t": 1.0184,
+            "p_raw": 0.3351,
+            "p": 1.0,
+            "significant_raw": false,
+            "significant": false
+          }
+        ]
+      },
+      "corr": {
+        "F1 vs nDCG@10": {
+          "spearman": 1.0,
+          "p": 0.0
+        },
+        "F1 vs MAP": {
+          "spearman": 1.0,
+          "p": 0.0
+        },
+        "F1 vs MRR": {
+          "spearman": 1.0,
+          "p": 0.0
+        },
+        "nDCG@10 vs MAP": {
+          "spearman": 1.0,
+          "p": 0.0
+        },
+        "nDCG@10 vs MRR": {
+          "spearman": 1.0,
+          "p": 0.0
+        },
+        "MAP vs MRR": {
+          "spearman": 1.0,
+          "p": 0.0
+        }
+      }
+    },
+    "FIRE-CrossLingIR-2026": {
+      "rank": {
+        "F1": {
+          "MEIRA-full": 1.0,
+          "MEIRA-no-xai": 2.0,
+          "MEIRA-no-decay": 3.0,
+          "ColBERT-like": 4.0,
+          "MEIRA-no-memory": 5.0,
+          "Dense-IR": 6.0,
+          "BM25": 7.0,
+          "TF-IDF": 8.0
+        },
+        "nDCG@10": {
+          "MEIRA-full": 1.0,
+          "MEIRA-no-xai": 2.0,
+          "MEIRA-no-decay": 3.0,
+          "ColBERT-like": 4.0,
+          "MEIRA-no-memory": 5.0,
+          "Dense-IR": 6.0,
+          "BM25": 7.0,
+          "TF-IDF": 8.0
+        },
+        "MAP": {
+          "MEIRA-full": 1.0,
+          "MEIRA-no-xai": 2.0,
+          "MEIRA-no-decay": 3.0,
+          "ColBERT-like": 4.0,
+          "MEIRA-no-memory": 5.0,
+          "Dense-IR": 6.0,
+          "BM25": 7.0,
+          "TF-IDF": 8.0
+        },
+        "MRR": {
+          "MEIRA-full": 1.0,
+          "MEIRA-no-xai": 2.0,
+          "MEIRA-no-decay": 3.0,
+          "ColBERT-like": 4.0,
+          "MEIRA-no-memory": 5.0,
+          "Dense-IR": 6.0,
+          "BM25": 7.0,
+          "TF-IDF": 8.0
+        }
+      },
+      "means": {
+        "F1": {
+          "BM25": 0.4643,
+          "TF-IDF": 0.4542,
+          "Dense-IR": 0.5905,
+          "ColBERT-like": 0.6803,
+          "MEIRA-no-memory": 0.6555,
+          "MEIRA-no-decay": 0.6938,
+          "MEIRA-no-xai": 0.7258,
+          "MEIRA-full": 0.7796
+        },
+        "nDCG@10": {
+          "BM25": 0.8172,
+          "TF-IDF": 0.8151,
+          "Dense-IR": 0.8961,
+          "ColBERT-like": 0.9323,
+          "MEIRA-no-memory": 0.922,
+          "MEIRA-no-decay": 0.9367,
+          "MEIRA-no-xai": 0.9449,
+          "MEIRA-full": 0.962
+        },
+        "MAP": {
+          "BM25": 0.7474,
+          "TF-IDF": 0.7443,
+          "Dense-IR": 0.8549,
+          "ColBERT-like": 0.9046,
+          "MEIRA-no-memory": 0.8906,
+          "MEIRA-no-decay": 0.9108,
+          "MEIRA-no-xai": 0.9221,
+          "MEIRA-full": 0.9466
+        },
+        "MRR": {
+          "BM25": 0.4227,
+          "TF-IDF": 0.4216,
+          "Dense-IR": 0.482,
+          "ColBERT-like": 0.5086,
+          "MEIRA-no-memory": 0.5009,
+          "MEIRA-no-decay": 0.5114,
+          "MEIRA-no-xai": 0.5175,
+          "MEIRA-full": 0.5292
+        }
+      },
+      "stds": {
+        "F1": {
+          "BM25": 0.0108,
+          "TF-IDF": 0.0077,
+          "Dense-IR": 0.0258,
+          "ColBERT-like": 0.0286,
+          "MEIRA-no-memory": 0.0304,
+          "MEIRA-no-decay": 0.0274,
+          "MEIRA-no-xai": 0.0292,
+          "MEIRA-full": 0.0297
+        },
+        "nDCG@10": {
+          "BM25": 0.0129,
+          "TF-IDF": 0.0141,
+          "Dense-IR": 0.0167,
+          "ColBERT-like": 0.0119,
+          "MEIRA-no-memory": 0.0147,
+          "MEIRA-no-decay": 0.0111,
+          "MEIRA-no-xai": 0.008,
+          "MEIRA-full": 0.0082
+        },
+        "MAP": {
+          "BM25": 0.0174,
+          "TF-IDF": 0.0187,
+          "Dense-IR": 0.0233,
+          "ColBERT-like": 0.0162,
+          "MEIRA-no-memory": 0.0206,
+          "MEIRA-no-decay": 0.0153,
+          "MEIRA-no-xai": 0.0107,
+          "MEIRA-full": 0.0106
+        },
+        "MRR": {
+          "BM25": 0.0172,
+          "TF-IDF": 0.0178,
+          "Dense-IR": 0.0184,
+          "ColBERT-like": 0.0154,
+          "MEIRA-no-memory": 0.0169,
+          "MEIRA-no-decay": 0.0154,
+          "MEIRA-no-xai": 0.0143,
+          "MEIRA-full": 0.0116
+        }
+      },
+      "adjacency": {
+        "F1": [
+          {
+            "higher": "MEIRA-full",
+            "lower": "MEIRA-no-xai",
+            "diff": 0.0538,
+            "t": 21.4125,
+            "p_raw": 0.0,
+            "p": 0.0,
+            "significant_raw": true,
+            "significant": true
+          },
+          {
+            "higher": "MEIRA-no-xai",
+            "lower": "MEIRA-no-decay",
+            "diff": 0.032,
+            "t": 11.9039,
+            "p_raw": 0.0,
+            "p": 0.0,
+            "significant_raw": true,
+            "significant": true
+          },
+          {
+            "higher": "MEIRA-no-decay",
+            "lower": "ColBERT-like",
+            "diff": 0.0135,
+            "t": 10.9991,
+            "p_raw": 0.0,
+            "p": 0.0,
+            "significant_raw": true,
+            "significant": true
+          },
+          {
+            "higher": "ColBERT-like",
+            "lower": "MEIRA-no-memory",
+            "diff": 0.0248,
+            "t": 11.5843,
+            "p_raw": 0.0,
+            "p": 0.0,
+            "significant_raw": true,
+            "significant": true
+          },
+          {
+            "higher": "MEIRA-no-memory",
+            "lower": "Dense-IR",
+            "diff": 0.065,
+            "t": 21.2505,
+            "p_raw": 0.0,
+            "p": 0.0,
+            "significant_raw": true,
+            "significant": true
+          },
+          {
+            "higher": "Dense-IR",
+            "lower": "BM25",
+            "diff": 0.1262,
+            "t": 22.6305,
+            "p_raw": 0.0,
+            "p": 0.0,
+            "significant_raw": true,
+            "significant": true
+          },
+          {
+            "higher": "BM25",
+            "lower": "TF-IDF",
+            "diff": 0.0101,
+            "t": 5.7581,
+            "p_raw": 0.0003,
+            "p": 0.0077,
+            "significant_raw": true,
+            "significant": true
+          }
+        ],
+        "nDCG@10": [
+          {
+            "higher": "MEIRA-full",
+            "lower": "MEIRA-no-xai",
+            "diff": 0.0171,
+            "t": 7.3986,
+            "p_raw": 0.0,
+            "p": 0.0012,
+            "significant_raw": true,
+            "significant": true
+          },
+          {
+            "higher": "MEIRA-no-xai",
+            "lower": "MEIRA-no-decay",
+            "diff": 0.0082,
+            "t": 5.6075,
+            "p_raw": 0.0003,
+            "p": 0.0093,
+            "significant_raw": true,
+            "significant": true
+          },
+          {
+            "higher": "MEIRA-no-decay",
+            "lower": "ColBERT-like",
+            "diff": 0.0044,
+            "t": 4.9726,
+            "p_raw": 0.0008,
+            "p": 0.0215,
+            "significant_raw": true,
+            "significant": true
+          },
+          {
+            "higher": "ColBERT-like",
+            "lower": "MEIRA-no-memory",
+            "diff": 0.0103,
+            "t": 4.8186,
+            "p_raw": 0.0009,
+            "p": 0.0266,
+            "significant_raw": true,
+            "significant": true
+          },
+          {
+            "higher": "MEIRA-no-memory",
+            "lower": "Dense-IR",
+            "diff": 0.0259,
+            "t": 13.3694,
+            "p_raw": 0.0,
+            "p": 0.0,
+            "significant_raw": true,
+            "significant": true
+          },
+          {
+            "higher": "Dense-IR",
+            "lower": "BM25",
+            "diff": 0.0789,
+            "t": 21.491,
+            "p_raw": 0.0,
+            "p": 0.0,
+            "significant_raw": true,
+            "significant": true
+          },
+          {
+            "higher": "BM25",
+            "lower": "TF-IDF",
+            "diff": 0.0021,
+            "t": 2.3159,
+            "p_raw": 0.0458,
+            "p": 1.0,
+            "significant_raw": true,
+            "significant": false
+          }
+        ],
+        "MAP": [
+          {
+            "higher": "MEIRA-full",
+            "lower": "MEIRA-no-xai",
+            "diff": 0.0245,
+            "t": 7.8248,
+            "p_raw": 0.0,
+            "p": 0.0007,
+            "significant_raw": true,
+            "significant": true
+          },
+          {
+            "higher": "MEIRA-no-xai",
+            "lower": "MEIRA-no-decay",
+            "diff": 0.0113,
+            "t": 5.3163,
+            "p_raw": 0.0005,
+            "p": 0.0135,
+            "significant_raw": true,
+            "significant": true
+          },
+          {
+            "higher": "MEIRA-no-decay",
+            "lower": "ColBERT-like",
+            "diff": 0.0062,
+            "t": 5.2508,
+            "p_raw": 0.0005,
+            "p": 0.0148,
+            "significant_raw": true,
+            "significant": true
+          },
+          {
+            "higher": "ColBERT-like",
+            "lower": "MEIRA-no-memory",
+            "diff": 0.014,
+            "t": 4.8726,
+            "p_raw": 0.0009,
+            "p": 0.0247,
+            "significant_raw": true,
+            "significant": true
+          },
+          {
+            "higher": "MEIRA-no-memory",
+            "lower": "Dense-IR",
+            "diff": 0.0357,
+            "t": 13.844,
+            "p_raw": 0.0,
+            "p": 0.0,
+            "significant_raw": true,
+            "significant": true
+          },
+          {
+            "higher": "Dense-IR",
+            "lower": "BM25",
+            "diff": 0.1075,
+            "t": 21.4219,
+            "p_raw": 0.0,
+            "p": 0.0,
+            "significant_raw": true,
+            "significant": true
+          },
+          {
+            "higher": "BM25",
+            "lower": "TF-IDF",
+            "diff": 0.0031,
+            "t": 2.6932,
+            "p_raw": 0.0247,
+            "p": 0.6907,
+            "significant_raw": true,
+            "significant": false
+          }
+        ],
+        "MRR": [
+          {
+            "higher": "MEIRA-full",
+            "lower": "MEIRA-no-xai",
+            "diff": 0.0117,
+            "t": 6.2675,
+            "p_raw": 0.0001,
+            "p": 0.0041,
+            "significant_raw": true,
+            "significant": true
+          },
+          {
+            "higher": "MEIRA-no-xai",
+            "lower": "MEIRA-no-decay",
+            "diff": 0.0061,
+            "t": 6.0552,
+            "p_raw": 0.0002,
+            "p": 0.0053,
+            "significant_raw": true,
+            "significant": true
+          },
+          {
+            "higher": "MEIRA-no-decay",
+            "lower": "ColBERT-like",
+            "diff": 0.0028,
+            "t": 4.2114,
+            "p_raw": 0.0023,
+            "p": 0.0635,
+            "significant_raw": true,
+            "significant": false
+          },
+          {
+            "higher": "ColBERT-like",
+            "lower": "MEIRA-no-memory",
+            "diff": 0.0077,
+            "t": 4.7358,
+            "p_raw": 0.0011,
+            "p": 0.0298,
+            "significant_raw": true,
+            "significant": true
+          },
+          {
+            "higher": "MEIRA-no-memory",
+            "lower": "Dense-IR",
+            "diff": 0.0189,
+            "t": 11.9747,
+            "p_raw": 0.0,
+            "p": 0.0,
+            "significant_raw": true,
+            "significant": true
+          },
+          {
+            "higher": "Dense-IR",
+            "lower": "BM25",
+            "diff": 0.0593,
+            "t": 22.6325,
+            "p_raw": 0.0,
+            "p": 0.0,
+            "significant_raw": true,
+            "significant": true
+          },
+          {
+            "higher": "BM25",
+            "lower": "TF-IDF",
+            "diff": 0.0011,
+            "t": 1.5505,
+            "p_raw": 0.1554,
+            "p": 1.0,
+            "significant_raw": false,
+            "significant": false
+          }
+        ]
+      },
+      "corr": {
+        "F1 vs nDCG@10": {
+          "spearman": 1.0,
+          "p": 0.0
+        },
+        "F1 vs MAP": {
+          "spearman": 1.0,
+          "p": 0.0
+        },
+        "F1 vs MRR": {
+          "spearman": 1.0,
+          "p": 0.0
+        },
+        "nDCG@10 vs MAP": {
+          "spearman": 1.0,
+          "p": 0.0
+        },
+        "nDCG@10 vs MRR": {
+          "spearman": 1.0,
+          "p": 0.0
+        },
+        "MAP vs MRR": {
+          "spearman": 1.0,
+          "p": 0.0
+        }
+      }
+    }
+  }
+}

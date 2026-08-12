@@ -1,0 +1,182 @@
+% ============================================================================
+% FIRE 2026 Conference Track - camera-ready LaTeX skeleton
+% ----------------------------------------------------------------------------
+% Template: ACM ICPS "sigconf" (acmart), as required by the FIRE 2026 CFP
+%   https://fire.irsi.org.in/fire/2026/call_for_papers
+%   (template: https://authors.acm.org/proceedings/production-information/overleaf)
+%
+% CFP requirements to honour:
+%   * maximum 9 pages of CONTENT (references excluded) - trim if over
+%   * ACM CCS concepts and keywords are REQUIRED (below)
+%   * do NOT use the "manuscript" option (that is single-column)
+%   * restrict packages to the ACM TAPS whitelist
+%   * alt text for figures/tables is strongly encouraged
+%   * disclose any AI-assisted writing per ACM policy (see "Use of Generative AI")
+%
+% Compile (4 passes for correct refs/citations):
+%   pdflatex main && bibtex main && pdflatex main && pdflatex main
+% or: latexmk -pdf main.tex
+% or (from this directory): tectonic main.tex
+%
+% Submissions:
+%   * Regular / Perspective tracks -> double-blind: keep `anonymous=true`
+%   * Resource / Demo track        -> single-blind: drop `anonymous`
+% ============================================================================
+
+\documentclass[sigconf,natbib=true,anonymous=true]{acmart}
+% Single-blind (Resource / Demo track): comment the line above and uncomment:
+% \documentclass[sigconf,natbib=true]{acmart}
+
+\usepackage{booktabs}   % publication-quality tables (ACM whitelist)
+\usepackage{cleveref}   % \Cref/\Crefrange for section/table references
+% Note: amssymb deliberately NOT loaded - it clashes with acmart's fonts
+\emergencystretch=3em     % let narrow columns absorb long inline tokens
+% tighten float spacing so wide table* floats leave smaller column gaps
+\setlength{\textfloatsep}{10pt plus 2pt minus 4pt}
+\setlength{\floatsep}{8pt plus 2pt minus 2pt}
+\setlength{\dbltextfloatsep}{10pt plus 2pt minus 4pt}
+\setlength{\dblfloatsep}{8pt plus 2pt minus 2pt}
+
+% ----------------------------------------------------------------------------
+\title{MEIRA: A Memory-Enhanced Interpretable Retrieval Agent for Multi-Turn
+Agentic and Cross-Lingual Information Retrieval}
+
+% --- Author block --------------------------------------------------------------
+% Double-blind: keep the author block commented out until camera-ready.
+% \author{First Author}
+% \affiliation{%
+%   \institution{...}
+%   \department{...}
+%   \city{...}
+%   \country{...}}
+% \email{first.author@example.org}
+% ... repeat per author; include ORCID where available.
+
+% --- ACM CCS concepts (REQUIRED) -----------------------------------------------
+% Verify against the ACM CCS 2012 thesaurus: https://dl.acm.org/ccs
+\begin{CCSXML}
+<ccs2012>
+<concept>
+<concept_id>10002951.10003317</concept_id>
+<concept_desc>Information systems~Information retrieval</concept_desc>
+<concept_significance>500</concept_significance>
+</concept>
+<concept>
+<concept_id>10002951.10003317.10003335</concept_id>
+<concept_desc>Information systems~Information retrieval~Retrieval models and ranking</concept_desc>
+<concept_significance>300</concept_significance>
+</concept>
+<concept>
+<concept_id>10002951.10003317.10003350</concept_id>
+<concept_desc>Information systems~Information retrieval~Evaluation of retrieval results</concept_desc>
+<concept_significance>300</concept_significance>
+</concept>
+</ccs2012>
+\end{CCSXML}
+\ccsdesc[500]{Information systems~Information retrieval}
+\ccsdesc[300]{Information systems~Information retrieval~Retrieval models and ranking}
+\ccsdesc[300]{Information systems~Information retrieval~Evaluation of retrieval results}
+
+\keywords{agentic information retrieval; conversational search; episodic memory;
+explainable IR; memory diversity; evaluation metrics}
+
+% --- Abstract -------------------------------------------------------------------
+\begin{abstract}
+
+\end{abstract}
+
+% Tight blurb variant (for call-for-papers / short abstracts) - commented out:
+% Agentic multi-turn retrieval requires memory across turns and the ability to
+% explain retrievals - capabilities absent from classical and neural baselines.
+% We present MEIRA (Memory-Enhanced Interpretable Retrieval Agent), which
+% couples a 64-slot episodic memory bank, a temporal-decay mechanism, and an
+% XAI attribution head. We contribute two FIRE-style benchmarks
+% (FIRE-AgentIR-2026, FIRE-CrossLingIR-2026) with sibling-topic hard negatives
+% and label noise, and two metrics - XAIR@K and MDS. On both benchmarks across
+% ten seeds, MEIRA-full beats the strongest baseline on every ranking-quality
+% metric (F1, nDCG@10, MAP, MRR; F1 +0.087/+0.099) at p < 0.0001, robust to
+% Holm and Bonferroni correction. Ablations rank memory > decay > XAI.
+
+% ============================================================================
+% DRAFTING NOTES - strip before submission (kept for the authors)
+% ============================================================================
+% Figures: three camera-ready figures (leaderboard bars, ablation-delta
+% heatmap, ordering-stability rank plot) are generated at 300 dpi by the
+% pipeline scripts (run_SOTA.py, run_ablation.py, compare_metric_orderings.py)
+% into figures/, and embedded here from the markdown image syntax
+% (![caption](path){#label}) - md2tex.py converts each into a figure* env.
+% The markdown alt text doubles as the caption (ACM TAPS encourages
+% descriptive alt text). Re-run the pipeline scripts after any data change.
+%
+% PAGE BUDGET: content currently fills the 9-page limit exactly (references
+% start on p10 and are excluded from the count). Any prose/figure addition
+% must be re-checked with latex/_pagemap.py - add a _trims.py entry if it
+% overflows.
+%
+% # MEIRA: A Memory-Enhanced Interpretable Retrieval Agent for Multi-Turn Agentic and Cross-Lingual Information Retrieval
+%
+% *FIRE 2026 submission draft — assembled from the six verified section drafts
+% (`paper_abstract_intro_draft.md`, `paper_related_work_draft.md`,
+% `paper_datasets_protocol_draft.md`, `paper_sota_ablation_draft.md`,
+% `paper_robustness_draft.md`, `paper_conclusion_draft.md`).*
+%
+% > ⚠️ **Simulation status — read before using any number.** The models in
+% > this harness are *simulated*: `model_sim.py` draws relevance scores from
+% > calibrated distributions instead of running trained checkpoints. Every
+% > table and figure in this paper is a **pipeline-validation artifact**, not
+% > an experimental result. The evaluation machinery (datasets, splits,
+% > metrics, statistical tests) is real and verified; only the score
+% > distributions are synthetic. Before submission, replace
+% > `simulate_model()` with real forward passes from the trained MEIRA
+% > checkpoints and regenerate every number (recipe: re-run
+% > `run_SOTA.py --seeds 10`, `run_ablation.py --seeds 10`,
+% > `run_experiments.py --k 10 --seeds 10`, then the significance /
+% > correction / sweep scripts). Section-specific status notes from the
+% > source drafts have been consolidated here.
+% >
+% > **Sources.** All quantitative claims trace to
+% > `results/s10/sota.json`, `results/s10/ablation.json`,
+% > `results/k10_s10/correction_comparison.json`, and
+% > `results/k10_s10/alpha_sweep.json` (regenerate per the
+% > recipe above).
+% >
+% > **Word count & variant selection.** The primary variant is the submission
+% > abstract. Counts (verified programmatically): **208 words** (whitespace-
+% > tokenized, the MS-Word-style convention) / **226** under a strict
+% > hyphen-splitting convention — comfortably inside the 250-word FIRE-style
+% > limit with margin for template quirks. The tight blurb is **114 / 127**
+% > words and is intended only for call-for-papers / short-abstract contexts.
+% > The two variants are deliberately related rather than independent: the
+% > blurb is the primary compressed to framing + headline result, with every
+% > number kept in the primary. If a venue enforces a lower cap (e.g. 150
+% > words), cut from the primary in this order of priority: (1) the
+% > benchmark-detail parentheticals (keep only the dataset names), (2) the
+% > full ΔF1 triple (keep "memory > decay > XAI by contribution"), (3) the
+% > Holm/Bonferroni clause (keep "significant at p < 0.0001").
+%
+% ---
+
+% ============================================================================
+% ACM policy: AI-assisted writing must be disclosed. Adapt or delete.
+% ============================================================================
+% \section{Use of Generative AI}
+% \paragraph{Declaration of AI use.} We used an LLM-assisted writing tool
+% to draft and edit parts of the text; all technical claims were verified
+% against the experimental pipeline before submission.
+
+\begin{document}
+
+\maketitle
+
+\input{sections/sec01_introduction}
+\input{sections/sec02_related_work}
+\input{sections/sec03_datasets}
+\input{sections/sec04_results}
+\input{sections/sec05_robustness}
+\input{sections/sec06_conclusion}
+
+\bibliographystyle{ACM-Reference-Format}
+\bibliography{paper_references}
+\nocite{lewis2020retrieval}   % replaced by an explicit \nocite{...} of uncited keys
+
+\end{document}

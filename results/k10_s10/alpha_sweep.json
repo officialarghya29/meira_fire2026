@@ -1,0 +1,831 @@
+{
+  "config": {
+    "k": 10,
+    "seeds": [
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51
+    ],
+    "models": [
+      "BM25",
+      "TF-IDF",
+      "Dense-IR",
+      "ColBERT-like",
+      "MEIRA-no-memory",
+      "MEIRA-no-decay",
+      "MEIRA-no-xai",
+      "MEIRA-full"
+    ],
+    "metrics": [
+      "F1",
+      "nDCG@10",
+      "MAP",
+      "MRR"
+    ],
+    "alphas": [
+      0.01,
+      0.05,
+      0.1
+    ],
+    "note": "Lost = significant under Holm but not Bonferroni at that \u03b1; verdicts are \u03b1-dependent, p-values are not."
+  },
+  "counts": {
+    "0.01": {
+      "F1": {
+        "FIRE-AgentIR-2026": {
+          "raw": 28,
+          "holm": 28,
+          "bonferroni": 28,
+          "lost": 0
+        },
+        "FIRE-CrossLingIR-2026": {
+          "raw": 28,
+          "holm": 28,
+          "bonferroni": 28,
+          "lost": 0
+        }
+      },
+      "nDCG@10": {
+        "FIRE-AgentIR-2026": {
+          "raw": 27,
+          "holm": 26,
+          "bonferroni": 26,
+          "lost": 0
+        },
+        "FIRE-CrossLingIR-2026": {
+          "raw": 27,
+          "holm": 27,
+          "bonferroni": 25,
+          "lost": 2
+        }
+      },
+      "MAP": {
+        "FIRE-AgentIR-2026": {
+          "raw": 28,
+          "holm": 28,
+          "bonferroni": 26,
+          "lost": 2
+        },
+        "FIRE-CrossLingIR-2026": {
+          "raw": 27,
+          "holm": 27,
+          "bonferroni": 24,
+          "lost": 3
+        }
+      },
+      "MRR": {
+        "FIRE-AgentIR-2026": {
+          "raw": 26,
+          "holm": 26,
+          "bonferroni": 26,
+          "lost": 0
+        },
+        "FIRE-CrossLingIR-2026": {
+          "raw": 27,
+          "holm": 27,
+          "bonferroni": 25,
+          "lost": 2
+        }
+      }
+    },
+    "0.05": {
+      "F1": {
+        "FIRE-AgentIR-2026": {
+          "raw": 28,
+          "holm": 28,
+          "bonferroni": 28,
+          "lost": 0
+        },
+        "FIRE-CrossLingIR-2026": {
+          "raw": 28,
+          "holm": 28,
+          "bonferroni": 28,
+          "lost": 0
+        }
+      },
+      "nDCG@10": {
+        "FIRE-AgentIR-2026": {
+          "raw": 28,
+          "holm": 28,
+          "bonferroni": 26,
+          "lost": 2
+        },
+        "FIRE-CrossLingIR-2026": {
+          "raw": 28,
+          "holm": 28,
+          "bonferroni": 27,
+          "lost": 1
+        }
+      },
+      "MAP": {
+        "FIRE-AgentIR-2026": {
+          "raw": 28,
+          "holm": 28,
+          "bonferroni": 26,
+          "lost": 2
+        },
+        "FIRE-CrossLingIR-2026": {
+          "raw": 28,
+          "holm": 28,
+          "bonferroni": 27,
+          "lost": 1
+        }
+      },
+      "MRR": {
+        "FIRE-AgentIR-2026": {
+          "raw": 27,
+          "holm": 27,
+          "bonferroni": 26,
+          "lost": 1
+        },
+        "FIRE-CrossLingIR-2026": {
+          "raw": 27,
+          "holm": 27,
+          "bonferroni": 26,
+          "lost": 1
+        }
+      }
+    },
+    "0.10": {
+      "F1": {
+        "FIRE-AgentIR-2026": {
+          "raw": 28,
+          "holm": 28,
+          "bonferroni": 28,
+          "lost": 0
+        },
+        "FIRE-CrossLingIR-2026": {
+          "raw": 28,
+          "holm": 28,
+          "bonferroni": 28,
+          "lost": 0
+        }
+      },
+      "nDCG@10": {
+        "FIRE-AgentIR-2026": {
+          "raw": 28,
+          "holm": 28,
+          "bonferroni": 26,
+          "lost": 2
+        },
+        "FIRE-CrossLingIR-2026": {
+          "raw": 28,
+          "holm": 28,
+          "bonferroni": 27,
+          "lost": 1
+        }
+      },
+      "MAP": {
+        "FIRE-AgentIR-2026": {
+          "raw": 28,
+          "holm": 28,
+          "bonferroni": 27,
+          "lost": 1
+        },
+        "FIRE-CrossLingIR-2026": {
+          "raw": 28,
+          "holm": 28,
+          "bonferroni": 27,
+          "lost": 1
+        }
+      },
+      "MRR": {
+        "FIRE-AgentIR-2026": {
+          "raw": 27,
+          "holm": 27,
+          "bonferroni": 26,
+          "lost": 1
+        },
+        "FIRE-CrossLingIR-2026": {
+          "raw": 27,
+          "holm": 27,
+          "bonferroni": 27,
+          "lost": 0
+        }
+      }
+    }
+  },
+  "lost_pairs": {
+    "0.01": {
+      "F1": {
+        "FIRE-AgentIR-2026": [],
+        "FIRE-CrossLingIR-2026": []
+      },
+      "nDCG@10": {
+        "FIRE-AgentIR-2026": [],
+        "FIRE-CrossLingIR-2026": [
+          {
+            "higher": "ColBERT-like",
+            "lower": "MEIRA-no-memory",
+            "raw": 0.0009488717730516393,
+            "holm": 0.0023013992410776197,
+            "bonferroni": 0.0265684096454459,
+            "t": 4.818563757068723
+          },
+          {
+            "higher": "MEIRA-no-decay",
+            "lower": "ColBERT-like",
+            "raw": 0.0007671330803592065,
+            "holm": 0.0023013992410776197,
+            "bonferroni": 0.02147972625005778,
+            "t": 4.972633597030409
+          }
+        ]
+      },
+      "MAP": {
+        "FIRE-AgentIR-2026": [
+          {
+            "higher": "BM25",
+            "lower": "TF-IDF",
+            "raw": 0.003376879294062619,
+            "holm": 0.006753758588125238,
+            "bonferroni": 0.09455262023375333,
+            "t": 3.945654766302268
+          },
+          {
+            "higher": "MEIRA-no-decay",
+            "lower": "ColBERT-like",
+            "raw": 0.004433237068759001,
+            "holm": 0.006753758588125238,
+            "bonferroni": 0.12413063792525202,
+            "t": 3.767537267571904
+          }
+        ],
+        "FIRE-CrossLingIR-2026": [
+          {
+            "higher": "ColBERT-like",
+            "lower": "MEIRA-no-memory",
+            "raw": 0.0008803733759897638,
+            "holm": 0.0019333837600575684,
+            "bonferroni": 0.024650454527713386,
+            "t": 4.872575995390309
+          },
+          {
+            "higher": "MEIRA-no-decay",
+            "lower": "ColBERT-like",
+            "raw": 0.0005271453333487289,
+            "holm": 0.0019333837600575684,
+            "bonferroni": 0.014760069333764407,
+            "t": 5.250787468928665
+          },
+          {
+            "higher": "MEIRA-no-xai",
+            "lower": "MEIRA-no-decay",
+            "raw": 0.0004833459400143921,
+            "holm": 0.0019333837600575684,
+            "bonferroni": 0.013533686320402978,
+            "t": 5.316287975938672
+          }
+        ]
+      },
+      "MRR": {
+        "FIRE-AgentIR-2026": [],
+        "FIRE-CrossLingIR-2026": [
+          {
+            "higher": "ColBERT-like",
+            "lower": "MEIRA-no-memory",
+            "raw": 0.0010651389219704633,
+            "holm": 0.00319541676591139,
+            "bonferroni": 0.02982388981517297,
+            "t": 4.735834361709334
+          },
+          {
+            "higher": "MEIRA-no-decay",
+            "lower": "ColBERT-like",
+            "raw": 0.00226813697083397,
+            "holm": 0.00453627394166794,
+            "bonferroni": 0.06350783518335117,
+            "t": 4.211390348344017
+          }
+        ]
+      }
+    },
+    "0.05": {
+      "F1": {
+        "FIRE-AgentIR-2026": [],
+        "FIRE-CrossLingIR-2026": []
+      },
+      "nDCG@10": {
+        "FIRE-AgentIR-2026": [
+          {
+            "higher": "BM25",
+            "lower": "TF-IDF",
+            "raw": 0.0104532904113634,
+            "holm": 0.014137188661079063,
+            "bonferroni": 0.2926921315181752,
+            "t": 3.2221509340779573
+          },
+          {
+            "higher": "MEIRA-no-decay",
+            "lower": "ColBERT-like",
+            "raw": 0.007068594330539532,
+            "holm": 0.014137188661079063,
+            "bonferroni": 0.1979206412551069,
+            "t": 3.4682182656048184
+          }
+        ],
+        "FIRE-CrossLingIR-2026": [
+          {
+            "higher": "BM25",
+            "lower": "TF-IDF",
+            "raw": 0.0457903972769767,
+            "holm": 0.0457903972769767,
+            "bonferroni": 1.0,
+            "t": 2.3159231015389583
+          }
+        ]
+      },
+      "MAP": {
+        "FIRE-AgentIR-2026": [
+          {
+            "higher": "BM25",
+            "lower": "TF-IDF",
+            "raw": 0.003376879294062619,
+            "holm": 0.006753758588125238,
+            "bonferroni": 0.09455262023375333,
+            "t": 3.945654766302268
+          },
+          {
+            "higher": "MEIRA-no-decay",
+            "lower": "ColBERT-like",
+            "raw": 0.004433237068759001,
+            "holm": 0.006753758588125238,
+            "bonferroni": 0.12413063792525202,
+            "t": 3.767537267571904
+          }
+        ],
+        "FIRE-CrossLingIR-2026": [
+          {
+            "higher": "BM25",
+            "lower": "TF-IDF",
+            "raw": 0.024666658895278283,
+            "holm": 0.024666658895278283,
+            "bonferroni": 0.690666449067792,
+            "t": 2.693205663233748
+          }
+        ]
+      },
+      "MRR": {
+        "FIRE-AgentIR-2026": [
+          {
+            "higher": "MEIRA-no-decay",
+            "lower": "ColBERT-like",
+            "raw": 0.02358770221875995,
+            "holm": 0.0471754044375199,
+            "bonferroni": 0.6604556621252786,
+            "t": 2.7205206343827135
+          }
+        ],
+        "FIRE-CrossLingIR-2026": [
+          {
+            "higher": "MEIRA-no-decay",
+            "lower": "ColBERT-like",
+            "raw": 0.00226813697083397,
+            "holm": 0.00453627394166794,
+            "bonferroni": 0.06350783518335117,
+            "t": 4.211390348344017
+          }
+        ]
+      }
+    },
+    "0.10": {
+      "F1": {
+        "FIRE-AgentIR-2026": [],
+        "FIRE-CrossLingIR-2026": []
+      },
+      "nDCG@10": {
+        "FIRE-AgentIR-2026": [
+          {
+            "higher": "BM25",
+            "lower": "TF-IDF",
+            "raw": 0.0104532904113634,
+            "holm": 0.014137188661079063,
+            "bonferroni": 0.2926921315181752,
+            "t": 3.2221509340779573
+          },
+          {
+            "higher": "MEIRA-no-decay",
+            "lower": "ColBERT-like",
+            "raw": 0.007068594330539532,
+            "holm": 0.014137188661079063,
+            "bonferroni": 0.1979206412551069,
+            "t": 3.4682182656048184
+          }
+        ],
+        "FIRE-CrossLingIR-2026": [
+          {
+            "higher": "BM25",
+            "lower": "TF-IDF",
+            "raw": 0.0457903972769767,
+            "holm": 0.0457903972769767,
+            "bonferroni": 1.0,
+            "t": 2.3159231015389583
+          }
+        ]
+      },
+      "MAP": {
+        "FIRE-AgentIR-2026": [
+          {
+            "higher": "MEIRA-no-decay",
+            "lower": "ColBERT-like",
+            "raw": 0.004433237068759001,
+            "holm": 0.006753758588125238,
+            "bonferroni": 0.12413063792525202,
+            "t": 3.767537267571904
+          }
+        ],
+        "FIRE-CrossLingIR-2026": [
+          {
+            "higher": "BM25",
+            "lower": "TF-IDF",
+            "raw": 0.024666658895278283,
+            "holm": 0.024666658895278283,
+            "bonferroni": 0.690666449067792,
+            "t": 2.693205663233748
+          }
+        ]
+      },
+      "MRR": {
+        "FIRE-AgentIR-2026": [
+          {
+            "higher": "MEIRA-no-decay",
+            "lower": "ColBERT-like",
+            "raw": 0.02358770221875995,
+            "holm": 0.0471754044375199,
+            "bonferroni": 0.6604556621252786,
+            "t": 2.7205206343827135
+          }
+        ],
+        "FIRE-CrossLingIR-2026": []
+      }
+    }
+  },
+  "sensitive_pairs": [
+    {
+      "metric": "MAP",
+      "dataset": "FIRE-AgentIR-2026",
+      "higher": "BM25",
+      "lower": "TF-IDF",
+      "raw": 0.003376879294062619,
+      "holm": 0.006753758588125238,
+      "bonferroni": 0.09455262023375333,
+      "t": 3.945654766302268,
+      "holm_sig": {
+        "0.01": true,
+        "0.05": true,
+        "0.10": true
+      },
+      "bonf_sig": {
+        "0.01": false,
+        "0.05": false,
+        "0.10": true
+      },
+      "flips_holm": false,
+      "flips_bonf": true,
+      "lost_at": [
+        "0.01",
+        "0.05"
+      ]
+    },
+    {
+      "metric": "MAP",
+      "dataset": "FIRE-AgentIR-2026",
+      "higher": "MEIRA-no-decay",
+      "lower": "ColBERT-like",
+      "raw": 0.004433237068759001,
+      "holm": 0.006753758588125238,
+      "bonferroni": 0.12413063792525202,
+      "t": 3.767537267571904,
+      "holm_sig": {
+        "0.01": true,
+        "0.05": true,
+        "0.10": true
+      },
+      "bonf_sig": {
+        "0.01": false,
+        "0.05": false,
+        "0.10": false
+      },
+      "flips_holm": false,
+      "flips_bonf": false,
+      "lost_at": [
+        "0.01",
+        "0.05",
+        "0.10"
+      ]
+    },
+    {
+      "metric": "MAP",
+      "dataset": "FIRE-CrossLingIR-2026",
+      "higher": "MEIRA-no-xai",
+      "lower": "MEIRA-no-decay",
+      "raw": 0.0004833459400143921,
+      "holm": 0.0019333837600575684,
+      "bonferroni": 0.013533686320402978,
+      "t": 5.316287975938672,
+      "holm_sig": {
+        "0.01": true,
+        "0.05": true,
+        "0.10": true
+      },
+      "bonf_sig": {
+        "0.01": false,
+        "0.05": true,
+        "0.10": true
+      },
+      "flips_holm": false,
+      "flips_bonf": true,
+      "lost_at": [
+        "0.01"
+      ]
+    },
+    {
+      "metric": "MAP",
+      "dataset": "FIRE-CrossLingIR-2026",
+      "higher": "MEIRA-no-decay",
+      "lower": "ColBERT-like",
+      "raw": 0.0005271453333487289,
+      "holm": 0.0019333837600575684,
+      "bonferroni": 0.014760069333764407,
+      "t": 5.250787468928665,
+      "holm_sig": {
+        "0.01": true,
+        "0.05": true,
+        "0.10": true
+      },
+      "bonf_sig": {
+        "0.01": false,
+        "0.05": true,
+        "0.10": true
+      },
+      "flips_holm": false,
+      "flips_bonf": true,
+      "lost_at": [
+        "0.01"
+      ]
+    },
+    {
+      "metric": "MAP",
+      "dataset": "FIRE-CrossLingIR-2026",
+      "higher": "ColBERT-like",
+      "lower": "MEIRA-no-memory",
+      "raw": 0.0008803733759897638,
+      "holm": 0.0019333837600575684,
+      "bonferroni": 0.024650454527713386,
+      "t": 4.872575995390309,
+      "holm_sig": {
+        "0.01": true,
+        "0.05": true,
+        "0.10": true
+      },
+      "bonf_sig": {
+        "0.01": false,
+        "0.05": true,
+        "0.10": true
+      },
+      "flips_holm": false,
+      "flips_bonf": true,
+      "lost_at": [
+        "0.01"
+      ]
+    },
+    {
+      "metric": "MAP",
+      "dataset": "FIRE-CrossLingIR-2026",
+      "higher": "BM25",
+      "lower": "TF-IDF",
+      "raw": 0.024666658895278283,
+      "holm": 0.024666658895278283,
+      "bonferroni": 0.690666449067792,
+      "t": 2.693205663233748,
+      "holm_sig": {
+        "0.01": false,
+        "0.05": true,
+        "0.10": true
+      },
+      "bonf_sig": {
+        "0.01": false,
+        "0.05": false,
+        "0.10": false
+      },
+      "flips_holm": true,
+      "flips_bonf": false,
+      "lost_at": [
+        "0.05",
+        "0.10"
+      ]
+    },
+    {
+      "metric": "MRR",
+      "dataset": "FIRE-AgentIR-2026",
+      "higher": "MEIRA-no-decay",
+      "lower": "ColBERT-like",
+      "raw": 0.02358770221875995,
+      "holm": 0.0471754044375199,
+      "bonferroni": 0.6604556621252786,
+      "t": 2.7205206343827135,
+      "holm_sig": {
+        "0.01": false,
+        "0.05": true,
+        "0.10": true
+      },
+      "bonf_sig": {
+        "0.01": false,
+        "0.05": false,
+        "0.10": false
+      },
+      "flips_holm": true,
+      "flips_bonf": false,
+      "lost_at": [
+        "0.05",
+        "0.10"
+      ]
+    },
+    {
+      "metric": "MRR",
+      "dataset": "FIRE-CrossLingIR-2026",
+      "higher": "ColBERT-like",
+      "lower": "MEIRA-no-memory",
+      "raw": 0.0010651389219704633,
+      "holm": 0.00319541676591139,
+      "bonferroni": 0.02982388981517297,
+      "t": 4.735834361709334,
+      "holm_sig": {
+        "0.01": true,
+        "0.05": true,
+        "0.10": true
+      },
+      "bonf_sig": {
+        "0.01": false,
+        "0.05": true,
+        "0.10": true
+      },
+      "flips_holm": false,
+      "flips_bonf": true,
+      "lost_at": [
+        "0.01"
+      ]
+    },
+    {
+      "metric": "MRR",
+      "dataset": "FIRE-CrossLingIR-2026",
+      "higher": "MEIRA-no-decay",
+      "lower": "ColBERT-like",
+      "raw": 0.00226813697083397,
+      "holm": 0.00453627394166794,
+      "bonferroni": 0.06350783518335117,
+      "t": 4.211390348344017,
+      "holm_sig": {
+        "0.01": true,
+        "0.05": true,
+        "0.10": true
+      },
+      "bonf_sig": {
+        "0.01": false,
+        "0.05": false,
+        "0.10": true
+      },
+      "flips_holm": false,
+      "flips_bonf": true,
+      "lost_at": [
+        "0.01",
+        "0.05"
+      ]
+    },
+    {
+      "metric": "nDCG@10",
+      "dataset": "FIRE-AgentIR-2026",
+      "higher": "MEIRA-no-decay",
+      "lower": "ColBERT-like",
+      "raw": 0.007068594330539532,
+      "holm": 0.014137188661079063,
+      "bonferroni": 0.1979206412551069,
+      "t": 3.4682182656048184,
+      "holm_sig": {
+        "0.01": false,
+        "0.05": true,
+        "0.10": true
+      },
+      "bonf_sig": {
+        "0.01": false,
+        "0.05": false,
+        "0.10": false
+      },
+      "flips_holm": true,
+      "flips_bonf": false,
+      "lost_at": [
+        "0.05",
+        "0.10"
+      ]
+    },
+    {
+      "metric": "nDCG@10",
+      "dataset": "FIRE-AgentIR-2026",
+      "higher": "BM25",
+      "lower": "TF-IDF",
+      "raw": 0.0104532904113634,
+      "holm": 0.014137188661079063,
+      "bonferroni": 0.2926921315181752,
+      "t": 3.2221509340779573,
+      "holm_sig": {
+        "0.01": false,
+        "0.05": true,
+        "0.10": true
+      },
+      "bonf_sig": {
+        "0.01": false,
+        "0.05": false,
+        "0.10": false
+      },
+      "flips_holm": true,
+      "flips_bonf": false,
+      "lost_at": [
+        "0.05",
+        "0.10"
+      ]
+    },
+    {
+      "metric": "nDCG@10",
+      "dataset": "FIRE-CrossLingIR-2026",
+      "higher": "MEIRA-no-decay",
+      "lower": "ColBERT-like",
+      "raw": 0.0007671330803592065,
+      "holm": 0.0023013992410776197,
+      "bonferroni": 0.02147972625005778,
+      "t": 4.972633597030409,
+      "holm_sig": {
+        "0.01": true,
+        "0.05": true,
+        "0.10": true
+      },
+      "bonf_sig": {
+        "0.01": false,
+        "0.05": true,
+        "0.10": true
+      },
+      "flips_holm": false,
+      "flips_bonf": true,
+      "lost_at": [
+        "0.01"
+      ]
+    },
+    {
+      "metric": "nDCG@10",
+      "dataset": "FIRE-CrossLingIR-2026",
+      "higher": "ColBERT-like",
+      "lower": "MEIRA-no-memory",
+      "raw": 0.0009488717730516393,
+      "holm": 0.0023013992410776197,
+      "bonferroni": 0.0265684096454459,
+      "t": 4.818563757068723,
+      "holm_sig": {
+        "0.01": true,
+        "0.05": true,
+        "0.10": true
+      },
+      "bonf_sig": {
+        "0.01": false,
+        "0.05": true,
+        "0.10": true
+      },
+      "flips_holm": false,
+      "flips_bonf": true,
+      "lost_at": [
+        "0.01"
+      ]
+    },
+    {
+      "metric": "nDCG@10",
+      "dataset": "FIRE-CrossLingIR-2026",
+      "higher": "BM25",
+      "lower": "TF-IDF",
+      "raw": 0.0457903972769767,
+      "holm": 0.0457903972769767,
+      "bonferroni": 1.0,
+      "t": 2.3159231015389583,
+      "holm_sig": {
+        "0.01": false,
+        "0.05": true,
+        "0.10": true
+      },
+      "bonf_sig": {
+        "0.01": false,
+        "0.05": false,
+        "0.10": false
+      },
+      "flips_holm": true,
+      "flips_bonf": false,
+      "lost_at": [
+        "0.05",
+        "0.10"
+      ]
+    }
+  ]
+}

@@ -8,13 +8,13 @@ We evaluate on two synthetic-but-realistic IR benchmarks built to mirror the tas
 
 \subsubsection{FIRE-AgentIR-2026}
 
-FIRE-AgentIR-2026 simulates multi-turn agentic retrieval: each conversation pursues a topic over six successive turns, and the system must retrieve the relevant document given the accumulated conversational context. The corpus is organised around \textbf{10 IR/NLP topic clusters} (episodic memory, dense retrieval, RAG, neural reranking, explainability, evaluation metrics, conversational search, query understanding, multimodal IR, and agentic systems). Difficulty increases across turns: the generative process retains a fraction \texttt{1 $-$ min(0.07$\cdot$turn, 0.35)} of a topic's core vocabulary (with a floor of two terms), so later turns contain fewer distinctive terms and are progressively harder to disambiguate (simulating topic drift).
+FIRE-AgentIR-2026 simulates multi-turn agentic retrieval: each conversation pursues a topic over six turns, and the system must retrieve the relevant document given the accumulated context. The corpus is organised around \textbf{10 IR/NLP topic clusters} (episodic memory, dense retrieval, RAG, neural reranking, explainability, evaluation metrics, conversational search, query understanding, multimodal IR, agentic systems). Difficulty increases across turns: the generative process retains a fraction \texttt{1 $-$ min(0.07$\cdot$turn, 0.35)} of a topic's core vocabulary (floor of two terms), so later turns contain fewer distinctive terms and are progressively harder (simulating topic drift).
 
 Each positive query--document pair is accompanied by \textbf{three negatives}; with probability 0.65 a negative is \emph{hard} --- drawn from a \textbf{sibling topic} that shares the common IR vocabulary, so it is topically confusable with the positive rather than an easy random distractor. Relevance labels are flipped with probability 0.05 to simulate imperfect human judgements.
 
 \subsubsection{FIRE-CrossLingIR-2026}
 
-FIRE-CrossLingIR-2026 simulates bilingual retrieval over Indian-language tracks, aligned with FIRE's historical emphasis on Hindi, Bengali and Tamil IR. The corpus is organised around \textbf{5 bilingual topic clusters} (Hindi-English health and agriculture; Bengali-English news and education; Tamil-English technology). Queries and documents are generated in English, in transliterated vernacular, or in \textbf{code-switched (mixed)} form, injecting vocabulary shift and transliteration noise. As in AgentIR, negatives are drawn from a sibling topic with shared vocabulary (hard-negative probability 0.60), and labels are flipped with probability 0.06.
+FIRE-CrossLingIR-2026 simulates bilingual retrieval over Indian-language tracks, aligned with FIRE's historical emphasis on Hindi, Bengali and Tamil IR, organised around \textbf{5 bilingual topic clusters} (Hindi-English health and agriculture; Bengali-English news and education; Tamil-English technology). Queries and documents are generated in English, transliterated vernacular, or \textbf{code-switched (mixed)} form, injecting vocabulary shift and transliteration noise; negatives come from a sibling topic (hard-negative probability 0.60) and labels are flipped with probability 0.06.
 
 \subsubsection{Corpus statistics}
 
@@ -45,7 +45,7 @@ Label noise & 0.05 & 0.06 \\
 \end{tabular}
 \end{table*}
 
-Both corpora are class-balanced enough for stable stratified splits while retaining a realistic positive-to-negative skew, and the hard-negative densities ($\approx$1.6--1.8 hard negatives per positive) make the ranking task non-trivial for lexical baselines.
+Both corpora are class-balanced with a realistic positive-to-negative skew, and the hard-negative densities ($\approx$1.6--1.8 per positive) make the ranking task non-trivial for lexical baselines.
 
 \subsubsection{Tokenisation \& input representation}
 
@@ -54,7 +54,7 @@ Text is tokenised with a fixed, deterministically-assigned vocabulary of 30,522 
 \subsection{Evaluation protocol}
 \label{sec:datasets-protocol}
 
-\textbf{Data splits.} Both datasets expose the same split utilities. For the multi-seed experiments the corpus is stratified-split by class into train / validation / test at \textbf{70 / 15 / 15}, with the split re-seeded per evaluation seed. For the k-fold experiment, a stratified \textbf{k-fold cross-validation} (k = 10) provides per-fold train/validation pairs.
+\textbf{Data splits.} Both datasets expose the same utilities: stratified by class into train / validation / test at \textbf{70 / 15 / 15}, re-seeded per evaluation seed; the k-fold experiment uses stratified \textbf{k-fold cross-validation} (k = 10).
 
 \textbf{Evaluation seeds.} All multi-seed experiments use seeds 42--51 (ten). For each seed, models are scored on the held-out \textbf{test} partition of that seed's stratified split ($\approx$15\% of each class: $\approx$1,260 samples per seed for FIRE-AgentIR-2026, $\approx$480 for FIRE-CrossLingIR-2026); the k-fold experiment scores each of the 10 folds once (seed 42 + fold index). Reported values are \textbf{mean $\pm$ std across the ten seeds} (or folds).
 
@@ -117,7 +117,7 @@ MEIRA-full couples an episodic memory bank (64 slots) with a temporal-decay mech
 \subsection{Statistical analysis}
 \label{sec:datasets-stats}
 
-All significance claims are computed from the ten-seed evaluation data with \textbf{paired two-sided t-tests} (across the ten seeds; $df = 9$) over every pair of the eight models --- 28 pairwise comparisons per dataset $\times$ metric. Because the t-tests are not independent, p-values are reported \textbf{Holm-Bonferroni corrected} (primary), with \textbf{Bonferroni} ($\times$28) as the conservative stress-test and an \textbf{$\alpha$-sensitivity sweep} over $\alpha \in \{0.01, 0.05, 0.10\}$ to show that conclusions do not hinge on the threshold. Full details, tables, and the defensible-claims list are in \Cref{sec:rob}; the pairwise matrices and $\alpha$-sweep data are archived in \texttt{results/\allowbreak\{\}k10\_s10/\allowbreak\{\}significance\_matrix\_*\_\{holm,bonferroni\}.\allowbreak\{\}json/\allowbreak\{\}.\allowbreak\{\}md} and \texttt{results/k10\_s10/alpha\_sweep.json/.md}.
+All significance claims come from the ten-seed data with \textbf{paired two-sided t-tests} ($df = 9$) over every pair of the eight models --- 28 comparisons per dataset $\times$ metric. Because the tests are not independent, p-values are reported \textbf{Holm-Bonferroni corrected} (primary), with \textbf{Bonferroni} ($\times$28) as a stress test and an \textbf{$\alpha$-sensitivity sweep} over $\alpha \in \{0.01, 0.05, 0.10\}$. Full details are in \Cref{sec:rob}; the matrices and sweep are archived in \texttt{results/k10\_s10/}.
 
 % ==== DRAFTING METADATA (was: 3.6 Defensible claims) ====
 

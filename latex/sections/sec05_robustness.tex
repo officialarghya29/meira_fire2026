@@ -60,7 +60,7 @@ MRR & FIRE-CrossLingIR-2026 & MEIRA-no-decay > ColBERT-like & 0.0023 & 0.0045 & 
 \end{tabular}
 \end{table*}
 
-\textbf{\Cref{tab:lost-pairs}. The eight pair-instances that are significant under Holm but not under Bonferroni at $\alpha = 0.05$.} The important observation is what is \textbf{not} in \Cref{tab:lost-pairs}. Every comparison involving \textbf{MEIRA-full --- including MEIRA-full vs the best baseline ColBERT-like --- remains significant at $p < 0.0001$ even after Bonferroni correction} on every metric and dataset (e.g. nDCG@10: $t = 20.12$ and $t = 13.06$ on FIRE-AgentIR-2026 and FIRE-CrossLingIR-2026, respectively, vs uncorrected differences of 0.969--0.937 and 0.962--0.932). The paper's headline superiority claim therefore does not depend on which correction is chosen.
+\textbf{\Cref{tab:lost-pairs}. The eight pair-instances that are significant under Holm but not under Bonferroni at $\alpha = 0.05$.} The important observation is what is \textbf{not} in \Cref{tab:lost-pairs}: every comparison involving \textbf{MEIRA-full --- including vs the best baseline ColBERT-like --- remains significant at $p < 0.0001$ even after Bonferroni correction} on every metric and dataset (nDCG@10: $t = 20.12$ / 13.06). The headline superiority claim therefore does not depend on which correction is chosen.
 
 \Cref{fig:ordering} tracks every model's rank across the four ranking-quality metrics and flags the models involved in adjacencies that remain non-significant after Holm correction (dashed lines) --- the only places where the reported ordering could flip. MEIRA-full holds rank 1 on both datasets and every metric, and BM25 vs TF-IDF is the sole fragile comparison.
 

@@ -193,9 +193,19 @@ def fig_ordering_stability(ds_results, models, tag, method="holm"):
     n_met = len(METRICS)
     # camera-ready: figsize is the target print width (ACM sigconf full text
     # width) so fonts render at their nominal point size
-    fig, axes = plt.subplots(n_ds, 2, figsize=(7.2, 4.2), squeeze=False)
-    fig.suptitle(f"Model-Ordering Stability Across Metrics ({tag}) – FIRE 2026",
-                 fontsize=11, color=PALETTE["primary"], fontweight="bold")
+    # Explicit gridspec: deterministic margins (mpl 3.11 layout engines leave
+    # ~100px of slack between rows and crush the panels). Gaps sized for the
+    # real text extents: bottom=0.17 reserves the legend band; the row gap
+    # (hspace) clears the x labels and colorbar end ticks; explicit colorbar
+    # ticks avoid 0.0/10.0 overhang labels. TUNED to the current data/fonts -
+    # re-run audit_figures.py after any data, seed, or font change.
+    fig = plt.figure(figsize=(7.2, 3.30))
+    gs = fig.add_gridspec(n_ds, 2, left=0.09, right=0.975, top=0.87,
+                          bottom=0.17, wspace=0.14, hspace=0.50)
+    axes = [[fig.add_subplot(gs[di, ci]) for ci in range(2)]
+            for di in range(n_ds)]
+    fig.suptitle("Model-Ordering Stability Across Metrics (Holm-corrected)",
+                 fontsize=11, color=PALETTE["primary"], fontweight="bold", y=0.99)
     x = np.arange(n_met)
     handles = labels = None
     for di, (ds_name, res) in enumerate(ds_results.items()):
@@ -210,7 +220,7 @@ def fig_ordering_stability(ds_results, models, tag, method="holm"):
                 if not pr["significant"]:
                     fragile_models.update([pr["higher"], pr["lower"]])
 
-        ax = axes[di, 0]
+        ax = axes[di][0]
         for k, m in enumerate(order):
             ranks = [res["rank"][met][m] for met in METRICS]
             fragile = m in fragile_models
@@ -224,17 +234,19 @@ def fig_ordering_stability(ds_results, models, tag, method="holm"):
             handles, labels = ax.get_legend_handles_labels()
         ax.set_xticks(x); ax.set_xticklabels(METRICS, fontsize=8)
         ax.set_yticks(range(1, len(models) + 1))
+        ax.tick_params(axis="y", labelsize=8)   # 1..8 ranks in a short panel
         ax.set_ylim(len(models) + 0.5, 0.5)   # rank 1 on top
         ax.set_ylabel("Rank (1 = best)")
         ax.grid(True, axis="y", alpha=0.6)
-        ax.set_title(f"{ds_name} – parallel coordinates", fontsize=9.5,
+        ds_short = ds_name.split('-')[1] if '-' in ds_name else ds_name
+        ax.set_title(f"{ds_short} – parallel coordinates", fontsize=9,
                      color=PALETTE["primary"], fontweight="bold")
         msg = ("identical ranking across metrics — no crossings"
                if stable else "orderings differ across metrics")
-        ax.text(0.02, 0.02, msg, transform=ax.transAxes, fontsize=7,
+        ax.text(0.02, 0.05, msg, transform=ax.transAxes, fontsize=7,
                 color=PALETTE["neutral"], style="italic")
 
-        ax2 = axes[di, 1]
+        ax2 = axes[di][1]
         mat = np.array([[res["rank"][met][m] for met in METRICS] for m in order])
         im = ax2.imshow(mat, cmap="YlOrRd", aspect="auto", vmin=1, vmax=len(models))
         ax2.set_xticks(range(n_met)); ax2.set_xticklabels(METRICS, fontsize=8)
@@ -245,13 +257,15 @@ def fig_ordering_stability(ds_results, models, tag, method="holm"):
                 v = mat[i, j]
                 ax2.text(j, i, f"{v:g}", ha="center", va="center", fontsize=7,
                          color="white" if v > len(models) / 2 else "black")
-        ax2.set_title(f"{ds_name} – rank matrix", fontsize=9.5,
+        ax2.set_title(f"{ds_short} – rank matrix", fontsize=9.5,
                       color=PALETTE["primary"], fontweight="bold")
-        fig.colorbar(im, ax=ax2, shrink=0.85, label="Rank")
+        cbar = fig.colorbar(im, ax=ax2, shrink=0.85, label="Rank",
+                            ticks=list(range(1, len(models) + 1)))
+        cbar.ax.tick_params(labelsize=8)   # 8 ticks fit the short colorbar
     if handles is not None:
+        # legend lives in the reserved bottom band (gridspec bottom=0.13)
         fig.legend(handles, labels, loc="lower center", ncol=4, fontsize=7,
                    framealpha=0.9)
-    fig.tight_layout(rect=[0, 0.08, 1, 0.97])
     path = os.path.join(FIG_DIR, f"ord1_ordering_stability{'' if method == 'none' else '_' + method}.png")
     fig.savefig(path, dpi=300, bbox_inches="tight"); plt.close(fig)
     print(f"  ✓ {os.path.basename(path)}")

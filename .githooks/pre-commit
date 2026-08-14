@@ -1,0 +1,45 @@
+#!/usr/bin/env bash
+# Pre-commit checks for the MEIRA-FIRE-2026 camera-ready pipeline.
+#
+#  1. audit_figures.py   - regenerates the three paper figures in /tmp and
+#                          fails if any text collides, clips, or overflows.
+#  2. paper build        - md2tex.py + tectonic, fails on overfull boxes or
+#                          undefined refs/citations (skip with SKIP_PAPER=1).
+#
+# All build outputs go to /tmp; tracked sources are only regenerated to
+# identical deterministic content, so the hook never dirties the worktree.
+set -u
+cd "$(git rev-parse --show-toplevel)" || exit 1
+
+PY=./.venv/bin/python
+[ -x "$PY" ] || PY=python3
+
+echo "== [pre-commit] figure audit (audit_figures.py) =="
+"$PY" audit_figures.py >/tmp/precommit_audit.log 2>&1 || {
+  echo "FAIL: figure audit - see /tmp/precommit_audit.log"; exit 1; }
+
+if [ "${SKIP_PAPER:-0}" != "1" ]; then
+  TECTONIC="$(command -v tectonic 2>/dev/null || echo "$HOME/.local/bin/tectonic")"
+  if [ -x "$TECTONIC" ]; then
+    echo "== [pre-commit] paper build (md2tex + tectonic) =="
+    "$PY" md2tex.py >/tmp/precommit_md2tex.log 2>&1 || {
+      echo "FAIL: md2tex - see /tmp/precommit_md2tex.log"; exit 1; }
+    ( cd latex && "$TECTONIC" main.tex --keep-intermediates \
+        >/tmp/precommit_tex.log 2>&1 ) || {
+      echo "FAIL: tectonic build - see /tmp/precommit_tex.log"; exit 1; }
+    if grep -q "Overfull" /tmp/precommit_tex.log; then
+      echo "FAIL: overfull boxes - see /tmp/precommit_tex.log"; exit 1; fi
+    if grep -qi "undefined" /tmp/precommit_tex.log; then
+      echo "FAIL: undefined refs/citations - see /tmp/precommit_tex.log"; exit 1; fi
+    "$PY" latex/_validate_tex.py >/tmp/precommit_validate.log 2>&1 || {
+      echo "FAIL: tex validator - see /tmp/precommit_validate.log"; exit 1; }
+    echo "== [pre-commit] paper build OK =="
+  else
+    echo "== [pre-commit] tectonic not found; skipping paper build =="
+  fi
+else
+  echo "== [pre-commit] SKIP_PAPER=1; skipping paper build =="
+fi
+
+echo "== [pre-commit] all checks passed =="
+exit 0

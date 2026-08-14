@@ -38,6 +38,7 @@ import numpy as np
 from scipy import stats
 import matplotlib; matplotlib.use("Agg")
 import matplotlib.pyplot as plt
+from matplotlib.ticker import MaxNLocator
 
 sys.path.insert(0, os.path.dirname(__file__))
 from datasets_fire import (build_agent_ir_dataset, build_crossling_ir_dataset,
@@ -146,12 +147,24 @@ def significance_vs_best_baseline(results, metric="nDCG@10", champion="MEIRA-ful
 def fig_leaderboard_bars(results, metrics=("nDCG@10","MAP","MRR","F1")):
     datasets = list(results.keys())
     # camera-ready: figsize is the target print width (full text width of
-    # ACM sigconf two-column) so fonts render at their nominal point size
-    fig, axes = plt.subplots(len(datasets), len(metrics), figsize=(7.2, 3.0))
-    if len(datasets) == 1: axes = [axes]
-    fig.suptitle("SOTA Leaderboard – MEIRA-full vs Baselines (FIRE 2026)",
-                 fontsize=11, color=PALETTE["primary"], fontweight="bold")
+    # ACM sigconf two-column) so fonts render at their nominal point size.
+    # Explicit gridspec: deterministic margins (mpl 3.11 layout engines leave
+    # ~100px of slack between rows and crush the panels when text pokes above
+    # the axes tops). The gaps are sized for the real text extents: y-tick
+    # labels need ~28px left of each panel (wspace), 90° model labels need
+    # ~57px below each row (hspace), row labels ~47px at the left margin.
+    # These fractions are TUNED to the current data/font sizes (≤5 y ticks,
+    # 90° x-label overhang, star headroom) - re-run audit_figures.py after
+    # any data, seed, or font change to re-verify the zero-collision layout.
+    fig = plt.figure(figsize=(7.2, 3.95))
+    gs = fig.add_gridspec(len(datasets), len(metrics), left=0.11, right=0.985,
+                          top=0.875, bottom=0.148, wspace=0.24, hspace=0.75)
+    axes = [[fig.add_subplot(gs[di, mi]) for mi in range(len(metrics))]
+            for di in range(len(datasets))]
+    fig.suptitle("SOTA Leaderboard – MEIRA-full vs Baselines",
+                 fontsize=11, color=PALETTE["primary"], fontweight="bold", y=0.99)
     for di, ds_name in enumerate(datasets):
+        ds_short = ds_name.split('-')[1] if '-' in ds_name else ds_name
         for mi, metric in enumerate(metrics):
             ax = axes[di][mi]
             means = [results[ds_name][m]["aggregate"].get(metric,{}).get("mean",0) for m in SOTA_MODELS]
@@ -160,20 +173,35 @@ def fig_leaderboard_bars(results, metrics=("nDCG@10","MAP","MRR","F1")):
             bars = ax.bar(x, means, color=COLORS[:len(SOTA_MODELS)], edgecolor="white",
                           alpha=0.9, width=0.62)
             ax.errorbar(x, means, yerr=stds, fmt="none", color=PALETTE["neutral"], capsize=3, lw=1.2)
-            ax.set_xticks(x); ax.set_xticklabels(SOTA_MODELS, fontsize=6.5, rotation=20, ha="right")
-            ax.set_ylabel(metric if mi==0 else "")
-            ax.set_title(f"{ds_name.split('-')[1] if '-' in ds_name else ds_name} – {metric}",
-                         fontsize=9, color=PALETTE["primary"])
+            # vertical labels: 20°-rotated model names collide inside the
+            # narrow panels; 90° keeps every label on its own line (small
+            # enough that the label overhang below each row fits the gap)
+            ax.set_xticks(x); ax.set_xticklabels(SOTA_MODELS, fontsize=6, rotation=90, ha="center")
+            # row = dataset (ylabel on first column), column = metric (title)
+            ax.set_ylabel(ds_short if mi == 0 else "", fontsize=9)
+            ax.set_title(metric, fontsize=9, color=PALETTE["primary"])
             ax.grid(True, axis="y")
-            lo = max(0, min(means)-0.1); hi = min(1, max(means)+0.12)
-            ax.set_ylim(lo, hi)
+            lo = max(0, min(means)-0.08)
             best_i = int(np.argmax(means))
-            ax.annotate("★", xy=(x[best_i], means[best_i]+stds[best_i]+0.01),
+            star_y = means[best_i] + stds[best_i] + 0.17   # clear of value labels
+            # headroom for the star GLYPH (~11px) so it never pokes through
+            # the panel's top border
+            hi = max(min(1, max(means)+0.18), star_y + 0.12)
+            ax.set_ylim(lo, hi)
+            # sparse clean ticks: MaxNLocator keeps ≤5 ticks so their labels
+            # never crowd the short panels; values capped at 1.0 keep bounded-
+            # metric panels free of stray 1.1/1.2 ticks
+            ticks = [t for t in MaxNLocator(nbins=4, steps=[1, 2, 5, 10]).tick_values(lo, hi)
+                     if t <= min(hi, 1.0) + 1e-9]
+            ax.set_yticks(ticks)
+            ax.annotate("★", xy=(x[best_i], star_y),
                         ha="center", fontsize=9, color=PALETTE["accent"])
-            for bar, mu in zip(bars, means):
-                ax.annotate(f"{mu:.3f}", xy=(bar.get_x()+bar.get_width()/2, bar.get_height()),
+            # value labels sit ABOVE the whisker cap (mean+std), not at the bar
+            # height where the error-bar line crosses through the text
+            for bar, mu, sd in zip(bars, means, stds):
+                ax.annotate(f"{mu:.3f}",
+                            xy=(bar.get_x()+bar.get_width()/2, bar.get_height()+sd),
                             xytext=(0,3), textcoords="offset points", ha="center", fontsize=6)
-    fig.tight_layout()
     path = os.path.join(FIG_DIR, "sota1_leaderboard_bars.png")
     fig.savefig(path, dpi=300, bbox_inches="tight"); plt.close(fig)
     print(f"  ✓ {os.path.basename(path)}")

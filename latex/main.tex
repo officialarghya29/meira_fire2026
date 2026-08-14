@@ -82,7 +82,7 @@ explainable IR; memory diversity; evaluation metrics}
 
 % --- Abstract -------------------------------------------------------------------
 \begin{abstract}
-
+Multi-turn agentic information retrieval --- retrieving relevant documents given an accumulating conversational context --- strains classical and neural retrieval systems: they carry no structured memory across turns and cannot explain their retrievals. We present \textbf{MEIRA}, a Memory-Enhanced Interpretable Retrieval Agent coupling a 64-slot episodic memory bank, a temporal-decay mechanism that down-weights stale memories, and an XAI attribution head that emits per-document explanation confidences. To evaluate it we introduce two synthetic-but-realistic FIRE-style benchmarks with sibling-topic hard negatives and label noise --- \textbf{FIRE-AgentIR-2026} (multi-turn agentic retrieval; 8,400 samples, 10 topic clusters) and \textbf{FIRE-CrossLingIR-2026} (cross-lingual Indian-language retrieval; 3,200 samples, 5 bilingual clusters) --- and two metrics: \textbf{XAIR@K}, an explainability-adjusted IR score interpolating ranking quality with attribution confidence ($w = 0.25$), and \textbf{MDS}, a memory-diversity score that flags memory mode collapse. Across ten evaluation seeds, MEIRA-full is the best model on every ranking-quality metric (F1, nDCG@10, MAP, MRR) on both datasets: F1 = 0.826/0.780 vs 0.740/0.680 for the strongest baseline (+11.7\%/+14.6\% relative), significant at $p < 0.0001$ (paired t-test) and surviving both Holm and Bonferroni multiplicity correction at every threshold we consider. Ablations rank the components memory > decay > XAI by $\Delta$F1 contribution (+0.110/+0.124, +0.078/+0.086, +0.049/+0.054), with the XAI head uniquely responsible for the explainability-adjusted score ($\Delta$XAIR@10 +0.894/+0.886).
 \end{abstract}
 
 % Tight blurb variant (for call-for-papers / short abstracts) - commented out:
@@ -108,10 +108,12 @@ explainable IR; memory diversity; evaluation metrics}
 % The markdown alt text doubles as the caption (ACM TAPS encourages
 % descriptive alt text). Re-run the pipeline scripts after any data change.
 %
-% PAGE BUDGET: content currently fills the 9-page limit exactly (references
-% start on p10 and are excluded from the count). Any prose/figure addition
-% must be re-checked with latex/_pagemap.py - add a _trims.py entry if it
-% overflows.
+% PAGE BUDGET: content currently fills the 9-page limit exactly; references
+% are FORCED onto a fresh page (p10) by an explicit \clearpage before the
+% bibliography - this is intentional (references are excluded from the count)
+% and keeps the last content page from overflowing. Any prose/figure
+% addition must be re-checked with latex/_pagemap.py - add a _trims.py entry
+% if it overflows.
 %
 % # MEIRA: A Memory-Enhanced Interpretable Retrieval Agent for Multi-Turn Agentic and Cross-Lingual Information Retrieval
 %
@@ -175,6 +177,9 @@ explainable IR; memory diversity; evaluation metrics}
 \input{sections/sec05_robustness}
 \input{sections/sec06_conclusion}
 
+% references start on a fresh page: the 9-page content limit excludes them,
+% and a clean page break keeps the last content page from overflowing
+\clearpage
 \bibliographystyle{ACM-Reference-Format}
 \bibliography{paper_references}
 \nocite{lewis2020retrieval}   % replaced by an explicit \nocite{...} of uncited keys

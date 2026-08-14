@@ -728,10 +728,12 @@ explainable IR; memory diversity; evaluation metrics}}
 % The markdown alt text doubles as the caption (ACM TAPS encourages
 % descriptive alt text). Re-run the pipeline scripts after any data change.
 %
-% PAGE BUDGET: content currently fills the 9-page limit exactly (references
-% start on p10 and are excluded from the count). Any prose/figure addition
-% must be re-checked with latex/_pagemap.py - add a _trims.py entry if it
-% overflows.
+% PAGE BUDGET: content currently fills the 9-page limit exactly; references
+% are FORCED onto a fresh page (p10) by an explicit \\clearpage before the
+% bibliography - this is intentional (references are excluded from the count)
+% and keeps the last content page from overflowing. Any prose/figure
+% addition must be re-checked with latex/_pagemap.py - add a _trims.py entry
+% if it overflows.
 %
 {front_comment}
 
@@ -749,6 +751,9 @@ explainable IR; memory diversity; evaluation metrics}}
 
 {inputs}
 
+% references start on a fresh page: the 9-page content limit excludes them,
+% and a clean page break keeps the last content page from overflowing
+\\clearpage
 \\bibliographystyle{{ACM-Reference-Format}}
 \\bibliography{{paper_references}}
 % @@NOCITE@@   % replaced by an explicit \\nocite{{...}} of uncited keys
@@ -779,8 +784,8 @@ def main():
     chunks, order = split_sections(md)
 
     # ---- abstract ---------------------------------------------------------
-    abs_paras = [p for p in re.split(r"\n\s*\n", "\n".join(chunks.get("Abstract", [])))
-                 if p.strip()]
+    abs_paras = [p.strip() for p in re.split(r"\n\s*\n", "\n".join(chunks.get("Abstract", [])))
+                  if p.strip()]
     primary, blurb, mode = [], [], None
     for p in abs_paras:
         if p.startswith("**Primary variant"):
@@ -793,7 +798,14 @@ def main():
             primary.append(p)
         elif mode == "blurb":
             blurb.append(p)
-    abstract_tex = tex_inline(re.sub(r"\s*\n\s*", " ", " ".join(primary)))
+    if not primary:
+        print("WARN: no '**Primary variant' abstract paragraph found - "
+              "the \\begin{abstract} block will be EMPTY. Check the "
+              "Abstract section of paper_full_draft.md.")
+    abs_body = " ".join(primary)
+    abs_body = re.sub(r"-\s*\n\s*", "-", abs_body)   # de-hyphenate wrapped lines
+    abs_body = re.sub(r"\s*\n\s*", " ", abs_body)
+    abstract_tex = tex_inline(abs_body)
     # safety net: trims do not apply to the abstract - flag any overlap so a
     # future markdown edit cannot silently leave abstract/body text divergent
     for name, old, _ in TRIMS:

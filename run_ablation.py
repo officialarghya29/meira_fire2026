@@ -173,25 +173,34 @@ def fig_ablation_bars(results):
 
 
 def fig_delta_heatmap(deltas):
-    """Heatmap: how much each ablated component costs, per dataset."""
+    """Heatmap: how much each ablated component costs, per dataset.
+    Rows = metrics (7), columns = removed components (3) so cells are wide
+    enough for readable value labels with no collisions."""
     datasets = list(deltas.keys())
-    fig, axes = plt.subplots(1, len(datasets), figsize=(7.2, 2.7))
+    fig, axes = plt.subplots(1, len(datasets), figsize=(7.2, 2.75),
+                             constrained_layout=True)
     if len(datasets) == 1: axes = [axes]
     fig.suptitle("Performance Drop When Component Removed (Δ vs MEIRA-full)",
                  fontsize=11, color=PALETTE["primary"], fontweight="bold")
     variants = [v for v, _ in ABLATION_VARIANTS[1:]]
+    comp_labels = {"MEIRA-no-memory": "−Memory",
+                   "MEIRA-no-xai":    "−XAI",
+                   "MEIRA-no-decay":  "−Decay"}
+    ims = []
     for ax, ds_name in zip(axes, datasets):
-        mat = np.array([[deltas[ds_name][v][m] for m in KEY_METRICS] for v in variants])
+        mat = np.array([[deltas[ds_name][v][m] for v in variants] for m in KEY_METRICS])
         im = ax.imshow(mat, cmap="RdYlGn_r", aspect="auto", vmin=-0.05, vmax=0.15)
-        ax.set_xticks(range(len(KEY_METRICS))); ax.set_xticklabels(KEY_METRICS, rotation=35, ha="right", fontsize=7)
-        ax.set_yticks(range(len(variants))); ax.set_yticklabels([v.replace("MEIRA-","−") for v in variants], fontsize=8)
+        ims.append(im)
+        ax.set_xticks(range(len(variants)))
+        ax.set_xticklabels([comp_labels[v] for v in variants], fontsize=9)
+        ax.set_yticks(range(len(KEY_METRICS)))
+        ax.set_yticklabels(KEY_METRICS, fontsize=8)
         ax.set_title(ds_name, color=PALETTE["primary"], fontweight="bold", fontsize=9)
         for i in range(mat.shape[0]):
             for j in range(mat.shape[1]):
-                ax.text(j, i, f"{mat[i,j]:+.3f}", ha="center", va="center", fontsize=7,
+                ax.text(j, i, f"{mat[i,j]:+.3f}", ha="center", va="center", fontsize=8,
                         color="black")
-        fig.colorbar(im, ax=ax, shrink=0.8, label="Δ (full − ablated)")
-    fig.tight_layout()
+    fig.colorbar(ims[0], ax=axes, shrink=0.85, pad=0.02, label="Δ (full − ablated)")
     path = os.path.join(FIG_DIR, "abl2_delta_heatmap.png")
     fig.savefig(path, dpi=300, bbox_inches="tight"); plt.close(fig)
     print(f"  ✓ {os.path.basename(path)}")

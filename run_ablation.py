@@ -272,7 +272,8 @@ def main(args):
 
     with open(os.path.join(RES_DIR, "ablation.json"), "w") as f:
         json.dump({"results": results, "deltas": deltas,
-                    "config": {"seeds": seeds, "variants": [v for v,_ in ABLATION_VARIANTS]}}, f, indent=2)
+                    "config": {"seeds": seeds, "variants": [v for v,_ in ABLATION_VARIANTS]}}, f, indent=2,
+                    sort_keys=True)
     write_markdown_table(results, deltas, os.path.join(RES_DIR, "ablation_table.md"))
 
     print("\n" + "="*70)

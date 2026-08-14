@@ -1,10 +1,11 @@
 #!/usr/bin/env bash
 # Pre-commit checks for the MEIRA-FIRE-2026 camera-ready pipeline.
 #
-#  1. audit_figures.py   - regenerates the three paper figures in /tmp and
-#                          fails if any text collides, clips, or overflows.
-#  2. paper build        - md2tex.py + tectonic, fails on overfull boxes or
-#                          undefined refs/citations (skip with SKIP_PAPER=1).
+#  1. unit tests          - python -m unittest discover -s tests (88 tests, ~0.2 s).
+#  2. audit_figures.py    - regenerates the three paper figures in /tmp and
+#                           fails if any text collides, clips, or overflows.
+#  3. paper build         - md2tex.py + tectonic, fails on overfull boxes or
+#                           undefined refs/citations (skip with SKIP_PAPER=1).
 #
 # All build outputs go to /tmp; tracked sources are only regenerated to
 # identical deterministic content, so the hook never dirties the worktree.
@@ -13,6 +14,10 @@ cd "$(git rev-parse --show-toplevel)" || exit 1
 
 PY=./.venv/bin/python
 [ -x "$PY" ] || PY=python3
+
+echo "== [pre-commit] unit tests =="
+"$PY" -m unittest discover -s tests >/tmp/precommit_tests.log 2>&1 || {
+  echo "FAIL: unit tests - see /tmp/precommit_tests.log"; exit 1; }
 
 echo "== [pre-commit] figure audit (audit_figures.py) =="
 "$PY" audit_figures.py >/tmp/precommit_audit.log 2>&1 || {

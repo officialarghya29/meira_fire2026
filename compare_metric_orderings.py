@@ -369,7 +369,7 @@ def main(args):
                                      "adjacency": res["adjacency"],
                                      "corr": res["corr"]}
                                 for ds, res in ds_results.items()}},
-                  f, indent=2)
+                  f, indent=2, sort_keys=True)
     print(f"  ✓ {out_stem(args.correction)}.json")
     fig_ordering_stability(ds_results, models, tag, args.correction)
 

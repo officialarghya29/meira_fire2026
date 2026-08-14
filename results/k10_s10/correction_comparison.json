@@ -1,17 +1,12 @@
 {
   "config": {
+    "alpha": 0.05,
     "k": 10,
-    "seeds": [
-      42,
-      43,
-      44,
-      45,
-      46,
-      47,
-      48,
-      49,
-      50,
-      51
+    "metrics": [
+      "F1",
+      "nDCG@10",
+      "MAP",
+      "MRR"
     ],
     "models": [
       "BM25",
@@ -23,181 +18,128 @@
       "MEIRA-no-xai",
       "MEIRA-full"
     ],
-    "metrics": [
-      "F1",
-      "nDCG@10",
-      "MAP",
-      "MRR"
-    ],
-    "alpha": 0.05,
-    "note": "Lost = significant under Holm, not under Bonferroni"
-  },
-  "summary": {
-    "F1": {
-      "FIRE-AgentIR-2026": {
-        "n_pairs": 28,
-        "raw": 28,
-        "holm": 28,
-        "bonferroni": 28
-      },
-      "FIRE-CrossLingIR-2026": {
-        "n_pairs": 28,
-        "raw": 28,
-        "holm": 28,
-        "bonferroni": 28
-      }
-    },
-    "nDCG@10": {
-      "FIRE-AgentIR-2026": {
-        "n_pairs": 28,
-        "raw": 28,
-        "holm": 28,
-        "bonferroni": 26
-      },
-      "FIRE-CrossLingIR-2026": {
-        "n_pairs": 28,
-        "raw": 28,
-        "holm": 28,
-        "bonferroni": 27
-      }
-    },
-    "MAP": {
-      "FIRE-AgentIR-2026": {
-        "n_pairs": 28,
-        "raw": 28,
-        "holm": 28,
-        "bonferroni": 26
-      },
-      "FIRE-CrossLingIR-2026": {
-        "n_pairs": 28,
-        "raw": 28,
-        "holm": 28,
-        "bonferroni": 27
-      }
-    },
-    "MRR": {
-      "FIRE-AgentIR-2026": {
-        "n_pairs": 28,
-        "raw": 27,
-        "holm": 27,
-        "bonferroni": 26
-      },
-      "FIRE-CrossLingIR-2026": {
-        "n_pairs": 28,
-        "raw": 27,
-        "holm": 27,
-        "bonferroni": 26
-      }
-    }
+    "note": "Lost = significant under Holm, not under Bonferroni",
+    "seeds": [
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51
+    ]
   },
   "lost_pairs": {
     "F1": {
       "FIRE-AgentIR-2026": [],
       "FIRE-CrossLingIR-2026": []
     },
-    "nDCG@10": {
-      "FIRE-AgentIR-2026": [
-        {
-          "higher": "BM25",
-          "lower": "TF-IDF",
-          "raw": 0.0104532904113634,
-          "holm": 0.014137188661079063,
-          "bonferroni": 0.2926921315181752,
-          "t": 3.2221509340779573,
-          "sig_raw": true,
-          "sig_holm": true,
-          "sig_bonferroni": false
-        },
-        {
-          "higher": "MEIRA-no-decay",
-          "lower": "ColBERT-like",
-          "raw": 0.007068594330539532,
-          "holm": 0.014137188661079063,
-          "bonferroni": 0.1979206412551069,
-          "t": 3.4682182656048184,
-          "sig_raw": true,
-          "sig_holm": true,
-          "sig_bonferroni": false
-        }
-      ],
-      "FIRE-CrossLingIR-2026": [
-        {
-          "higher": "BM25",
-          "lower": "TF-IDF",
-          "raw": 0.0457903972769767,
-          "holm": 0.0457903972769767,
-          "bonferroni": 1.0,
-          "t": 2.3159231015389583,
-          "sig_raw": true,
-          "sig_holm": true,
-          "sig_bonferroni": false
-        }
-      ]
-    },
     "MAP": {
       "FIRE-AgentIR-2026": [
         {
+          "bonferroni": 0.09455262023375333,
           "higher": "BM25",
+          "holm": 0.006753758588125238,
           "lower": "TF-IDF",
           "raw": 0.003376879294062619,
-          "holm": 0.006753758588125238,
-          "bonferroni": 0.09455262023375333,
-          "t": 3.945654766302268,
-          "sig_raw": true,
+          "sig_bonferroni": false,
           "sig_holm": true,
-          "sig_bonferroni": false
+          "sig_raw": true,
+          "t": 3.945654766302268
         },
         {
+          "bonferroni": 0.12413063792525202,
           "higher": "MEIRA-no-decay",
+          "holm": 0.006753758588125238,
           "lower": "ColBERT-like",
           "raw": 0.004433237068759001,
-          "holm": 0.006753758588125238,
-          "bonferroni": 0.12413063792525202,
-          "t": 3.767537267571904,
-          "sig_raw": true,
+          "sig_bonferroni": false,
           "sig_holm": true,
-          "sig_bonferroni": false
+          "sig_raw": true,
+          "t": 3.767537267571904
         }
       ],
       "FIRE-CrossLingIR-2026": [
         {
+          "bonferroni": 0.690666449067792,
           "higher": "BM25",
+          "holm": 0.024666658895278283,
           "lower": "TF-IDF",
           "raw": 0.024666658895278283,
-          "holm": 0.024666658895278283,
-          "bonferroni": 0.690666449067792,
-          "t": 2.693205663233748,
-          "sig_raw": true,
+          "sig_bonferroni": false,
           "sig_holm": true,
-          "sig_bonferroni": false
+          "sig_raw": true,
+          "t": 2.693205663233748
         }
       ]
     },
     "MRR": {
       "FIRE-AgentIR-2026": [
         {
+          "bonferroni": 0.6604556621252786,
           "higher": "MEIRA-no-decay",
+          "holm": 0.0471754044375199,
           "lower": "ColBERT-like",
           "raw": 0.02358770221875995,
-          "holm": 0.0471754044375199,
-          "bonferroni": 0.6604556621252786,
-          "t": 2.7205206343827135,
-          "sig_raw": true,
+          "sig_bonferroni": false,
           "sig_holm": true,
-          "sig_bonferroni": false
+          "sig_raw": true,
+          "t": 2.7205206343827135
         }
       ],
       "FIRE-CrossLingIR-2026": [
         {
+          "bonferroni": 0.06350783518335117,
           "higher": "MEIRA-no-decay",
+          "holm": 0.00453627394166794,
           "lower": "ColBERT-like",
           "raw": 0.00226813697083397,
-          "holm": 0.00453627394166794,
-          "bonferroni": 0.06350783518335117,
-          "t": 4.211390348344017,
-          "sig_raw": true,
+          "sig_bonferroni": false,
           "sig_holm": true,
-          "sig_bonferroni": false
+          "sig_raw": true,
+          "t": 4.211390348344017
+        }
+      ]
+    },
+    "nDCG@10": {
+      "FIRE-AgentIR-2026": [
+        {
+          "bonferroni": 0.2926921315181752,
+          "higher": "BM25",
+          "holm": 0.014137188661079063,
+          "lower": "TF-IDF",
+          "raw": 0.0104532904113634,
+          "sig_bonferroni": false,
+          "sig_holm": true,
+          "sig_raw": true,
+          "t": 3.2221509340779573
+        },
+        {
+          "bonferroni": 0.1979206412551069,
+          "higher": "MEIRA-no-decay",
+          "holm": 0.014137188661079063,
+          "lower": "ColBERT-like",
+          "raw": 0.007068594330539532,
+          "sig_bonferroni": false,
+          "sig_holm": true,
+          "sig_raw": true,
+          "t": 3.4682182656048184
+        }
+      ],
+      "FIRE-CrossLingIR-2026": [
+        {
+          "bonferroni": 1.0,
+          "higher": "BM25",
+          "holm": 0.0457903972769767,
+          "lower": "TF-IDF",
+          "raw": 0.0457903972769767,
+          "sig_bonferroni": false,
+          "sig_holm": true,
+          "sig_raw": true,
+          "t": 2.3159231015389583
         }
       ]
     }
@@ -206,2490 +148,2548 @@
     "F1": {
       "FIRE-AgentIR-2026": [
         {
+          "bonferroni": 5.761581501072817e-05,
           "higher": "BM25",
+          "holm": 2.0577076789545777e-06,
           "lower": "TF-IDF",
           "raw": 2.0577076789545777e-06,
-          "holm": 2.0577076789545777e-06,
-          "bonferroni": 5.761581501072817e-05,
-          "t": 10.683933609029214,
-          "sig_raw": true,
+          "sig_bonferroni": true,
           "sig_holm": true,
-          "sig_bonferroni": true
+          "sig_raw": true,
+          "t": 10.683933609029214
         },
         {
+          "bonferroni": 3.276597124466962e-14,
           "higher": "Dense-IR",
+          "holm": 3.042554472719322e-14,
           "lower": "BM25",
           "raw": 1.1702132587382008e-15,
-          "holm": 3.042554472719322e-14,
-          "bonferroni": 3.276597124466962e-14,
-          "t": 117.71397495872469,
-          "sig_raw": true,
+          "sig_bonferroni": true,
           "sig_holm": true,
-          "sig_bonferroni": true
+          "sig_raw": true,
+          "t": 117.71397495872469
         },
         {
+          "bonferroni": 8.934979703294375e-14,
           "higher": "ColBERT-like",
+          "holm": 7.977660449369978e-14,
           "lower": "BM25",
           "raw": 3.191064179747991e-15,
-          "holm": 7.977660449369978e-14,
-          "bonferroni": 8.934979703294375e-14,
-          "t": 105.29025292625265,
-          "sig_raw": true,
+          "sig_bonferroni": true,
           "sig_holm": true,
-          "sig_bonferroni": true
+          "sig_raw": true,
+          "t": 105.29025292625265
         },
         {
+          "bonferroni": 1.3889786176651631e-14,
           "higher": "MEIRA-no-memory",
+          "holm": 1.339372238462836e-14,
           "lower": "BM25",
           "raw": 4.960637920232725e-16,
-          "holm": 1.339372238462836e-14,
-          "bonferroni": 1.3889786176651631e-14,
-          "t": 129.49841450911882,
-          "sig_raw": true,
+          "sig_bonferroni": true,
           "sig_holm": true,
-          "sig_bonferroni": true
+          "sig_raw": true,
+          "t": 129.49841450911882
         },
         {
+          "bonferroni": 1.2695159224308946e-13,
           "higher": "MEIRA-no-decay",
+          "holm": 1.0428166505682349e-13,
           "lower": "BM25",
           "raw": 4.533985437253195e-15,
-          "holm": 1.0428166505682349e-13,
-          "bonferroni": 1.2695159224308946e-13,
-          "t": 101.25716436283373,
-          "sig_raw": true,
+          "sig_bonferroni": true,
           "sig_holm": true,
-          "sig_bonferroni": true
+          "sig_raw": true,
+          "t": 101.25716436283373
         },
         {
+          "bonferroni": 5.872284848317892e-13,
           "higher": "MEIRA-no-xai",
+          "holm": 4.194489177369923e-13,
           "lower": "BM25",
           "raw": 2.0972445886849616e-14,
-          "holm": 4.194489177369923e-13,
-          "bonferroni": 5.872284848317892e-13,
-          "t": 85.3980267997083,
-          "sig_raw": true,
+          "sig_bonferroni": true,
           "sig_holm": true,
-          "sig_bonferroni": true
+          "sig_raw": true,
+          "t": 85.3980267997083
         },
         {
+          "bonferroni": 5.127345723432505e-13,
           "higher": "MEIRA-full",
+          "holm": 3.8727868953588444e-13,
           "lower": "BM25",
           "raw": 1.8311949012258945e-14,
-          "holm": 3.8727868953588444e-13,
-          "bonferroni": 5.127345723432505e-13,
-          "t": 86.69641246623003,
-          "sig_raw": true,
+          "sig_bonferroni": true,
           "sig_holm": true,
-          "sig_bonferroni": true
+          "sig_raw": true,
+          "t": 86.69641246623003
         },
         {
+          "bonferroni": 8.982395803348889e-16,
           "higher": "Dense-IR",
+          "holm": 8.982395803348889e-16,
           "lower": "TF-IDF",
           "raw": 3.207998501196032e-17,
-          "holm": 8.982395803348889e-16,
-          "bonferroni": 8.982395803348889e-16,
-          "t": 175.5729308897406,
-          "sig_raw": true,
+          "sig_bonferroni": true,
           "sig_holm": true,
-          "sig_bonferroni": true
+          "sig_raw": true,
+          "t": 175.5729308897406
         },
         {
+          "bonferroni": 4.929001503183983e-13,
           "higher": "ColBERT-like",
+          "holm": 3.8727868953588444e-13,
           "lower": "TF-IDF",
           "raw": 1.7603576797085656e-14,
-          "holm": 3.8727868953588444e-13,
-          "bonferroni": 4.929001503183983e-13,
-          "t": 87.07769583284208,
-          "sig_raw": true,
+          "sig_bonferroni": true,
           "sig_holm": true,
-          "sig_bonferroni": true
+          "sig_raw": true,
+          "t": 87.07769583284208
         },
         {
+          "bonferroni": 9.537056986157262e-14,
           "higher": "MEIRA-no-memory",
+          "holm": 8.174620273849082e-14,
           "lower": "TF-IDF",
           "raw": 3.4060917807704506e-15,
-          "holm": 8.174620273849082e-14,
-          "bonferroni": 9.537056986157262e-14,
-          "t": 104.52954822753327,
-          "sig_raw": true,
+          "sig_bonferroni": true,
           "sig_holm": true,
-          "sig_bonferroni": true
+          "sig_raw": true,
+          "t": 104.52954822753327
         },
         {
+          "bonferroni": 6.017558401912907e-13,
           "higher": "MEIRA-no-decay",
+          "holm": 4.194489177369923e-13,
           "lower": "TF-IDF",
           "raw": 2.1491280006831808e-14,
-          "holm": 4.194489177369923e-13,
-          "bonferroni": 6.017558401912907e-13,
-          "t": 85.16619903104227,
-          "sig_raw": true,
+          "sig_bonferroni": true,
           "sig_holm": true,
-          "sig_bonferroni": true
+          "sig_raw": true,
+          "t": 85.16619903104227
         },
         {
+          "bonferroni": 1.972547085847831e-12,
           "higher": "MEIRA-no-xai",
+          "holm": 1.197617873550469e-12,
           "lower": "TF-IDF",
           "raw": 7.044811020885112e-14,
-          "holm": 1.197617873550469e-12,
-          "bonferroni": 1.972547085847831e-12,
-          "t": 74.62831507435885,
-          "sig_raw": true,
+          "sig_bonferroni": true,
           "sig_holm": true,
-          "sig_bonferroni": true
+          "sig_raw": true,
+          "t": 74.62831507435885
         },
         {
+          "bonferroni": 1.4485260384406231e-12,
           "higher": "MEIRA-full",
+          "holm": 9.311953104261149e-13,
           "lower": "TF-IDF",
           "raw": 5.173307280145083e-14,
-          "holm": 9.311953104261149e-13,
-          "bonferroni": 1.4485260384406231e-12,
-          "t": 77.2369129325611,
-          "sig_raw": true,
+          "sig_bonferroni": true,
           "sig_holm": true,
-          "sig_bonferroni": true
+          "sig_raw": true,
+          "t": 77.2369129325611
         },
         {
+          "bonferroni": 7.620976275904859e-09,
           "higher": "ColBERT-like",
+          "holm": 2.7217772413945924e-09,
           "lower": "Dense-IR",
           "raw": 2.7217772413945923e-10,
-          "holm": 2.7217772413945924e-09,
-          "bonferroni": 7.620976275904859e-09,
-          "t": 29.693661916170175,
-          "sig_raw": true,
+          "sig_bonferroni": true,
           "sig_holm": true,
-          "sig_bonferroni": true
+          "sig_raw": true,
+          "t": 29.693661916170175
         },
         {
+          "bonferroni": 1.4659019617046318e-08,
           "higher": "MEIRA-no-memory",
+          "holm": 4.711827734050603e-09,
           "lower": "Dense-IR",
           "raw": 5.235364148945114e-10,
-          "holm": 4.711827734050603e-09,
-          "bonferroni": 1.4659019617046318e-08,
-          "t": 27.591955840208836,
-          "sig_raw": true,
+          "sig_bonferroni": true,
           "sig_holm": true,
-          "sig_bonferroni": true
+          "sig_raw": true,
+          "t": 27.591955840208836
         },
         {
+          "bonferroni": 5.405170516439609e-09,
           "higher": "MEIRA-no-decay",
+          "holm": 2.290250785722965e-09,
           "lower": "Dense-IR",
           "raw": 1.9304180415855746e-10,
-          "holm": 2.290250785722965e-09,
-          "bonferroni": 5.405170516439609e-09,
-          "t": 30.85955207263242,
-          "sig_raw": true,
+          "sig_bonferroni": true,
           "sig_holm": true,
-          "sig_bonferroni": true
+          "sig_raw": true,
+          "t": 30.85955207263242
         },
         {
+          "bonferroni": 5.343918500020252e-09,
           "higher": "MEIRA-no-xai",
+          "holm": 2.290250785722965e-09,
           "lower": "Dense-IR",
           "raw": 1.9085423214358044e-10,
-          "holm": 2.290250785722965e-09,
-          "bonferroni": 5.343918500020252e-09,
-          "t": 30.898990157592802,
-          "sig_raw": true,
+          "sig_bonferroni": true,
           "sig_holm": true,
-          "sig_bonferroni": true
+          "sig_raw": true,
+          "t": 30.898990157592802
         },
         {
+          "bonferroni": 6.435860335993625e-10,
           "higher": "MEIRA-full",
+          "holm": 3.6776344777106433e-10,
           "lower": "Dense-IR",
           "raw": 2.298521548569152e-11,
-          "holm": 3.6776344777106433e-10,
-          "bonferroni": 6.435860335993625e-10,
-          "t": 39.154371133753095,
-          "sig_raw": true,
+          "sig_bonferroni": true,
           "sig_holm": true,
-          "sig_bonferroni": true
+          "sig_raw": true,
+          "t": 39.154371133753095
         },
         {
+          "bonferroni": 8.147764407471604e-08,
           "higher": "ColBERT-like",
+          "holm": 1.4549579299056435e-08,
           "lower": "MEIRA-no-memory",
           "raw": 2.909915859811287e-09,
-          "holm": 1.4549579299056435e-08,
-          "bonferroni": 8.147764407471604e-08,
-          "t": 22.74719148167623,
-          "sig_raw": true,
+          "sig_bonferroni": true,
           "sig_holm": true,
-          "sig_bonferroni": true
+          "sig_raw": true,
+          "t": 22.74719148167623
         },
         {
+          "bonferroni": 3.1802013549837147e-07,
           "higher": "MEIRA-no-decay",
+          "holm": 3.4073585946254084e-08,
           "lower": "ColBERT-like",
           "raw": 1.1357861982084695e-08,
-          "holm": 3.4073585946254084e-08,
-          "bonferroni": 3.1802013549837147e-07,
-          "t": 19.49844446525634,
-          "sig_raw": true,
+          "sig_bonferroni": true,
           "sig_holm": true,
-          "sig_bonferroni": true
+          "sig_raw": true,
+          "t": 19.49844446525634
         },
         {
+          "bonferroni": 1.1109541035139929e-07,
           "higher": "MEIRA-no-xai",
+          "holm": 1.5870772907342756e-08,
           "lower": "ColBERT-like",
           "raw": 3.967693226835689e-09,
-          "holm": 1.5870772907342756e-08,
-          "bonferroni": 1.1109541035139929e-07,
-          "t": 21.964488736385906,
-          "sig_raw": true,
+          "sig_bonferroni": true,
           "sig_holm": true,
-          "sig_bonferroni": true
+          "sig_raw": true,
+          "t": 21.964488736385906
         },
         {
+          "bonferroni": 2.760532312517105e-09,
           "higher": "MEIRA-full",
+          "holm": 1.4788565959913063e-09,
           "lower": "ColBERT-like",
           "raw": 9.859043973275375e-11,
-          "holm": 1.4788565959913063e-09,
-          "bonferroni": 2.760532312517105e-09,
-          "t": 33.27148033318578,
-          "sig_raw": true,
+          "sig_bonferroni": true,
           "sig_holm": true,
-          "sig_bonferroni": true
+          "sig_raw": true,
+          "t": 33.27148033318578
         },
         {
+          "bonferroni": 1.948168741015112e-08,
           "higher": "MEIRA-no-decay",
+          "holm": 5.081143052471597e-09,
           "lower": "MEIRA-no-memory",
           "raw": 6.9577455036254e-10,
-          "holm": 5.081143052471597e-09,
-          "bonferroni": 1.948168741015112e-08,
-          "t": 26.72426008361624,
-          "sig_raw": true,
+          "sig_bonferroni": true,
           "sig_holm": true,
-          "sig_bonferroni": true
+          "sig_raw": true,
+          "t": 26.72426008361624
         },
         {
+          "bonferroni": 1.778400068365059e-08,
           "higher": "MEIRA-no-xai",
+          "holm": 5.081143052471597e-09,
           "lower": "MEIRA-no-memory",
           "raw": 6.351428815589496e-10,
-          "holm": 5.081143052471597e-09,
-          "bonferroni": 1.778400068365059e-08,
-          "t": 26.999468234746125,
-          "sig_raw": true,
+          "sig_bonferroni": true,
           "sig_holm": true,
-          "sig_bonferroni": true
+          "sig_raw": true,
+          "t": 26.999468234746125
         },
         {
+          "bonferroni": 2.938522146405811e-09,
           "higher": "MEIRA-full",
+          "holm": 1.4788565959913063e-09,
           "lower": "MEIRA-no-memory",
           "raw": 1.0494721951449325e-10,
-          "holm": 1.4788565959913063e-09,
-          "bonferroni": 2.938522146405811e-09,
-          "t": 33.039584027771824,
-          "sig_raw": true,
+          "sig_bonferroni": true,
           "sig_holm": true,
-          "sig_bonferroni": true
+          "sig_raw": true,
+          "t": 33.039584027771824
         },
         {
+          "bonferroni": 5.184476426221368e-07,
           "higher": "MEIRA-no-xai",
+          "holm": 3.7031974473009775e-08,
           "lower": "MEIRA-no-decay",
           "raw": 1.8515987236504888e-08,
-          "holm": 3.7031974473009775e-08,
-          "bonferroni": 5.184476426221368e-07,
-          "t": 18.44509348159234,
-          "sig_raw": true,
+          "sig_bonferroni": true,
           "sig_holm": true,
-          "sig_bonferroni": true
+          "sig_raw": true,
+          "t": 18.44509348159234
         },
         {
+          "bonferroni": 4.456547071012431e-09,
           "higher": "MEIRA-full",
+          "holm": 2.0691111401129145e-09,
           "lower": "MEIRA-no-decay",
           "raw": 1.591623953933011e-10,
-          "holm": 2.0691111401129145e-09,
-          "bonferroni": 4.456547071012431e-09,
-          "t": 31.534081551177017,
-          "sig_raw": true,
+          "sig_bonferroni": true,
           "sig_holm": true,
-          "sig_bonferroni": true
+          "sig_raw": true,
+          "t": 31.534081551177017
         },
         {
+          "bonferroni": 1.9204995500025354e-08,
           "higher": "MEIRA-full",
+          "holm": 5.081143052471597e-09,
           "lower": "MEIRA-no-xai",
           "raw": 6.85892696429477e-10,
-          "holm": 5.081143052471597e-09,
-          "bonferroni": 1.9204995500025354e-08,
-          "t": 26.76725519582886,
-          "sig_raw": true,
+          "sig_bonferroni": true,
           "sig_holm": true,
-          "sig_bonferroni": true
+          "sig_raw": true,
+          "t": 26.76725519582886
         }
       ],
       "FIRE-CrossLingIR-2026": [
         {
+          "bonferroni": 0.007657551472272428,
           "higher": "BM25",
+          "holm": 0.00027348398115258673,
           "lower": "TF-IDF",
           "raw": 0.00027348398115258673,
-          "holm": 0.00027348398115258673,
-          "bonferroni": 0.007657551472272428,
-          "t": 5.758125823658559,
-          "sig_raw": true,
+          "sig_bonferroni": true,
           "sig_holm": true,
-          "sig_bonferroni": true
+          "sig_raw": true,
+          "t": 5.758125823658559
         },
         {
+          "bonferroni": 8.527554076202117e-08,
           "higher": "Dense-IR",
+          "holm": 4.263777038101059e-08,
           "lower": "BM25",
           "raw": 3.045555027215042e-09,
-          "holm": 4.263777038101059e-08,
-          "bonferroni": 8.527554076202117e-08,
-          "t": 22.63051524110943,
-          "sig_raw": true,
+          "sig_bonferroni": true,
           "sig_holm": true,
-          "sig_bonferroni": true
+          "sig_raw": true,
+          "t": 22.63051524110943
         },
         {
+          "bonferroni": 2.3337346799429487e-09,
           "higher": "ColBERT-like",
+          "holm": 1.833648677098031e-09,
           "lower": "BM25",
           "raw": 8.33476671408196e-11,
-          "holm": 1.833648677098031e-09,
-          "bonferroni": 2.3337346799429487e-09,
-          "t": 33.902792572204156,
-          "sig_raw": true,
+          "sig_bonferroni": true,
           "sig_holm": true,
-          "sig_bonferroni": true
+          "sig_raw": true,
+          "t": 33.902792572204156
         },
         {
+          "bonferroni": 1.448437208563674e-08,
           "higher": "MEIRA-no-memory",
+          "holm": 8.794083051993735e-09,
           "lower": "BM25",
           "raw": 5.17299003058455e-10,
-          "holm": 8.794083051993735e-09,
-          "bonferroni": 1.448437208563674e-08,
-          "t": 27.629119792264156,
-          "sig_raw": true,
+          "sig_bonferroni": true,
           "sig_holm": true,
-          "sig_bonferroni": true
+          "sig_raw": true,
+          "t": 27.629119792264156
         },
         {
+          "bonferroni": 7.380632233456541e-10,
           "higher": "MEIRA-no-decay",
+          "holm": 6.58985020844334e-10,
           "lower": "BM25",
           "raw": 2.635940083377336e-11,
-          "holm": 6.58985020844334e-10,
-          "bonferroni": 7.380632233456541e-10,
-          "t": 38.559801310592704,
-          "sig_raw": true,
+          "sig_bonferroni": true,
           "sig_holm": true,
-          "sig_bonferroni": true
+          "sig_raw": true,
+          "t": 38.559801310592704
         },
         {
+          "bonferroni": 6.545284330581931e-10,
           "higher": "MEIRA-no-xai",
+          "holm": 6.07776402125465e-10,
           "lower": "BM25",
           "raw": 2.337601546636404e-11,
-          "holm": 6.07776402125465e-10,
-          "bonferroni": 6.545284330581931e-10,
-          "t": 39.08070232510245,
-          "sig_raw": true,
+          "sig_bonferroni": true,
           "sig_holm": true,
-          "sig_bonferroni": true
+          "sig_raw": true,
+          "t": 39.08070232510245
         },
         {
+          "bonferroni": 2.2324535700685803e-10,
           "higher": "MEIRA-full",
+          "holm": 2.2324535700685803e-10,
           "lower": "BM25",
           "raw": 7.973048464530644e-12,
-          "holm": 2.2324535700685803e-10,
-          "bonferroni": 2.2324535700685803e-10,
-          "t": 44.06710921918684,
-          "sig_raw": true,
+          "sig_bonferroni": true,
           "sig_holm": true,
-          "sig_bonferroni": true
+          "sig_raw": true,
+          "t": 44.06710921918684
         },
         {
+          "bonferroni": 3.244291859095215e-07,
           "higher": "Dense-IR",
+          "holm": 9.269405311700614e-08,
           "lower": "TF-IDF",
           "raw": 1.1586756639625768e-08,
-          "holm": 9.269405311700614e-08,
-          "bonferroni": 3.244291859095215e-07,
-          "t": 19.454336591407646,
-          "sig_raw": true,
+          "sig_bonferroni": true,
           "sig_holm": true,
-          "sig_bonferroni": true
+          "sig_raw": true,
+          "t": 19.454336591407646
         },
         {
+          "bonferroni": 7.61021011289408e-09,
           "higher": "ColBERT-like",
+          "holm": 5.164071148035269e-09,
           "lower": "TF-IDF",
           "raw": 2.7179321831764576e-10,
-          "holm": 5.164071148035269e-09,
-          "bonferroni": 7.61021011289408e-09,
-          "t": 29.698369744658585,
-          "sig_raw": true,
+          "sig_bonferroni": true,
           "sig_holm": true,
-          "sig_bonferroni": true
+          "sig_raw": true,
+          "t": 29.698369744658585
         },
         {
+          "bonferroni": 4.6242327697989566e-08,
           "higher": "MEIRA-no-memory",
+          "holm": 2.477267555249441e-08,
           "lower": "TF-IDF",
           "raw": 1.6515117034996274e-09,
-          "holm": 2.477267555249441e-08,
-          "bonferroni": 4.6242327697989566e-08,
-          "t": 24.24745702002048,
-          "sig_raw": true,
+          "sig_bonferroni": true,
           "sig_holm": true,
-          "sig_bonferroni": true
+          "sig_raw": true,
+          "t": 24.24745702002048
         },
         {
+          "bonferroni": 2.9091560566151754e-09,
           "higher": "MEIRA-no-decay",
+          "holm": 2.181867042461382e-09,
           "lower": "TF-IDF",
           "raw": 1.0389843059339913e-10,
-          "holm": 2.181867042461382e-09,
-          "bonferroni": 2.9091560566151754e-09,
-          "t": 33.07675208209372,
-          "sig_raw": true,
+          "sig_bonferroni": true,
           "sig_holm": true,
-          "sig_bonferroni": true
+          "sig_raw": true,
+          "t": 33.07675208209372
         },
         {
+          "bonferroni": 1.783574370969871e-09,
           "higher": "MEIRA-no-xai",
+          "holm": 1.465078947582394e-09,
           "lower": "TF-IDF",
           "raw": 6.369908467749539e-11,
-          "holm": 1.465078947582394e-09,
-          "bonferroni": 1.783574370969871e-09,
-          "t": 34.938029553207635,
-          "sig_raw": true,
+          "sig_bonferroni": true,
           "sig_holm": true,
-          "sig_bonferroni": true
+          "sig_raw": true,
+          "t": 34.938029553207635
         },
         {
+          "bonferroni": 5.777142194900071e-10,
           "higher": "MEIRA-full",
+          "holm": 5.570815687939355e-10,
           "lower": "TF-IDF",
           "raw": 2.0632650696071683e-11,
-          "holm": 5.570815687939355e-10,
-          "bonferroni": 5.777142194900071e-10,
-          "t": 39.629455965379115,
-          "sig_raw": true,
+          "sig_bonferroni": true,
           "sig_holm": true,
-          "sig_bonferroni": true
+          "sig_raw": true,
+          "t": 39.629455965379115
         },
         {
+          "bonferroni": 1.0123559978048291e-08,
           "higher": "ColBERT-like",
+          "holm": 6.508002843031044e-09,
           "lower": "Dense-IR",
           "raw": 3.615557135017247e-10,
-          "holm": 6.508002843031044e-09,
-          "bonferroni": 1.0123559978048291e-08,
-          "t": 28.762727050523154,
-          "sig_raw": true,
+          "sig_bonferroni": true,
           "sig_holm": true,
-          "sig_bonferroni": true
+          "sig_raw": true,
+          "t": 28.762727050523154
         },
         {
+          "bonferroni": 1.4881590930515888e-07,
           "higher": "MEIRA-no-memory",
+          "holm": 6.460391536468045e-08,
           "lower": "Dense-IR",
           "raw": 5.314853903755674e-09,
-          "holm": 6.460391536468045e-08,
-          "bonferroni": 1.4881590930515888e-07,
-          "t": 21.25045534023154,
-          "sig_raw": true,
+          "sig_bonferroni": true,
           "sig_holm": true,
-          "sig_bonferroni": true
+          "sig_raw": true,
+          "t": 21.25045534023154
         },
         {
+          "bonferroni": 1.0015332940798987e-09,
           "higher": "MEIRA-no-decay",
+          "holm": 8.584571092113418e-10,
           "lower": "Dense-IR",
           "raw": 3.576904621713924e-11,
-          "holm": 8.584571092113418e-10,
-          "bonferroni": 1.0015332940798987e-09,
-          "t": 37.266683035035996,
-          "sig_raw": true,
+          "sig_bonferroni": true,
           "sig_holm": true,
-          "sig_bonferroni": true
+          "sig_raw": true,
+          "t": 37.266683035035996
         },
         {
+          "bonferroni": 1.8974773387008556e-08,
           "higher": "MEIRA-no-xai",
+          "holm": 1.0842727649719175e-08,
           "lower": "Dense-IR",
           "raw": 6.776704781074485e-10,
-          "holm": 1.0842727649719175e-08,
-          "bonferroni": 1.8974773387008556e-08,
-          "t": 26.803556695812144,
-          "sig_raw": true,
+          "sig_bonferroni": true,
           "sig_holm": true,
-          "sig_bonferroni": true
+          "sig_raw": true,
+          "t": 26.803556695812144
         },
         {
+          "bonferroni": 7.1795687606990455e-09,
           "higher": "MEIRA-full",
+          "holm": 5.1282634004993186e-09,
           "lower": "Dense-IR",
           "raw": 2.564131700249659e-10,
-          "holm": 5.1282634004993186e-09,
-          "bonferroni": 7.1795687606990455e-09,
-          "t": 29.892994114357386,
-          "sig_raw": true,
+          "sig_bonferroni": true,
           "sig_holm": true,
-          "sig_bonferroni": true
+          "sig_raw": true,
+          "t": 29.892994114357386
         },
         {
+          "bonferroni": 2.9094164580334857e-05,
           "higher": "ColBERT-like",
+          "holm": 3.298216935734935e-06,
           "lower": "MEIRA-no-memory",
           "raw": 1.0390773064405306e-06,
-          "holm": 3.298216935734935e-06,
-          "bonferroni": 2.9094164580334857e-05,
-          "t": 11.584343760751523,
-          "sig_raw": true,
+          "sig_bonferroni": true,
           "sig_holm": true,
-          "sig_bonferroni": true
+          "sig_raw": true,
+          "t": 11.584343760751523
         },
         {
+          "bonferroni": 4.5109173177359596e-05,
           "higher": "MEIRA-no-decay",
+          "holm": 3.298216935734935e-06,
           "lower": "ColBERT-like",
           "raw": 1.6110418991914142e-06,
-          "holm": 3.298216935734935e-06,
-          "bonferroni": 4.5109173177359596e-05,
-          "t": 10.999101466607355,
-          "sig_raw": true,
+          "sig_bonferroni": true,
           "sig_holm": true,
-          "sig_bonferroni": true
+          "sig_raw": true,
+          "t": 10.999101466607355
         },
         {
+          "bonferroni": 3.2371758279855044e-06,
           "higher": "MEIRA-no-xai",
+          "holm": 6.936805345683224e-07,
           "lower": "ColBERT-like",
           "raw": 1.1561342242805372e-07,
-          "holm": 6.936805345683224e-07,
-          "bonferroni": 3.2371758279855044e-06,
-          "t": 14.957664106923612,
-          "sig_raw": true,
+          "sig_bonferroni": true,
           "sig_holm": true,
-          "sig_bonferroni": true
+          "sig_raw": true,
+          "t": 14.957664106923612
         },
         {
+          "bonferroni": 2.090108506627143e-07,
           "higher": "MEIRA-full",
+          "holm": 8.1458536549285e-08,
           "lower": "ColBERT-like",
           "raw": 7.464673237954082e-09,
-          "holm": 8.1458536549285e-08,
-          "bonferroni": 2.090108506627143e-07,
-          "t": 20.44885465757171,
-          "sig_raw": true,
+          "sig_bonferroni": true,
           "sig_holm": true,
-          "sig_bonferroni": true
+          "sig_raw": true,
+          "t": 20.44885465757171
         },
         {
+          "bonferroni": 2.4056365077669814e-06,
           "higher": "MEIRA-no-decay",
+          "holm": 6.014091269417454e-07,
           "lower": "MEIRA-no-memory",
           "raw": 8.591558956310648e-08,
-          "holm": 6.014091269417454e-07,
-          "bonferroni": 2.4056365077669814e-06,
-          "t": 15.477290587772796,
-          "sig_raw": true,
+          "sig_bonferroni": true,
           "sig_holm": true,
-          "sig_bonferroni": true
+          "sig_raw": true,
+          "t": 15.477290587772796
         },
         {
+          "bonferroni": 3.6492588703431064e-06,
           "higher": "MEIRA-no-xai",
+          "holm": 6.936805345683224e-07,
           "lower": "MEIRA-no-memory",
           "raw": 1.3033067394082523e-07,
-          "holm": 6.936805345683224e-07,
-          "bonferroni": 3.6492588703431064e-06,
-          "t": 14.752580980756418,
-          "sig_raw": true,
+          "sig_bonferroni": true,
           "sig_holm": true,
-          "sig_bonferroni": true
+          "sig_raw": true,
+          "t": 14.752580980756418
         },
         {
+          "bonferroni": 2.0734900212545272e-07,
           "higher": "MEIRA-full",
+          "holm": 8.1458536549285e-08,
           "lower": "MEIRA-no-memory",
           "raw": 7.405321504480454e-09,
-          "holm": 8.1458536549285e-08,
-          "bonferroni": 2.0734900212545272e-07,
-          "t": 20.4673546706955,
-          "sig_raw": true,
+          "sig_bonferroni": true,
           "sig_holm": true,
-          "sig_bonferroni": true
+          "sig_raw": true,
+          "t": 20.4673546706955
         },
         {
+          "bonferroni": 2.3087518550144546e-05,
           "higher": "MEIRA-no-xai",
+          "holm": 3.298216935734935e-06,
           "lower": "MEIRA-no-decay",
           "raw": 8.245542339337338e-07,
-          "holm": 3.298216935734935e-06,
-          "bonferroni": 2.3087518550144546e-05,
-          "t": 11.903893541306163,
-          "sig_raw": true,
+          "sig_bonferroni": true,
           "sig_holm": true,
-          "sig_bonferroni": true
+          "sig_raw": true,
+          "t": 11.903893541306163
         },
         {
+          "bonferroni": 2.1041290795705615e-07,
           "higher": "MEIRA-full",
+          "holm": 8.1458536549285e-08,
           "lower": "MEIRA-no-decay",
           "raw": 7.514746712752005e-09,
-          "holm": 8.1458536549285e-08,
-          "bonferroni": 2.1041290795705615e-07,
-          "t": 20.433373106791176,
-          "sig_raw": true,
+          "sig_bonferroni": true,
           "sig_holm": true,
-          "sig_bonferroni": true
+          "sig_raw": true,
+          "t": 20.433373106791176
         },
         {
+          "bonferroni": 1.3914689463161943e-07,
           "higher": "MEIRA-full",
+          "holm": 6.460391536468045e-08,
           "lower": "MEIRA-no-xai",
           "raw": 4.969531951129265e-09,
-          "holm": 6.460391536468045e-08,
-          "bonferroni": 1.3914689463161943e-07,
-          "t": 21.412540771264172,
-          "sig_raw": true,
+          "sig_bonferroni": true,
           "sig_holm": true,
-          "sig_bonferroni": true
-        }
-      ]
-    },
-    "nDCG@10": {
-      "FIRE-AgentIR-2026": [
-        {
-          "higher": "BM25",
-          "lower": "TF-IDF",
-          "raw": 0.0104532904113634,
-          "holm": 0.014137188661079063,
-          "bonferroni": 0.2926921315181752,
-          "t": 3.2221509340779573,
           "sig_raw": true,
-          "sig_holm": true,
-          "sig_bonferroni": false
-        },
-        {
-          "higher": "Dense-IR",
-          "lower": "BM25",
-          "raw": 4.678773556778291e-09,
-          "holm": 7.486037690845265e-08,
-          "bonferroni": 1.3100565958979215e-07,
-          "t": 21.55901737514869,
-          "sig_raw": true,
-          "sig_holm": true,
-          "sig_bonferroni": true
-        },
-        {
-          "higher": "ColBERT-like",
-          "lower": "BM25",
-          "raw": 3.5793576790816325e-10,
-          "holm": 8.232522661887754e-09,
-          "bonferroni": 1.002220150142857e-08,
-          "t": 28.79522144642376,
-          "sig_raw": true,
-          "sig_holm": true,
-          "sig_bonferroni": true
-        },
-        {
-          "higher": "MEIRA-no-memory",
-          "lower": "BM25",
-          "raw": 1.4152891465123047e-09,
-          "holm": 2.689049378373379e-08,
-          "bonferroni": 3.9628096102344536e-08,
-          "t": 24.672687092524917,
-          "sig_raw": true,
-          "sig_holm": true,
-          "sig_bonferroni": true
-        },
-        {
-          "higher": "MEIRA-no-decay",
-          "lower": "BM25",
-          "raw": 4.769359288497153e-10,
-          "holm": 1.001565450584402e-08,
-          "bonferroni": 1.3354206007792028e-08,
-          "t": 27.882314764229072,
-          "sig_raw": true,
-          "sig_holm": true,
-          "sig_bonferroni": true
-        },
-        {
-          "higher": "MEIRA-no-xai",
-          "lower": "BM25",
-          "raw": 2.508789062006581e-10,
-          "holm": 6.271972655016452e-09,
-          "bonferroni": 7.024609373618426e-09,
-          "t": 29.966218034821786,
-          "sig_raw": true,
-          "sig_holm": true,
-          "sig_bonferroni": true
-        },
-        {
-          "higher": "MEIRA-full",
-          "lower": "BM25",
-          "raw": 7.351200598082764e-11,
-          "holm": 2.0235213448387463e-09,
-          "bonferroni": 2.058336167463174e-09,
-          "t": 34.38249939844863,
-          "sig_raw": true,
-          "sig_holm": true,
-          "sig_bonferroni": true
-        },
-        {
-          "higher": "Dense-IR",
-          "lower": "TF-IDF",
-          "raw": 2.9769679736981737e-09,
-          "holm": 5.0608455552868955e-08,
-          "bonferroni": 8.335510326354886e-08,
-          "t": 22.688776447812042,
-          "sig_raw": true,
-          "sig_holm": true,
-          "sig_bonferroni": true
-        },
-        {
-          "higher": "ColBERT-like",
-          "lower": "TF-IDF",
-          "raw": 2.9150564141559903e-10,
-          "holm": 6.996135393974377e-09,
-          "bonferroni": 8.162157959636774e-09,
-          "t": 29.466078366915124,
-          "sig_raw": true,
-          "sig_holm": true,
-          "sig_bonferroni": true
-        },
-        {
-          "higher": "MEIRA-no-memory",
-          "lower": "TF-IDF",
-          "raw": 1.1312039513655697e-09,
-          "holm": 2.2624079027311393e-08,
-          "bonferroni": 3.1673710638235954e-08,
-          "t": 25.30285857414608,
-          "sig_raw": true,
-          "sig_holm": true,
-          "sig_bonferroni": true
-        },
-        {
-          "higher": "MEIRA-no-decay",
-          "lower": "TF-IDF",
-          "raw": 4.506314013584e-10,
-          "holm": 9.9138908298848e-09,
-          "bonferroni": 1.26176792380352e-08,
-          "t": 28.060477049528682,
-          "sig_raw": true,
-          "sig_holm": true,
-          "sig_bonferroni": true
-        },
-        {
-          "higher": "MEIRA-no-xai",
-          "lower": "TF-IDF",
-          "raw": 2.3031388115410927e-10,
-          "holm": 5.988160910006841e-09,
-          "bonferroni": 6.44878867231506e-09,
-          "t": 30.25493799130628,
-          "sig_raw": true,
-          "sig_holm": true,
-          "sig_bonferroni": true
-        },
-        {
-          "higher": "MEIRA-full",
-          "lower": "TF-IDF",
-          "raw": 7.226861945852666e-11,
-          "holm": 2.0235213448387463e-09,
-          "bonferroni": 2.0235213448387463e-09,
-          "t": 34.44818108730969,
-          "sig_raw": true,
-          "sig_holm": true,
-          "sig_bonferroni": true
-        },
-        {
-          "higher": "ColBERT-like",
-          "lower": "Dense-IR",
-          "raw": 6.2080387243206345e-09,
-          "holm": 9.312058086480951e-08,
-          "bonferroni": 1.7382508428097777e-07,
-          "t": 20.880184398985538,
-          "sig_raw": true,
-          "sig_holm": true,
-          "sig_bonferroni": true
-        },
-        {
-          "higher": "MEIRA-no-memory",
-          "lower": "Dense-IR",
-          "raw": 1.9475401610891378e-08,
-          "holm": 2.1422941771980514e-07,
-          "bonferroni": 5.453112451049585e-07,
-          "t": 18.339364864103327,
-          "sig_raw": true,
-          "sig_holm": true,
-          "sig_bonferroni": true
-        },
-        {
-          "higher": "MEIRA-no-decay",
-          "lower": "Dense-IR",
-          "raw": 1.7268404642140077e-08,
-          "holm": 2.0722085570568094e-07,
-          "bonferroni": 4.835153299799222e-07,
-          "t": 18.592041590937068,
-          "sig_raw": true,
-          "sig_holm": true,
-          "sig_bonferroni": true
-        },
-        {
-          "higher": "MEIRA-no-xai",
-          "lower": "Dense-IR",
-          "raw": 9.124007890938872e-09,
-          "holm": 1.2059712405377884e-07,
-          "bonferroni": 2.5547222094628843e-07,
-          "t": 19.988919610627974,
-          "sig_raw": true,
-          "sig_holm": true,
-          "sig_bonferroni": true
-        },
-        {
-          "higher": "MEIRA-full",
-          "lower": "Dense-IR",
-          "raw": 2.381071430963368e-09,
-          "holm": 4.2859285757340624e-08,
-          "bonferroni": 6.66700000669743e-08,
-          "t": 23.26783018128833,
-          "sig_raw": true,
-          "sig_holm": true,
-          "sig_bonferroni": true
-        },
-        {
-          "higher": "ColBERT-like",
-          "lower": "MEIRA-no-memory",
-          "raw": 1.4102877252538196e-05,
-          "holm": 5.6411509010152786e-05,
-          "bonferroni": 0.0003948805630710695,
-          "t": 8.461473270211892,
-          "sig_raw": true,
-          "sig_holm": true,
-          "sig_bonferroni": true
-        },
-        {
-          "higher": "MEIRA-no-decay",
-          "lower": "ColBERT-like",
-          "raw": 0.007068594330539532,
-          "holm": 0.014137188661079063,
-          "bonferroni": 0.1979206412551069,
-          "t": 3.4682182656048184,
-          "sig_raw": true,
-          "sig_holm": true,
-          "sig_bonferroni": false
-        },
-        {
-          "higher": "MEIRA-no-xai",
-          "lower": "ColBERT-like",
-          "raw": 1.8242730863389523e-06,
-          "holm": 9.121365431694761e-06,
-          "bonferroni": 5.1079646417490665e-05,
-          "t": 10.838015319431927,
-          "sig_raw": true,
-          "sig_holm": true,
-          "sig_bonferroni": true
-        },
-        {
-          "higher": "MEIRA-full",
-          "lower": "ColBERT-like",
-          "raw": 8.614080289555631e-09,
-          "holm": 1.2059712405377884e-07,
-          "bonferroni": 2.411942481075577e-07,
-          "t": 20.11967109984833,
-          "sig_raw": true,
-          "sig_holm": true,
-          "sig_bonferroni": true
-        },
-        {
-          "higher": "MEIRA-no-decay",
-          "lower": "MEIRA-no-memory",
-          "raw": 8.419879696895093e-05,
-          "holm": 0.0002525963909068528,
-          "bonferroni": 0.0023575663151306258,
-          "t": 6.744217780026808,
-          "sig_raw": true,
-          "sig_holm": true,
-          "sig_bonferroni": true
-        },
-        {
-          "higher": "MEIRA-no-xai",
-          "lower": "MEIRA-no-memory",
-          "raw": 1.3602526692789827e-06,
-          "holm": 8.161516015673896e-06,
-          "bonferroni": 3.808707473981151e-05,
-          "t": 11.221754183011026,
-          "sig_raw": true,
-          "sig_holm": true,
-          "sig_bonferroni": true
-        },
-        {
-          "higher": "MEIRA-full",
-          "lower": "MEIRA-no-memory",
-          "raw": 2.1983494296832798e-08,
-          "holm": 2.1983494296832797e-07,
-          "bonferroni": 6.155378403113183e-07,
-          "t": 18.088177815997874,
-          "sig_raw": true,
-          "sig_holm": true,
-          "sig_bonferroni": true
-        },
-        {
-          "higher": "MEIRA-no-xai",
-          "lower": "MEIRA-no-decay",
-          "raw": 1.2445948755488507e-07,
-          "holm": 9.956759004390806e-07,
-          "bonferroni": 3.484865651536782e-06,
-          "t": 14.831163245671858,
-          "sig_raw": true,
-          "sig_holm": true,
-          "sig_bonferroni": true
-        },
-        {
-          "higher": "MEIRA-full",
-          "lower": "MEIRA-no-decay",
-          "raw": 2.5431003633108032e-08,
-          "holm": 2.2887903269797228e-07,
-          "bonferroni": 7.120681017270249e-07,
-          "t": 17.790445355359928,
-          "sig_raw": true,
-          "sig_holm": true,
-          "sig_bonferroni": true
-        },
-        {
-          "higher": "MEIRA-full",
-          "lower": "MEIRA-no-xai",
-          "raw": 2.975332694908862e-07,
-          "holm": 2.0827328864362034e-06,
-          "bonferroni": 8.330931545744814e-06,
-          "t": 13.40885999404492,
-          "sig_raw": true,
-          "sig_holm": true,
-          "sig_bonferroni": true
-        }
-      ],
-      "FIRE-CrossLingIR-2026": [
-        {
-          "higher": "BM25",
-          "lower": "TF-IDF",
-          "raw": 0.0457903972769767,
-          "holm": 0.0457903972769767,
-          "bonferroni": 1.0,
-          "t": 2.3159231015389583,
-          "sig_raw": true,
-          "sig_holm": true,
-          "sig_bonferroni": false
-        },
-        {
-          "higher": "Dense-IR",
-          "lower": "BM25",
-          "raw": 4.811324874015553e-09,
-          "holm": 8.17925228582644e-08,
-          "bonferroni": 1.347170964724355e-07,
-          "t": 21.491024514360223,
-          "sig_raw": true,
-          "sig_holm": true,
-          "sig_bonferroni": true
-        },
-        {
-          "higher": "ColBERT-like",
-          "lower": "BM25",
-          "raw": 3.422551545131397e-12,
-          "holm": 7.871868553802213e-11,
-          "bonferroni": 9.583144326367912e-11,
-          "t": 48.42609714079573,
-          "sig_raw": true,
-          "sig_holm": true,
-          "sig_bonferroni": true
-        },
-        {
-          "higher": "MEIRA-no-memory",
-          "lower": "BM25",
-          "raw": 1.1664897061283454e-11,
-          "holm": 2.5662773534823597e-10,
-          "bonferroni": 3.266171177159367e-10,
-          "t": 42.23495289920052,
-          "sig_raw": true,
-          "sig_holm": true,
-          "sig_bonferroni": true
-        },
-        {
-          "higher": "MEIRA-no-decay",
-          "lower": "BM25",
-          "raw": 2.759643139458138e-13,
-          "holm": 7.451036476536973e-12,
-          "bonferroni": 7.727000790482786e-12,
-          "t": 64.10670821353368,
-          "sig_raw": true,
-          "sig_holm": true,
-          "sig_bonferroni": true
-        },
-        {
-          "higher": "MEIRA-no-xai",
-          "lower": "BM25",
-          "raw": 1.4701749906262096e-12,
-          "holm": 3.822454975628145e-11,
-          "bonferroni": 4.116489973753387e-11,
-          "t": 53.20895901233407,
-          "sig_raw": true,
-          "sig_holm": true,
-          "sig_bonferroni": true
-        },
-        {
-          "higher": "MEIRA-full",
-          "lower": "BM25",
-          "raw": 3.7762089437416983e-11,
-          "holm": 7.552417887483396e-10,
-          "bonferroni": 1.0573385042476756e-09,
-          "t": 37.04151333798711,
-          "sig_raw": true,
-          "sig_holm": true,
-          "sig_bonferroni": true
-        },
-        {
-          "higher": "Dense-IR",
-          "lower": "TF-IDF",
-          "raw": 4.332003822630222e-09,
-          "holm": 7.797606880734399e-08,
-          "bonferroni": 1.2129610703364623e-07,
-          "t": 21.747514223148166,
-          "sig_raw": true,
-          "sig_holm": true,
-          "sig_bonferroni": true
-        },
-        {
-          "higher": "ColBERT-like",
-          "lower": "TF-IDF",
-          "raw": 2.031559698279868e-12,
-          "holm": 4.980737435345693e-11,
-          "bonferroni": 5.68836715518363e-11,
-          "t": 51.32527424704719,
-          "sig_raw": true,
-          "sig_holm": true,
-          "sig_bonferroni": true
-        },
-        {
-          "higher": "MEIRA-no-memory",
-          "lower": "TF-IDF",
-          "raw": 1.881664068854398e-11,
-          "holm": 3.951494544594236e-10,
-          "bonferroni": 5.268659392792315e-10,
-          "t": 40.03933971511243,
-          "sig_raw": true,
-          "sig_holm": true,
-          "sig_bonferroni": true
-        },
-        {
-          "higher": "MEIRA-no-decay",
-          "lower": "TF-IDF",
-          "raw": 2.1064371972447122e-13,
-          "holm": 5.898024152285194e-12,
-          "bonferroni": 5.898024152285194e-12,
-          "t": 66.06363712841707,
-          "sig_raw": true,
-          "sig_holm": true,
-          "sig_bonferroni": true
-        },
-        {
-          "higher": "MEIRA-no-xai",
-          "lower": "TF-IDF",
-          "raw": 1.992294974138277e-12,
-          "holm": 4.980737435345693e-11,
-          "bonferroni": 5.578425927587176e-11,
-          "t": 51.4370400018895,
-          "sig_raw": true,
-          "sig_holm": true,
-          "sig_bonferroni": true
-        },
-        {
-          "higher": "MEIRA-full",
-          "lower": "TF-IDF",
-          "raw": 4.359885783095492e-11,
-          "holm": 8.283782987881435e-10,
-          "bonferroni": 1.2207680192667377e-09,
-          "t": 36.45115210787193,
-          "sig_raw": true,
-          "sig_holm": true,
-          "sig_bonferroni": true
-        },
-        {
-          "higher": "ColBERT-like",
-          "lower": "Dense-IR",
-          "raw": 2.3439259483385513e-06,
-          "holm": 2.3439259483385513e-05,
-          "bonferroni": 6.562992655347944e-05,
-          "t": 10.51942416943273,
-          "sig_raw": true,
-          "sig_holm": true,
-          "sig_bonferroni": true
-        },
-        {
-          "higher": "MEIRA-no-memory",
-          "lower": "Dense-IR",
-          "raw": 3.0517995284087483e-07,
-          "holm": 4.577699292613122e-06,
-          "bonferroni": 8.545038679544495e-06,
-          "t": 13.3693929264144,
-          "sig_raw": true,
-          "sig_holm": true,
-          "sig_bonferroni": true
-        },
-        {
-          "higher": "MEIRA-no-decay",
-          "lower": "Dense-IR",
-          "raw": 8.248257499086017e-07,
-          "holm": 1.0722734748811823e-05,
-          "bonferroni": 2.309512099744085e-05,
-          "t": 11.903433064288928,
-          "sig_raw": true,
-          "sig_holm": true,
-          "sig_bonferroni": true
-        },
-        {
-          "higher": "MEIRA-no-xai",
-          "lower": "Dense-IR",
-          "raw": 1.2530409205715167e-06,
-          "holm": 1.4922917190627325e-05,
-          "bonferroni": 3.508514577600247e-05,
-          "t": 11.331199506631927,
-          "sig_raw": true,
-          "sig_holm": true,
-          "sig_bonferroni": true
-        },
-        {
-          "higher": "MEIRA-full",
-          "lower": "Dense-IR",
-          "raw": 1.380446335714553e-07,
-          "holm": 2.208714137143285e-06,
-          "bonferroni": 3.865249740000749e-06,
-          "t": 14.655092619311448,
-          "sig_raw": true,
-          "sig_holm": true,
-          "sig_bonferroni": true
-        },
-        {
-          "higher": "ColBERT-like",
-          "lower": "MEIRA-no-memory",
-          "raw": 0.0009488717730516393,
-          "holm": 0.0023013992410776197,
-          "bonferroni": 0.0265684096454459,
-          "t": 4.818563757068723,
-          "sig_raw": true,
-          "sig_holm": true,
-          "sig_bonferroni": true
-        },
-        {
-          "higher": "MEIRA-no-decay",
-          "lower": "ColBERT-like",
-          "raw": 0.0007671330803592065,
-          "holm": 0.0023013992410776197,
-          "bonferroni": 0.02147972625005778,
-          "t": 4.972633597030409,
-          "sig_raw": true,
-          "sig_holm": true,
-          "sig_bonferroni": true
-        },
-        {
-          "higher": "MEIRA-no-xai",
-          "lower": "ColBERT-like",
-          "raw": 0.0001323185443528412,
-          "holm": 0.000661592721764206,
-          "bonferroni": 0.003704919241879554,
-          "t": 6.353556633957344,
-          "sig_raw": true,
-          "sig_holm": true,
-          "sig_bonferroni": true
-        },
-        {
-          "higher": "MEIRA-full",
-          "lower": "ColBERT-like",
-          "raw": 3.7362656885204466e-07,
-          "holm": 5.230771963928625e-06,
-          "bonferroni": 1.046154392785725e-05,
-          "t": 13.0584367197903,
-          "sig_raw": true,
-          "sig_holm": true,
-          "sig_bonferroni": true
-        },
-        {
-          "higher": "MEIRA-no-decay",
-          "lower": "MEIRA-no-memory",
-          "raw": 7.164500102376183e-05,
-          "holm": 0.0004990017803504655,
-          "bonferroni": 0.002006060028665331,
-          "t": 6.887717720324686,
-          "sig_raw": true,
-          "sig_holm": true,
-          "sig_bonferroni": true
-        },
-        {
-          "higher": "MEIRA-no-xai",
-          "lower": "MEIRA-no-memory",
-          "raw": 7.128596862149507e-05,
-          "holm": 0.0004990017803504655,
-          "bonferroni": 0.001996007121401862,
-          "t": 6.892217302518881,
-          "sig_raw": true,
-          "sig_holm": true,
-          "sig_bonferroni": true
-        },
-        {
-          "higher": "MEIRA-full",
-          "lower": "MEIRA-no-memory",
-          "raw": 1.243576432552277e-06,
-          "holm": 1.4922917190627325e-05,
-          "bonferroni": 3.4820140111463754e-05,
-          "t": 11.341354329539419,
-          "sig_raw": true,
-          "sig_holm": true,
-          "sig_bonferroni": true
-        },
-        {
-          "higher": "MEIRA-no-xai",
-          "lower": "MEIRA-no-decay",
-          "raw": 0.0003310925579259905,
-          "holm": 0.001324370231703962,
-          "bonferroni": 0.009270591621927735,
-          "t": 5.607470315419964,
-          "sig_raw": true,
-          "sig_holm": true,
-          "sig_bonferroni": true
-        },
-        {
-          "higher": "MEIRA-full",
-          "lower": "MEIRA-no-decay",
-          "raw": 3.1686120185201335e-06,
-          "holm": 2.85175081666812e-05,
-          "bonferroni": 8.872113651856374e-05,
-          "t": 10.146974454312646,
-          "sig_raw": true,
-          "sig_holm": true,
-          "sig_bonferroni": true
-        },
-        {
-          "higher": "MEIRA-full",
-          "lower": "MEIRA-no-xai",
-          "raw": 4.1096397024228585e-05,
-          "holm": 0.0003287711761938287,
-          "bonferroni": 0.0011506991166784003,
-          "t": 7.398568809660628,
-          "sig_raw": true,
-          "sig_holm": true,
-          "sig_bonferroni": true
+          "t": 21.412540771264172
         }
       ]
     },
     "MAP": {
       "FIRE-AgentIR-2026": [
         {
+          "bonferroni": 0.09455262023375333,
           "higher": "BM25",
+          "holm": 0.006753758588125238,
           "lower": "TF-IDF",
           "raw": 0.003376879294062619,
-          "holm": 0.006753758588125238,
-          "bonferroni": 0.09455262023375333,
-          "t": 3.945654766302268,
-          "sig_raw": true,
+          "sig_bonferroni": false,
           "sig_holm": true,
-          "sig_bonferroni": false
+          "sig_raw": true,
+          "t": 3.945654766302268
         },
         {
+          "bonferroni": 1.0790169405974155e-07,
           "higher": "Dense-IR",
+          "holm": 5.7804478960575834e-08,
           "lower": "BM25",
           "raw": 3.8536319307050554e-09,
-          "holm": 5.7804478960575834e-08,
-          "bonferroni": 1.0790169405974155e-07,
-          "t": 22.03699618848551,
-          "sig_raw": true,
+          "sig_bonferroni": true,
           "sig_holm": true,
-          "sig_bonferroni": true
+          "sig_raw": true,
+          "t": 22.03699618848551
         },
         {
+          "bonferroni": 5.6770121353709484e-09,
           "higher": "ColBERT-like",
+          "holm": 4.866010401746527e-09,
           "lower": "BM25",
           "raw": 2.0275043340610529e-10,
-          "holm": 4.866010401746527e-09,
-          "bonferroni": 5.6770121353709484e-09,
-          "t": 30.69031546457321,
-          "sig_raw": true,
+          "sig_bonferroni": true,
           "sig_holm": true,
-          "sig_bonferroni": true
+          "sig_raw": true,
+          "t": 30.69031546457321
         },
         {
+          "bonferroni": 2.8664829812501105e-08,
           "higher": "MEIRA-no-memory",
+          "holm": 1.945113451562575e-08,
           "lower": "BM25",
           "raw": 1.0237439218750395e-09,
-          "holm": 1.945113451562575e-08,
-          "bonferroni": 2.8664829812501105e-08,
-          "t": 25.588628561549022,
-          "sig_raw": true,
+          "sig_bonferroni": true,
           "sig_holm": true,
-          "sig_bonferroni": true
+          "sig_raw": true,
+          "t": 25.588628561549022
         },
         {
+          "bonferroni": 8.480829970489053e-09,
           "higher": "MEIRA-no-decay",
+          "holm": 6.663509262527113e-09,
           "lower": "BM25",
           "raw": 3.028867846603233e-10,
-          "holm": 6.663509262527113e-09,
-          "bonferroni": 8.480829970489053e-09,
-          "t": 29.33977043962749,
-          "sig_raw": true,
+          "sig_bonferroni": true,
           "sig_holm": true,
-          "sig_bonferroni": true
+          "sig_raw": true,
+          "t": 29.33977043962749
         },
         {
+          "bonferroni": 4.034510927196353e-09,
           "higher": "MEIRA-no-xai",
+          "holm": 3.746331575253757e-09,
           "lower": "BM25",
           "raw": 1.4408967597129834e-10,
-          "holm": 3.746331575253757e-09,
-          "bonferroni": 4.034510927196353e-09,
-          "t": 31.88747037826394,
-          "sig_raw": true,
+          "sig_bonferroni": true,
           "sig_holm": true,
-          "sig_bonferroni": true
+          "sig_raw": true,
+          "t": 31.88747037826394
         },
         {
+          "bonferroni": 1.0476364007478972e-09,
           "higher": "MEIRA-full",
+          "holm": 1.0476364007478972e-09,
           "lower": "BM25",
           "raw": 3.741558574099633e-11,
-          "holm": 1.0476364007478972e-09,
-          "bonferroni": 1.0476364007478972e-09,
-          "t": 37.07969898284192,
-          "sig_raw": true,
+          "sig_bonferroni": true,
           "sig_holm": true,
-          "sig_bonferroni": true
+          "sig_raw": true,
+          "t": 37.07969898284192
         },
         {
+          "bonferroni": 8.341195352915475e-08,
           "higher": "Dense-IR",
+          "holm": 4.7663973445231285e-08,
           "lower": "TF-IDF",
           "raw": 2.9789983403269553e-09,
-          "holm": 4.7663973445231285e-08,
-          "bonferroni": 8.341195352915475e-08,
-          "t": 22.687030449472978,
-          "sig_raw": true,
+          "sig_bonferroni": true,
           "sig_holm": true,
-          "sig_bonferroni": true
+          "sig_raw": true,
+          "t": 22.687030449472978
         },
         {
+          "bonferroni": 5.78108424100439e-09,
           "higher": "ColBERT-like",
+          "holm": 4.866010401746527e-09,
           "lower": "TF-IDF",
           "raw": 2.0646729432158537e-10,
-          "holm": 4.866010401746527e-09,
-          "bonferroni": 5.78108424100439e-09,
-          "t": 30.62789288531681,
-          "sig_raw": true,
+          "sig_bonferroni": true,
           "sig_holm": true,
-          "sig_bonferroni": true
+          "sig_raw": true,
+          "t": 30.62789288531681
         },
         {
+          "bonferroni": 2.6977694908368648e-08,
           "higher": "MEIRA-no-memory",
+          "holm": 1.926978207740618e-08,
           "lower": "TF-IDF",
           "raw": 9.634891038703089e-10,
-          "holm": 1.926978207740618e-08,
-          "bonferroni": 2.6977694908368648e-08,
-          "t": 25.763832691424394,
-          "sig_raw": true,
+          "sig_bonferroni": true,
           "sig_holm": true,
-          "sig_bonferroni": true
+          "sig_raw": true,
+          "t": 25.763832691424394
         },
         {
+          "bonferroni": 1.0010383788375356e-08,
           "higher": "MEIRA-no-decay",
+          "holm": 7.507787841281518e-09,
           "lower": "TF-IDF",
           "raw": 3.575137067276913e-10,
-          "holm": 7.507787841281518e-09,
-          "bonferroni": 1.0010383788375356e-08,
-          "t": 28.799033802566395,
-          "sig_raw": true,
+          "sig_bonferroni": true,
           "sig_holm": true,
-          "sig_bonferroni": true
+          "sig_raw": true,
+          "t": 28.799033802566395
         },
         {
+          "bonferroni": 4.733945649864221e-09,
           "higher": "MEIRA-no-xai",
+          "holm": 4.226737187378769e-09,
           "lower": "TF-IDF",
           "raw": 1.6906948749515077e-10,
-          "holm": 4.226737187378769e-09,
-          "bonferroni": 4.733945649864221e-09,
-          "t": 31.321474735145927,
-          "sig_raw": true,
+          "sig_bonferroni": true,
           "sig_holm": true,
-          "sig_bonferroni": true
+          "sig_raw": true,
+          "t": 31.321474735145927
         },
         {
+          "bonferroni": 1.2756726538136689e-09,
           "higher": "MEIRA-full",
+          "holm": 1.2301129161774664e-09,
           "lower": "TF-IDF",
           "raw": 4.555973763620246e-11,
-          "holm": 1.2301129161774664e-09,
-          "bonferroni": 1.2756726538136689e-09,
-          "t": 36.272311231727635,
-          "sig_raw": true,
+          "sig_bonferroni": true,
           "sig_holm": true,
-          "sig_bonferroni": true
+          "sig_raw": true,
+          "t": 36.272311231727635
         },
         {
+          "bonferroni": 6.972835523794932e-08,
           "higher": "ColBERT-like",
+          "holm": 4.233507282304066e-08,
           "lower": "Dense-IR",
           "raw": 2.490298401355333e-09,
-          "holm": 4.233507282304066e-08,
-          "bonferroni": 6.972835523794932e-08,
-          "t": 23.15041195019029,
-          "sig_raw": true,
+          "sig_bonferroni": true,
           "sig_holm": true,
-          "sig_bonferroni": true
+          "sig_raw": true,
+          "t": 23.15041195019029
         },
         {
+          "bonferroni": 2.7403747847440335e-07,
           "higher": "MEIRA-no-memory",
+          "holm": 1.1702454988036664e-07,
           "lower": "Dense-IR",
           "raw": 9.787052802657262e-09,
-          "holm": 1.1702454988036664e-07,
-          "bonferroni": 2.7403747847440335e-07,
-          "t": 19.8305348652639,
-          "sig_raw": true,
+          "sig_bonferroni": true,
           "sig_holm": true,
-          "sig_bonferroni": true
+          "sig_raw": true,
+          "t": 19.8305348652639
         },
         {
+          "bonferroni": 2.7305728305418886e-07,
           "higher": "MEIRA-no-decay",
+          "holm": 1.1702454988036664e-07,
           "lower": "Dense-IR",
           "raw": 9.752045823363887e-09,
-          "holm": 1.1702454988036664e-07,
-          "bonferroni": 2.7305728305418886e-07,
-          "t": 19.838595787046458,
-          "sig_raw": true,
+          "sig_bonferroni": true,
           "sig_holm": true,
-          "sig_bonferroni": true
+          "sig_raw": true,
+          "t": 19.838595787046458
         },
         {
+          "bonferroni": 1.6829805435727521e-07,
           "higher": "MEIRA-no-xai",
+          "holm": 7.813838238016349e-08,
           "lower": "Dense-IR",
           "raw": 6.010644798474115e-09,
-          "holm": 7.813838238016349e-08,
-          "bonferroni": 1.6829805435727521e-07,
-          "t": 20.956690534329724,
-          "sig_raw": true,
+          "sig_bonferroni": true,
           "sig_holm": true,
-          "sig_bonferroni": true
+          "sig_raw": true,
+          "t": 20.956690534329724
         },
         {
+          "bonferroni": 3.6631475565684285e-08,
           "higher": "MEIRA-full",
+          "holm": 2.354880572079704e-08,
           "lower": "Dense-IR",
           "raw": 1.3082669844887244e-09,
-          "holm": 2.354880572079704e-08,
-          "bonferroni": 3.6631475565684285e-08,
-          "t": 24.892083741058997,
-          "sig_raw": true,
+          "sig_bonferroni": true,
           "sig_holm": true,
-          "sig_bonferroni": true
+          "sig_raw": true,
+          "t": 24.892083741058997
         },
         {
+          "bonferroni": 0.00034752814281549884,
           "higher": "ColBERT-like",
+          "holm": 4.964687754507126e-05,
           "lower": "MEIRA-no-memory",
           "raw": 1.2411719386267816e-05,
-          "holm": 4.964687754507126e-05,
-          "bonferroni": 0.00034752814281549884,
-          "t": 8.59601009053191,
-          "sig_raw": true,
+          "sig_bonferroni": true,
           "sig_holm": true,
-          "sig_bonferroni": true
+          "sig_raw": true,
+          "t": 8.59601009053191
         },
         {
+          "bonferroni": 0.12413063792525202,
           "higher": "MEIRA-no-decay",
+          "holm": 0.006753758588125238,
           "lower": "ColBERT-like",
           "raw": 0.004433237068759001,
-          "holm": 0.006753758588125238,
-          "bonferroni": 0.12413063792525202,
-          "t": 3.767537267571904,
-          "sig_raw": true,
+          "sig_bonferroni": false,
           "sig_holm": true,
-          "sig_bonferroni": false
+          "sig_raw": true,
+          "t": 3.767537267571904
         },
         {
+          "bonferroni": 3.6711919221898436e-05,
           "higher": "MEIRA-no-xai",
+          "holm": 6.7266408268559266e-06,
           "lower": "ColBERT-like",
           "raw": 1.3111399722106583e-06,
-          "holm": 6.7266408268559266e-06,
-          "bonferroni": 3.6711919221898436e-05,
-          "t": 11.270662065737335,
-          "sig_raw": true,
+          "sig_bonferroni": true,
           "sig_holm": true,
-          "sig_bonferroni": true
+          "sig_raw": true,
+          "t": 11.270662065737335
         },
         {
+          "bonferroni": 1.5551753723416802e-07,
           "higher": "MEIRA-full",
+          "holm": 7.775876861708401e-08,
           "lower": "ColBERT-like",
           "raw": 5.554197758363143e-09,
-          "holm": 7.775876861708401e-08,
-          "bonferroni": 1.5551753723416802e-07,
-          "t": 21.14482229330831,
-          "sig_raw": true,
+          "sig_bonferroni": true,
           "sig_holm": true,
-          "sig_bonferroni": true
+          "sig_raw": true,
+          "t": 21.14482229330831
         },
         {
+          "bonferroni": 0.001633478514146845,
           "higher": "MEIRA-no-decay",
+          "holm": 0.00017501555508716196,
           "lower": "MEIRA-no-memory",
           "raw": 5.833851836238732e-05,
-          "holm": 0.00017501555508716196,
-          "bonferroni": 0.001633478514146845,
-          "t": 7.073463852069457,
-          "sig_raw": true,
+          "sig_bonferroni": true,
           "sig_holm": true,
-          "sig_bonferroni": true
+          "sig_raw": true,
+          "t": 7.073463852069457
         },
         {
+          "bonferroni": 3.1390990525327656e-05,
           "higher": "MEIRA-no-xai",
+          "holm": 6.7266408268559266e-06,
           "lower": "MEIRA-no-memory",
           "raw": 1.1211068044759877e-06,
-          "holm": 6.7266408268559266e-06,
-          "bonferroni": 3.1390990525327656e-05,
-          "t": 11.481019770315688,
-          "sig_raw": true,
+          "sig_bonferroni": true,
           "sig_holm": true,
-          "sig_bonferroni": true
+          "sig_raw": true,
+          "t": 11.481019770315688
         },
         {
+          "bonferroni": 4.1651039096086004e-07,
           "higher": "MEIRA-full",
+          "holm": 1.4875371105745e-07,
           "lower": "MEIRA-no-memory",
           "raw": 1.4875371105745001e-08,
-          "holm": 1.4875371105745e-07,
-          "bonferroni": 4.1651039096086004e-07,
-          "t": 18.910044284031216,
-          "sig_raw": true,
+          "sig_bonferroni": true,
           "sig_holm": true,
-          "sig_bonferroni": true
+          "sig_raw": true,
+          "t": 18.910044284031216
         },
         {
+          "bonferroni": 3.2271883947376347e-06,
           "higher": "MEIRA-no-xai",
+          "holm": 9.220538270678957e-07,
           "lower": "MEIRA-no-decay",
           "raw": 1.1525672838348696e-07,
-          "holm": 9.220538270678957e-07,
-          "bonferroni": 3.2271883947376347e-06,
-          "t": 14.962987677780667,
-          "sig_raw": true,
+          "sig_bonferroni": true,
           "sig_holm": true,
-          "sig_bonferroni": true
+          "sig_raw": true,
+          "t": 14.962987677780667
         },
         {
+          "bonferroni": 5.12362211933433e-07,
           "higher": "MEIRA-full",
+          "holm": 1.6468785383574636e-07,
           "lower": "MEIRA-no-decay",
           "raw": 1.829865042619404e-08,
-          "holm": 1.6468785383574636e-07,
-          "bonferroni": 5.12362211933433e-07,
-          "t": 18.469888483094106,
-          "sig_raw": true,
+          "sig_bonferroni": true,
           "sig_holm": true,
-          "sig_bonferroni": true
+          "sig_raw": true,
+          "t": 18.469888483094106
         },
         {
+          "bonferroni": 4.750738773190194e-06,
           "higher": "MEIRA-full",
+          "holm": 1.1876846932975484e-06,
           "lower": "MEIRA-no-xai",
           "raw": 1.6966924189964977e-07,
-          "holm": 1.1876846932975484e-06,
-          "bonferroni": 4.750738773190194e-06,
-          "t": 14.310267235860085,
-          "sig_raw": true,
+          "sig_bonferroni": true,
           "sig_holm": true,
-          "sig_bonferroni": true
+          "sig_raw": true,
+          "t": 14.310267235860085
         }
       ],
       "FIRE-CrossLingIR-2026": [
         {
+          "bonferroni": 0.690666449067792,
           "higher": "BM25",
+          "holm": 0.024666658895278283,
           "lower": "TF-IDF",
           "raw": 0.024666658895278283,
-          "holm": 0.024666658895278283,
-          "bonferroni": 0.690666449067792,
-          "t": 2.693205663233748,
-          "sig_raw": true,
+          "sig_bonferroni": false,
           "sig_holm": true,
-          "sig_bonferroni": false
+          "sig_raw": true,
+          "t": 2.693205663233748
         },
         {
+          "bonferroni": 1.3860819344932772e-07,
           "higher": "Dense-IR",
+          "holm": 8.744505787165619e-08,
           "lower": "BM25",
           "raw": 4.950292623190276e-09,
-          "holm": 8.744505787165619e-08,
-          "bonferroni": 1.3860819344932772e-07,
-          "t": 21.421935931910433,
-          "sig_raw": true,
+          "sig_bonferroni": true,
           "sig_holm": true,
-          "sig_bonferroni": true
+          "sig_raw": true,
+          "t": 21.421935931910433
         },
         {
+          "bonferroni": 9.43222217401913e-11,
           "higher": "ColBERT-like",
+          "holm": 7.747896785801429e-11,
           "lower": "BM25",
           "raw": 3.3686507764354038e-12,
-          "holm": 7.747896785801429e-11,
-          "bonferroni": 9.43222217401913e-11,
-          "t": 48.511883497292786,
-          "sig_raw": true,
+          "sig_bonferroni": true,
           "sig_holm": true,
-          "sig_bonferroni": true
+          "sig_raw": true,
+          "t": 48.511883497292786
         },
         {
+          "bonferroni": 3.0663824575892356e-10,
           "higher": "MEIRA-no-memory",
+          "holm": 2.4093005023915423e-10,
           "lower": "BM25",
           "raw": 1.0951365919961557e-11,
-          "holm": 2.4093005023915423e-10,
-          "bonferroni": 3.0663824575892356e-10,
-          "t": 42.53355941822771,
-          "sig_raw": true,
+          "sig_bonferroni": true,
           "sig_holm": true,
-          "sig_bonferroni": true
+          "sig_raw": true,
+          "t": 42.53355941822771
         },
         {
+          "bonferroni": 7.525446167462468e-12,
           "higher": "MEIRA-no-decay",
+          "holm": 7.2566802329102376e-12,
           "lower": "BM25",
           "raw": 2.68765934552231e-13,
-          "holm": 7.2566802329102376e-12,
-          "bonferroni": 7.525446167462468e-12,
-          "t": 64.29562463004822,
-          "sig_raw": true,
+          "sig_bonferroni": true,
           "sig_holm": true,
-          "sig_bonferroni": true
+          "sig_raw": true,
+          "t": 64.29562463004822
         },
         {
+          "bonferroni": 3.689043915517924e-11,
           "higher": "MEIRA-no-xai",
+          "holm": 3.317121925771805e-11,
           "lower": "BM25",
           "raw": 1.3175156841135443e-12,
-          "holm": 3.317121925771805e-11,
-          "bonferroni": 3.689043915517924e-11,
-          "t": 53.86296069352868,
-          "sig_raw": true,
+          "sig_bonferroni": true,
           "sig_holm": true,
-          "sig_bonferroni": true
+          "sig_raw": true,
+          "t": 53.86296069352868
         },
         {
+          "bonferroni": 8.320681269152052e-10,
           "higher": "MEIRA-full",
+          "holm": 5.943343763680038e-10,
           "lower": "BM25",
           "raw": 2.971671881840019e-11,
-          "holm": 5.943343763680038e-10,
-          "bonferroni": 8.320681269152052e-10,
-          "t": 38.0467446036791,
-          "sig_raw": true,
+          "sig_bonferroni": true,
           "sig_holm": true,
-          "sig_bonferroni": true
+          "sig_raw": true,
+          "t": 38.0467446036791
         },
         {
+          "bonferroni": 1.3602564557813187e-07,
           "higher": "Dense-IR",
+          "holm": 8.744505787165619e-08,
           "lower": "TF-IDF",
           "raw": 4.858058770647566e-09,
-          "holm": 8.744505787165619e-08,
-          "bonferroni": 1.3602564557813187e-07,
-          "t": 21.467546201261467,
-          "sig_raw": true,
+          "sig_bonferroni": true,
           "sig_holm": true,
-          "sig_bonferroni": true
+          "sig_raw": true,
+          "t": 21.467546201261467
         },
         {
+          "bonferroni": 5.587732288157638e-11,
           "higher": "ColBERT-like",
+          "holm": 4.789484818420833e-11,
           "lower": "TF-IDF",
           "raw": 1.9956186743420137e-12,
-          "holm": 4.789484818420833e-11,
-          "bonferroni": 5.587732288157638e-11,
-          "t": 51.42748479362772,
-          "sig_raw": true,
+          "sig_bonferroni": true,
           "sig_holm": true,
-          "sig_bonferroni": true
+          "sig_raw": true,
+          "t": 51.42748479362772
         },
         {
+          "bonferroni": 4.890090666738585e-10,
           "higher": "MEIRA-no-memory",
+          "holm": 3.667568000053939e-10,
           "lower": "TF-IDF",
           "raw": 1.7464609524066376e-11,
-          "holm": 3.667568000053939e-10,
-          "bonferroni": 4.890090666738585e-10,
-          "t": 40.374136331021134,
-          "sig_raw": true,
+          "sig_bonferroni": true,
           "sig_holm": true,
-          "sig_bonferroni": true
+          "sig_raw": true,
+          "t": 40.374136331021134
         },
         {
+          "bonferroni": 4.192877999651529e-12,
           "higher": "MEIRA-no-decay",
+          "holm": 4.192877999651529e-12,
           "lower": "TF-IDF",
           "raw": 1.4974564284469745e-13,
-          "holm": 4.192877999651529e-12,
-          "bonferroni": 4.192877999651529e-12,
-          "t": 68.62118858495353,
-          "sig_raw": true,
+          "sig_bonferroni": true,
           "sig_holm": true,
-          "sig_bonferroni": true
+          "sig_raw": true,
+          "t": 68.62118858495353
         },
         {
+          "bonferroni": 3.5722851508311745e-11,
           "higher": "MEIRA-no-xai",
+          "holm": 3.317121925771805e-11,
           "lower": "TF-IDF",
           "raw": 1.275816125296848e-12,
-          "holm": 3.317121925771805e-11,
-          "bonferroni": 3.5722851508311745e-11,
-          "t": 54.05632900227607,
-          "sig_raw": true,
+          "sig_bonferroni": true,
           "sig_holm": true,
-          "sig_bonferroni": true
+          "sig_raw": true,
+          "t": 54.05632900227607
         },
         {
+          "bonferroni": 9.357317396128341e-10,
           "higher": "MEIRA-full",
+          "holm": 6.349608233087089e-10,
           "lower": "TF-IDF",
           "raw": 3.341899070045836e-11,
-          "holm": 6.349608233087089e-10,
-          "bonferroni": 9.357317396128341e-10,
-          "t": 37.55080401190532,
-          "sig_raw": true,
+          "sig_bonferroni": true,
           "sig_holm": true,
-          "sig_bonferroni": true
+          "sig_raw": true,
+          "t": 37.55080401190532
         },
         {
+          "bonferroni": 5.4063393019666325e-05,
           "higher": "ColBERT-like",
+          "holm": 1.9308354649880832e-05,
           "lower": "Dense-IR",
           "raw": 1.930835464988083e-06,
-          "holm": 1.9308354649880832e-05,
-          "bonferroni": 5.4063393019666325e-05,
-          "t": 10.765130057809301,
-          "sig_raw": true,
+          "sig_bonferroni": true,
           "sig_holm": true,
-          "sig_bonferroni": true
+          "sig_raw": true,
+          "t": 10.765130057809301
         },
         {
+          "bonferroni": 6.325738627726273e-06,
           "higher": "MEIRA-no-memory",
+          "holm": 3.388788550567646e-06,
           "lower": "Dense-IR",
           "raw": 2.2591923670450974e-07,
-          "holm": 3.388788550567646e-06,
-          "bonferroni": 6.325738627726273e-06,
-          "t": 13.844023672649293,
-          "sig_raw": true,
+          "sig_bonferroni": true,
           "sig_holm": true,
-          "sig_bonferroni": true
+          "sig_raw": true,
+          "t": 13.844023672649293
         },
         {
+          "bonferroni": 2.0046819033894994e-05,
           "higher": "MEIRA-no-decay",
+          "holm": 9.30745169430839e-06,
           "lower": "Dense-IR",
           "raw": 7.159578226391069e-07,
-          "holm": 9.30745169430839e-06,
-          "bonferroni": 2.0046819033894994e-05,
-          "t": 12.102883687409943,
-          "sig_raw": true,
+          "sig_bonferroni": true,
           "sig_holm": true,
-          "sig_bonferroni": true
+          "sig_raw": true,
+          "t": 12.102883687409943
         },
         {
+          "bonferroni": 3.938253969150763e-05,
           "higher": "MEIRA-no-xai",
+          "holm": 1.6878231296360415e-05,
           "lower": "Dense-IR",
           "raw": 1.4065192746967012e-06,
-          "holm": 1.6878231296360415e-05,
-          "bonferroni": 3.938253969150763e-05,
-          "t": 11.177431851177294,
-          "sig_raw": true,
+          "sig_bonferroni": true,
           "sig_holm": true,
-          "sig_bonferroni": true
+          "sig_raw": true,
+          "t": 11.177431851177294
         },
         {
+          "bonferroni": 4.07039742680458e-06,
           "higher": "MEIRA-full",
+          "holm": 2.3259413867454746e-06,
           "lower": "Dense-IR",
           "raw": 1.4537133667159216e-07,
-          "holm": 2.3259413867454746e-06,
-          "bonferroni": 4.07039742680458e-06,
-          "t": 14.567927344319,
-          "sig_raw": true,
+          "sig_bonferroni": true,
           "sig_holm": true,
-          "sig_bonferroni": true
+          "sig_raw": true,
+          "t": 14.567927344319
         },
         {
+          "bonferroni": 0.024650454527713386,
           "higher": "ColBERT-like",
+          "holm": 0.0019333837600575684,
           "lower": "MEIRA-no-memory",
           "raw": 0.0008803733759897638,
-          "holm": 0.0019333837600575684,
-          "bonferroni": 0.024650454527713386,
-          "t": 4.872575995390309,
-          "sig_raw": true,
+          "sig_bonferroni": true,
           "sig_holm": true,
-          "sig_bonferroni": true
+          "sig_raw": true,
+          "t": 4.872575995390309
         },
         {
+          "bonferroni": 0.014760069333764407,
           "higher": "MEIRA-no-decay",
+          "holm": 0.0019333837600575684,
           "lower": "ColBERT-like",
           "raw": 0.0005271453333487289,
-          "holm": 0.0019333837600575684,
-          "bonferroni": 0.014760069333764407,
-          "t": 5.250787468928665,
-          "sig_raw": true,
+          "sig_bonferroni": true,
           "sig_holm": true,
-          "sig_bonferroni": true
+          "sig_raw": true,
+          "t": 5.250787468928665
         },
         {
+          "bonferroni": 0.004151342685338621,
           "higher": "MEIRA-no-xai",
+          "holm": 0.0007413111938104679,
           "lower": "ColBERT-like",
           "raw": 0.0001482622387620936,
-          "holm": 0.0007413111938104679,
-          "bonferroni": 0.004151342685338621,
-          "t": 6.257717719015737,
-          "sig_raw": true,
+          "sig_bonferroni": true,
           "sig_holm": true,
-          "sig_bonferroni": true
+          "sig_raw": true,
+          "t": 6.257717719015737
         },
         {
+          "bonferroni": 9.348383360933428e-06,
           "higher": "MEIRA-full",
+          "holm": 4.674191680466714e-06,
           "lower": "ColBERT-like",
           "raw": 3.33870834319051e-07,
-          "holm": 4.674191680466714e-06,
-          "bonferroni": 9.348383360933428e-06,
-          "t": 13.230494438591661,
-          "sig_raw": true,
+          "sig_bonferroni": true,
           "sig_holm": true,
-          "sig_bonferroni": true
+          "sig_raw": true,
+          "t": 13.230494438591661
         },
         {
+          "bonferroni": 0.001896855667673704,
           "higher": "MEIRA-no-decay",
+          "holm": 0.000474213916918426,
           "lower": "MEIRA-no-memory",
           "raw": 6.774484527406085e-05,
-          "holm": 0.000474213916918426,
-          "bonferroni": 0.001896855667673704,
-          "t": 6.937969993662719,
-          "sig_raw": true,
+          "sig_bonferroni": true,
           "sig_holm": true,
-          "sig_bonferroni": true
+          "sig_raw": true,
+          "t": 6.937969993662719
         },
         {
+          "bonferroni": 0.002479666250733902,
           "higher": "MEIRA-no-xai",
+          "holm": 0.0005313570537286932,
           "lower": "MEIRA-no-memory",
           "raw": 8.855950895478221e-05,
-          "holm": 0.0005313570537286932,
-          "bonferroni": 0.002479666250733902,
-          "t": 6.699776168831241,
-          "sig_raw": true,
+          "sig_bonferroni": true,
           "sig_holm": true,
-          "sig_bonferroni": true
+          "sig_raw": true,
+          "t": 6.699776168831241
         },
         {
+          "bonferroni": 3.956200075046686e-05,
           "higher": "MEIRA-full",
+          "holm": 1.6878231296360415e-05,
           "lower": "MEIRA-no-memory",
           "raw": 1.4129285982309592e-06,
-          "holm": 1.6878231296360415e-05,
-          "bonferroni": 3.956200075046686e-05,
-          "t": 11.17141902394958,
-          "sig_raw": true,
+          "sig_bonferroni": true,
           "sig_holm": true,
-          "sig_bonferroni": true
+          "sig_raw": true,
+          "t": 11.17141902394958
         },
         {
+          "bonferroni": 0.013533686320402978,
           "higher": "MEIRA-no-xai",
+          "holm": 0.0019333837600575684,
           "lower": "MEIRA-no-decay",
           "raw": 0.0004833459400143921,
-          "holm": 0.0019333837600575684,
-          "bonferroni": 0.013533686320402978,
-          "t": 5.316287975938672,
-          "sig_raw": true,
+          "sig_bonferroni": true,
           "sig_holm": true,
-          "sig_bonferroni": true
+          "sig_raw": true,
+          "t": 5.316287975938672
         },
         {
+          "bonferroni": 6.98061091167302e-05,
           "higher": "MEIRA-full",
+          "holm": 2.243767793037756e-05,
           "lower": "MEIRA-no-decay",
           "raw": 2.493075325597507e-06,
-          "holm": 2.243767793037756e-05,
-          "bonferroni": 6.98061091167302e-05,
-          "t": 10.442266655535896,
-          "sig_raw": true,
+          "sig_bonferroni": true,
           "sig_holm": true,
-          "sig_bonferroni": true
+          "sig_raw": true,
+          "t": 10.442266655535896
         },
         {
+          "bonferroni": 0.0007393777502499768,
           "higher": "MEIRA-full",
+          "holm": 0.00021125078578570765,
           "lower": "MEIRA-no-xai",
           "raw": 2.6406348223213456e-05,
-          "holm": 0.00021125078578570765,
-          "bonferroni": 0.0007393777502499768,
-          "t": 7.8248185817524245,
-          "sig_raw": true,
+          "sig_bonferroni": true,
           "sig_holm": true,
-          "sig_bonferroni": true
+          "sig_raw": true,
+          "t": 7.8248185817524245
         }
       ]
     },
     "MRR": {
       "FIRE-AgentIR-2026": [
         {
+          "bonferroni": 1.0,
           "higher": "BM25",
+          "holm": 0.3350751395817117,
           "lower": "TF-IDF",
           "raw": 0.3350751395817117,
-          "holm": 0.3350751395817117,
-          "bonferroni": 1.0,
-          "t": 1.018414940209674,
-          "sig_raw": false,
+          "sig_bonferroni": false,
           "sig_holm": false,
-          "sig_bonferroni": false
+          "sig_raw": false,
+          "t": 1.018414940209674
         },
         {
+          "bonferroni": 2.786850969088476e-07,
           "higher": "Dense-IR",
+          "holm": 1.6920166598037177e-07,
           "lower": "BM25",
           "raw": 9.953039175315987e-09,
-          "holm": 1.6920166598037177e-07,
-          "bonferroni": 2.786850969088476e-07,
-          "t": 19.792744102117148,
-          "sig_raw": true,
+          "sig_bonferroni": true,
           "sig_holm": true,
-          "sig_bonferroni": true
+          "sig_raw": true,
+          "t": 19.792744102117148
         },
         {
+          "bonferroni": 7.476578364702084e-08,
           "higher": "ColBERT-like",
+          "holm": 5.607433773526562e-08,
           "lower": "BM25",
           "raw": 2.6702065588221726e-09,
-          "holm": 5.607433773526562e-08,
-          "bonferroni": 7.476578364702084e-08,
-          "t": 22.96894553580187,
-          "sig_raw": true,
+          "sig_bonferroni": true,
           "sig_holm": true,
-          "sig_bonferroni": true
+          "sig_raw": true,
+          "t": 22.96894553580187
         },
         {
+          "bonferroni": 1.7196103457961012e-07,
           "higher": "MEIRA-no-memory",
+          "holm": 1.1054637937260651e-07,
           "lower": "BM25",
           "raw": 6.141465520700362e-09,
-          "holm": 1.1054637937260651e-07,
-          "bonferroni": 1.7196103457961012e-07,
-          "t": 20.9056816420648,
-          "sig_raw": true,
+          "sig_bonferroni": true,
           "sig_holm": true,
-          "sig_bonferroni": true
+          "sig_raw": true,
+          "t": 20.9056816420648
         },
         {
+          "bonferroni": 6.986708082480582e-08,
           "higher": "MEIRA-no-decay",
+          "holm": 5.4895563505204576e-08,
           "lower": "BM25",
           "raw": 2.495252886600208e-09,
-          "holm": 5.4895563505204576e-08,
-          "bonferroni": 6.986708082480582e-08,
-          "t": 23.14522208566139,
-          "sig_raw": true,
+          "sig_bonferroni": true,
           "sig_holm": true,
-          "sig_bonferroni": true
+          "sig_raw": true,
+          "t": 23.14522208566139
         },
         {
+          "bonferroni": 5.635569384552972e-08,
           "higher": "MEIRA-no-xai",
+          "holm": 4.6292177087399416e-08,
           "lower": "BM25",
           "raw": 2.0127033516260614e-09,
-          "holm": 4.6292177087399416e-08,
-          "bonferroni": 5.635569384552972e-08,
-          "t": 23.712989190871525,
-          "sig_raw": true,
+          "sig_bonferroni": true,
           "sig_holm": true,
-          "sig_bonferroni": true
+          "sig_raw": true,
+          "t": 23.712989190871525
         },
         {
+          "bonferroni": 2.6683318307165113e-08,
           "higher": "MEIRA-full",
+          "holm": 2.5730342653337787e-08,
           "lower": "BM25",
           "raw": 9.529756538273254e-10,
-          "holm": 2.5730342653337787e-08,
-          "bonferroni": 2.6683318307165113e-08,
-          "t": 25.795647052232503,
-          "sig_raw": true,
+          "sig_bonferroni": true,
           "sig_holm": true,
-          "sig_bonferroni": true
+          "sig_raw": true,
+          "t": 25.795647052232503
         },
         {
+          "bonferroni": 1.1199337706938226e-07,
           "higher": "Dense-IR",
+          "holm": 7.59955058685094e-08,
           "lower": "TF-IDF",
           "raw": 3.999763466763652e-09,
-          "holm": 7.59955058685094e-08,
-          "bonferroni": 1.1199337706938226e-07,
-          "t": 21.944517925373578,
-          "sig_raw": true,
+          "sig_bonferroni": true,
           "sig_holm": true,
-          "sig_bonferroni": true
+          "sig_raw": true,
+          "t": 21.944517925373578
         },
         {
+          "bonferroni": 4.3133078028024355e-08,
           "higher": "ColBERT-like",
+          "holm": 3.763054997193319e-08,
           "lower": "TF-IDF",
           "raw": 1.5404670724294412e-09,
-          "holm": 3.763054997193319e-08,
-          "bonferroni": 4.3133078028024355e-08,
-          "t": 24.43831874994573,
-          "sig_raw": true,
+          "sig_bonferroni": true,
           "sig_holm": true,
-          "sig_bonferroni": true
+          "sig_raw": true,
+          "t": 24.43831874994573
         },
         {
+          "bonferroni": 1.0193566131088167e-07,
           "higher": "MEIRA-no-memory",
+          "holm": 7.281118665062977e-08,
           "lower": "TF-IDF",
           "raw": 3.640559332531488e-09,
-          "holm": 7.281118665062977e-08,
-          "bonferroni": 1.0193566131088167e-07,
-          "t": 22.179050903173508,
-          "sig_raw": true,
+          "sig_bonferroni": true,
           "sig_holm": true,
-          "sig_bonferroni": true
+          "sig_raw": true,
+          "t": 22.179050903173508
         },
         {
+          "bonferroni": 4.214621596856517e-08,
           "higher": "MEIRA-no-decay",
+          "holm": 3.763054997193319e-08,
           "lower": "TF-IDF",
           "raw": 1.5052219988773276e-09,
-          "holm": 3.763054997193319e-08,
-          "bonferroni": 4.214621596856517e-08,
-          "t": 24.502107556886443,
-          "sig_raw": true,
+          "sig_bonferroni": true,
           "sig_holm": true,
-          "sig_bonferroni": true
+          "sig_raw": true,
+          "t": 24.502107556886443
         },
         {
+          "bonferroni": 3.2072050407463333e-08,
           "higher": "MEIRA-no-xai",
+          "holm": 2.9781189664073097e-08,
           "lower": "TF-IDF",
           "raw": 1.1454303716951191e-09,
-          "holm": 2.9781189664073097e-08,
-          "bonferroni": 3.2072050407463333e-08,
-          "t": 25.267297377071497,
-          "sig_raw": true,
+          "sig_bonferroni": true,
           "sig_holm": true,
-          "sig_bonferroni": true
+          "sig_raw": true,
+          "t": 25.267297377071497
         },
         {
+          "bonferroni": 1.8400544791164154e-08,
           "higher": "MEIRA-full",
+          "holm": 1.8400544791164154e-08,
           "lower": "TF-IDF",
           "raw": 6.571623139701484e-10,
-          "holm": 1.8400544791164154e-08,
-          "bonferroni": 1.8400544791164154e-08,
-          "t": 26.896273946223847,
-          "sig_raw": true,
+          "sig_bonferroni": true,
           "sig_holm": true,
-          "sig_bonferroni": true
+          "sig_raw": true,
+          "t": 26.896273946223847
         },
         {
+          "bonferroni": 3.017686858540121e-06,
           "higher": "ColBERT-like",
+          "holm": 1.2932943679457663e-06,
           "lower": "Dense-IR",
           "raw": 1.0777453066214719e-07,
-          "holm": 1.2932943679457663e-06,
-          "bonferroni": 3.017686858540121e-06,
-          "t": 15.079061683005827,
-          "sig_raw": true,
+          "sig_bonferroni": true,
           "sig_holm": true,
-          "sig_bonferroni": true
+          "sig_raw": true,
+          "t": 15.079061683005827
         },
         {
+          "bonferroni": 5.363765484910652e-06,
           "higher": "MEIRA-no-memory",
+          "holm": 1.7240674772927094e-06,
           "lower": "Dense-IR",
           "raw": 1.9156305303252327e-07,
-          "holm": 1.7240674772927094e-06,
-          "bonferroni": 5.363765484910652e-06,
-          "t": 14.110900675163268,
-          "sig_raw": true,
+          "sig_bonferroni": true,
           "sig_holm": true,
-          "sig_bonferroni": true
+          "sig_raw": true,
+          "t": 14.110900675163268
         },
         {
+          "bonferroni": 2.528936284263381e-06,
           "higher": "MEIRA-no-decay",
+          "holm": 1.174148989122284e-06,
           "lower": "Dense-IR",
           "raw": 9.031915300940646e-08,
-          "holm": 1.174148989122284e-06,
-          "bonferroni": 2.528936284263381e-06,
-          "t": 15.388643237948607,
-          "sig_raw": true,
+          "sig_bonferroni": true,
           "sig_holm": true,
-          "sig_bonferroni": true
+          "sig_raw": true,
+          "t": 15.388643237948607
         },
         {
+          "bonferroni": 1.3707882374733282e-06,
           "higher": "MEIRA-no-xai",
+          "holm": 7.343508415035687e-07,
           "lower": "Dense-IR",
           "raw": 4.895672276690458e-08,
-          "holm": 7.343508415035687e-07,
-          "bonferroni": 1.3707882374733282e-06,
-          "t": 16.508294243547596,
-          "sig_raw": true,
+          "sig_bonferroni": true,
           "sig_holm": true,
-          "sig_bonferroni": true
+          "sig_raw": true,
+          "t": 16.508294243547596
         },
         {
+          "bonferroni": 6.285732409659566e-07,
           "higher": "MEIRA-full",
+          "holm": 3.5918470912340375e-07,
           "lower": "Dense-IR",
           "raw": 2.2449044320212735e-08,
-          "holm": 3.5918470912340375e-07,
-          "bonferroni": 6.285732409659566e-07,
-          "t": 18.045058190296036,
-          "sig_raw": true,
+          "sig_bonferroni": true,
           "sig_holm": true,
-          "sig_bonferroni": true
+          "sig_raw": true,
+          "t": 18.045058190296036
         },
         {
+          "bonferroni": 0.0035479624875244965,
           "higher": "ColBERT-like",
+          "holm": 0.000506851783932071,
           "lower": "MEIRA-no-memory",
           "raw": 0.00012671294598301774,
-          "holm": 0.000506851783932071,
-          "bonferroni": 0.0035479624875244965,
-          "t": 6.390279127982126,
-          "sig_raw": true,
+          "sig_bonferroni": true,
           "sig_holm": true,
-          "sig_bonferroni": true
+          "sig_raw": true,
+          "t": 6.390279127982126
         },
         {
+          "bonferroni": 0.6604556621252786,
           "higher": "MEIRA-no-decay",
+          "holm": 0.0471754044375199,
           "lower": "ColBERT-like",
           "raw": 0.02358770221875995,
-          "holm": 0.0471754044375199,
-          "bonferroni": 0.6604556621252786,
-          "t": 2.7205206343827135,
-          "sig_raw": true,
+          "sig_bonferroni": false,
           "sig_holm": true,
-          "sig_bonferroni": false
+          "sig_raw": true,
+          "t": 2.7205206343827135
         },
         {
+          "bonferroni": 0.00016550682452374875,
           "higher": "MEIRA-no-xai",
+          "holm": 2.9554790093526562e-05,
           "lower": "ColBERT-like",
           "raw": 5.910958018705312e-06,
-          "holm": 2.9554790093526562e-05,
-          "bonferroni": 0.00016550682452374875,
-          "t": 9.412124995474597,
-          "sig_raw": true,
+          "sig_bonferroni": true,
           "sig_holm": true,
-          "sig_bonferroni": true
+          "sig_raw": true,
+          "t": 9.412124995474597
         },
         {
+          "bonferroni": 1.6062728904779723e-06,
           "higher": "MEIRA-full",
+          "holm": 8.031364452389862e-07,
           "lower": "ColBERT-like",
           "raw": 5.736688894564187e-08,
-          "holm": 8.031364452389862e-07,
-          "bonferroni": 1.6062728904779723e-06,
-          "t": 16.211344348597628,
-          "sig_raw": true,
+          "sig_bonferroni": true,
           "sig_holm": true,
-          "sig_bonferroni": true
+          "sig_raw": true,
+          "t": 16.211344348597628
         },
         {
+          "bonferroni": 0.008034576490934956,
           "higher": "MEIRA-no-decay",
+          "holm": 0.0008608474811716024,
           "lower": "MEIRA-no-memory",
           "raw": 0.0002869491603905341,
-          "holm": 0.0008608474811716024,
-          "bonferroni": 0.008034576490934956,
-          "t": 5.720016641943553,
-          "sig_raw": true,
+          "sig_bonferroni": true,
           "sig_holm": true,
-          "sig_bonferroni": true
+          "sig_raw": true,
+          "t": 5.720016641943553
         },
         {
+          "bonferroni": 8.40665332703475e-05,
           "higher": "MEIRA-no-xai",
+          "holm": 1.8014257129360176e-05,
           "lower": "MEIRA-no-memory",
           "raw": 3.0023761882266964e-06,
-          "holm": 1.8014257129360176e-05,
-          "bonferroni": 8.40665332703475e-05,
-          "t": 10.212709387796505,
-          "sig_raw": true,
+          "sig_bonferroni": true,
           "sig_holm": true,
-          "sig_bonferroni": true
+          "sig_raw": true,
+          "t": 10.212709387796505
         },
         {
+          "bonferroni": 3.427122984980713e-06,
           "higher": "MEIRA-full",
+          "holm": 1.3463697440995658e-06,
           "lower": "MEIRA-no-memory",
           "raw": 1.223972494635969e-07,
-          "holm": 1.3463697440995658e-06,
-          "bonferroni": 3.427122984980713e-06,
-          "t": 14.85974357950182,
-          "sig_raw": true,
+          "sig_bonferroni": true,
           "sig_holm": true,
-          "sig_bonferroni": true
+          "sig_raw": true,
+          "t": 14.85974357950182
         },
         {
+          "bonferroni": 2.0706485082173178e-05,
           "higher": "MEIRA-no-xai",
+          "holm": 5.916138594906623e-06,
           "lower": "MEIRA-no-decay",
           "raw": 7.395173243633278e-07,
-          "holm": 5.916138594906623e-06,
-          "bonferroni": 2.0706485082173178e-05,
-          "t": 12.057002431982449,
-          "sig_raw": true,
+          "sig_bonferroni": true,
           "sig_holm": true,
-          "sig_bonferroni": true
+          "sig_raw": true,
+          "t": 12.057002431982449
         },
         {
+          "bonferroni": 4.738394452102588e-06,
           "higher": "MEIRA-full",
+          "holm": 1.6922837328937815e-06,
           "lower": "MEIRA-no-decay",
           "raw": 1.6922837328937815e-07,
-          "holm": 1.6922837328937815e-06,
-          "bonferroni": 4.738394452102588e-06,
-          "t": 14.314569473697608,
-          "sig_raw": true,
+          "sig_bonferroni": true,
           "sig_holm": true,
-          "sig_bonferroni": true
+          "sig_raw": true,
+          "t": 14.314569473697608
         },
         {
+          "bonferroni": 6.095927322611381e-05,
           "higher": "MEIRA-full",
+          "holm": 1.5239818306528452e-05,
           "lower": "MEIRA-no-xai",
           "raw": 2.177116900932636e-06,
-          "holm": 1.5239818306528452e-05,
-          "bonferroni": 6.095927322611381e-05,
-          "t": 10.612407758229569,
-          "sig_raw": true,
+          "sig_bonferroni": true,
           "sig_holm": true,
-          "sig_bonferroni": true
+          "sig_raw": true,
+          "t": 10.612407758229569
         }
       ],
       "FIRE-CrossLingIR-2026": [
         {
+          "bonferroni": 1.0,
           "higher": "BM25",
+          "holm": 0.1554398039620283,
           "lower": "TF-IDF",
           "raw": 0.1554398039620283,
-          "holm": 0.1554398039620283,
-          "bonferroni": 1.0,
-          "t": 1.5504752529252908,
-          "sig_raw": false,
+          "sig_bonferroni": false,
           "sig_holm": false,
-          "sig_bonferroni": false
+          "sig_raw": false,
+          "t": 1.5504752529252908
         },
         {
+          "bonferroni": 8.520767060543936e-08,
           "higher": "Dense-IR",
+          "holm": 5.17332285818739e-08,
           "lower": "BM25",
           "raw": 3.0431310930514057e-09,
-          "holm": 5.17332285818739e-08,
-          "bonferroni": 8.520767060543936e-08,
-          "t": 22.63254934077049,
-          "sig_raw": true,
+          "sig_bonferroni": true,
           "sig_holm": true,
-          "sig_bonferroni": true
+          "sig_raw": true,
+          "t": 22.63254934077049
         },
         {
+          "bonferroni": 7.077450703689539e-11,
           "higher": "ColBERT-like",
+          "holm": 6.319152414008516e-11,
           "lower": "BM25",
           "raw": 2.5276609656034067e-12,
-          "holm": 6.319152414008516e-11,
-          "bonferroni": 7.077450703689539e-11,
-          "t": 50.090398029162266,
-          "sig_raw": true,
+          "sig_bonferroni": true,
           "sig_holm": true,
-          "sig_bonferroni": true
+          "sig_raw": true,
+          "t": 50.090398029162266
         },
         {
+          "bonferroni": 1.9970533322348237e-10,
           "higher": "MEIRA-no-memory",
+          "holm": 1.5691133324702187e-10,
           "lower": "BM25",
           "raw": 7.1323333294100844e-12,
-          "holm": 1.5691133324702187e-10,
-          "bonferroni": 1.9970533322348237e-10,
-          "t": 44.61839091418266,
-          "sig_raw": true,
+          "sig_bonferroni": true,
           "sig_holm": true,
-          "sig_bonferroni": true
+          "sig_raw": true,
+          "t": 44.61839091418266
         },
         {
+          "bonferroni": 1.3534161641624833e-11,
           "higher": "MEIRA-no-decay",
+          "holm": 1.3534161641624833e-11,
           "lower": "BM25",
           "raw": 4.833629157723154e-13,
-          "holm": 1.3534161641624833e-11,
-          "bonferroni": 1.3534161641624833e-11,
-          "t": 60.22813633845576,
-          "sig_raw": true,
+          "sig_bonferroni": true,
           "sig_holm": true,
-          "sig_bonferroni": true
+          "sig_raw": true,
+          "t": 60.22813633845576
         },
         {
+          "bonferroni": 8.148062316330735e-11,
           "higher": "MEIRA-no-xai",
+          "holm": 6.984053413997773e-11,
           "lower": "BM25",
           "raw": 2.9100222558324055e-12,
-          "holm": 6.984053413997773e-11,
-          "bonferroni": 8.148062316330735e-11,
-          "t": 49.30993980492433,
-          "sig_raw": true,
+          "sig_bonferroni": true,
           "sig_holm": true,
-          "sig_bonferroni": true
+          "sig_raw": true,
+          "t": 49.30993980492433
         },
         {
+          "bonferroni": 7.742163339802984e-10,
           "higher": "MEIRA-full",
+          "holm": 5.530116671287846e-10,
           "lower": "BM25",
           "raw": 2.7650583356439228e-11,
-          "holm": 5.530116671287846e-10,
-          "bonferroni": 7.742163339802984e-10,
-          "t": 38.35432875338555,
-          "sig_raw": true,
+          "sig_bonferroni": true,
           "sig_holm": true,
-          "sig_bonferroni": true
+          "sig_raw": true,
+          "t": 38.35432875338555
         },
         {
+          "bonferroni": 6.678425591541651e-08,
           "higher": "Dense-IR",
+          "holm": 4.293273594562489e-08,
           "lower": "TF-IDF",
           "raw": 2.385151996979161e-09,
-          "holm": 4.293273594562489e-08,
-          "bonferroni": 6.678425591541651e-08,
-          "t": 23.263336991537678,
-          "sig_raw": true,
+          "sig_bonferroni": true,
           "sig_holm": true,
-          "sig_bonferroni": true
+          "sig_raw": true,
+          "t": 23.263336991537678
         },
         {
+          "bonferroni": 3.649890396566203e-11,
           "higher": "ColBERT-like",
+          "holm": 3.3891839396686167e-11,
           "lower": "TF-IDF",
           "raw": 1.3035322844879295e-12,
-          "holm": 3.3891839396686167e-11,
-          "bonferroni": 3.649890396566203e-11,
-          "t": 53.92703724434324,
-          "sig_raw": true,
+          "sig_bonferroni": true,
           "sig_holm": true,
-          "sig_bonferroni": true
+          "sig_raw": true,
+          "t": 53.92703724434324
         },
         {
+          "bonferroni": 3.318836028480121e-10,
           "higher": "MEIRA-no-memory",
+          "holm": 2.4891270213600906e-10,
           "lower": "TF-IDF",
           "raw": 1.1852985816000432e-11,
-          "holm": 2.4891270213600906e-10,
-          "bonferroni": 3.318836028480121e-10,
-          "t": 42.159611108358256,
-          "sig_raw": true,
+          "sig_bonferroni": true,
           "sig_holm": true,
-          "sig_bonferroni": true
+          "sig_raw": true,
+          "t": 42.159611108358256
         },
         {
+          "bonferroni": 1.5523779020628316e-11,
           "higher": "MEIRA-no-decay",
+          "holm": 1.4969358341320162e-11,
           "lower": "TF-IDF",
           "raw": 5.544206793081542e-13,
-          "holm": 1.4969358341320162e-11,
-          "bonferroni": 1.5523779020628316e-11,
-          "t": 59.31517478048805,
-          "sig_raw": true,
+          "sig_bonferroni": true,
           "sig_holm": true,
-          "sig_bonferroni": true
+          "sig_raw": true,
+          "t": 59.31517478048805
         },
         {
+          "bonferroni": 1.4335052243804707e-10,
           "higher": "MEIRA-no-xai",
+          "holm": 1.1775221485982437e-10,
           "lower": "TF-IDF",
           "raw": 5.119661515644538e-12,
-          "holm": 1.1775221485982437e-10,
-          "bonferroni": 1.4335052243804707e-10,
-          "t": 46.299488580311724,
-          "sig_raw": true,
+          "sig_bonferroni": true,
           "sig_holm": true,
-          "sig_bonferroni": true
+          "sig_raw": true,
+          "t": 46.299488580311724
         },
         {
+          "bonferroni": 8.031223511309744e-10,
           "higher": "MEIRA-full",
+          "holm": 5.530116671287846e-10,
           "lower": "TF-IDF",
           "raw": 2.8682941111820514e-11,
-          "holm": 5.530116671287846e-10,
-          "bonferroni": 8.031223511309744e-10,
-          "t": 38.197566217828985,
-          "sig_raw": true,
+          "sig_bonferroni": true,
           "sig_holm": true,
-          "sig_bonferroni": true
+          "sig_raw": true,
+          "t": 38.197566217828985
         },
         {
+          "bonferroni": 9.769698924310256e-05,
           "higher": "ColBERT-like",
+          "holm": 3.4891781872536626e-05,
           "lower": "Dense-IR",
           "raw": 3.489178187253663e-06,
-          "holm": 3.4891781872536626e-05,
-          "bonferroni": 9.769698924310256e-05,
-          "t": 10.030319304934842,
-          "sig_raw": true,
+          "sig_bonferroni": true,
           "sig_holm": true,
-          "sig_bonferroni": true
+          "sig_raw": true,
+          "t": 10.030319304934842
         },
         {
+          "bonferroni": 2.1950486668727864e-05,
           "higher": "MEIRA-no-memory",
+          "holm": 1.0975243334363932e-05,
           "lower": "Dense-IR",
           "raw": 7.839459524545665e-07,
-          "holm": 1.0975243334363932e-05,
-          "bonferroni": 2.1950486668727864e-05,
-          "t": 11.974716897757729,
-          "sig_raw": true,
+          "sig_bonferroni": true,
           "sig_holm": true,
-          "sig_bonferroni": true
+          "sig_raw": true,
+          "t": 11.974716897757729
         },
         {
+          "bonferroni": 3.533171172336909e-05,
           "higher": "MEIRA-no-decay",
+          "holm": 1.3880315319894999e-05,
           "lower": "Dense-IR",
           "raw": 1.2618468472631817e-06,
-          "holm": 1.3880315319894999e-05,
-          "bonferroni": 3.533171172336909e-05,
-          "t": 11.321827047969096,
-          "sig_raw": true,
+          "sig_bonferroni": true,
           "sig_holm": true,
-          "sig_bonferroni": true
+          "sig_raw": true,
+          "t": 11.321827047969096
         },
         {
+          "bonferroni": 3.0261063005352855e-05,
           "higher": "MEIRA-no-xai",
+          "holm": 1.296902700229408e-05,
           "lower": "Dense-IR",
           "raw": 1.0807522501911733e-06,
-          "holm": 1.296902700229408e-05,
-          "bonferroni": 3.0261063005352855e-05,
-          "t": 11.53076741147635,
-          "sig_raw": true,
+          "sig_bonferroni": true,
           "sig_holm": true,
-          "sig_bonferroni": true
+          "sig_raw": true,
+          "t": 11.53076741147635
         },
         {
+          "bonferroni": 2.408149977744571e-06,
           "higher": "MEIRA-full",
+          "holm": 1.3760857015683262e-06,
           "lower": "Dense-IR",
           "raw": 8.600535634802039e-08,
-          "holm": 1.3760857015683262e-06,
-          "bonferroni": 2.408149977744571e-06,
-          "t": 15.475433682823354,
-          "sig_raw": true,
+          "sig_bonferroni": true,
           "sig_holm": true,
-          "sig_bonferroni": true
+          "sig_raw": true,
+          "t": 15.475433682823354
         },
         {
+          "bonferroni": 0.02982388981517297,
           "higher": "ColBERT-like",
+          "holm": 0.00319541676591139,
           "lower": "MEIRA-no-memory",
           "raw": 0.0010651389219704633,
-          "holm": 0.00319541676591139,
-          "bonferroni": 0.02982388981517297,
-          "t": 4.735834361709334,
-          "sig_raw": true,
+          "sig_bonferroni": true,
           "sig_holm": true,
-          "sig_bonferroni": true
+          "sig_raw": true,
+          "t": 4.735834361709334
         },
         {
+          "bonferroni": 0.06350783518335117,
           "higher": "MEIRA-no-decay",
+          "holm": 0.00453627394166794,
           "lower": "ColBERT-like",
           "raw": 0.00226813697083397,
-          "holm": 0.00453627394166794,
-          "bonferroni": 0.06350783518335117,
-          "t": 4.211390348344017,
-          "sig_raw": true,
+          "sig_bonferroni": false,
           "sig_holm": true,
-          "sig_bonferroni": false
+          "sig_raw": true,
+          "t": 4.211390348344017
         },
         {
+          "bonferroni": 0.004325535273583189,
           "higher": "MEIRA-no-xai",
+          "holm": 0.000879223883727084,
           "lower": "ColBERT-like",
           "raw": 0.00015448340262797105,
-          "holm": 0.000879223883727084,
-          "bonferroni": 0.004325535273583189,
-          "t": 6.223330505986491,
-          "sig_raw": true,
+          "sig_bonferroni": true,
           "sig_holm": true,
-          "sig_bonferroni": true
+          "sig_raw": true,
+          "t": 6.223330505986491
         },
         {
+          "bonferroni": 2.379252097074797e-05,
           "higher": "MEIRA-full",
+          "holm": 1.1046527593561555e-05,
           "lower": "ColBERT-like",
           "raw": 8.497328918124274e-07,
-          "holm": 1.1046527593561555e-05,
-          "bonferroni": 2.379252097074797e-05,
-          "t": 11.861889410203752,
-          "sig_raw": true,
+          "sig_bonferroni": true,
           "sig_holm": true,
-          "sig_bonferroni": true
+          "sig_raw": true,
+          "t": 11.861889410203752
         },
         {
+          "bonferroni": 0.002838577890986275,
           "higher": "MEIRA-no-decay",
+          "holm": 0.0007096444727465687,
           "lower": "MEIRA-no-memory",
           "raw": 0.0001013777818209384,
-          "holm": 0.0007096444727465687,
-          "bonferroni": 0.002838577890986275,
-          "t": 6.581807077559675,
-          "sig_raw": true,
+          "sig_bonferroni": true,
           "sig_holm": true,
-          "sig_bonferroni": true
+          "sig_raw": true,
+          "t": 6.581807077559675
         },
         {
+          "bonferroni": 0.0014049629378579326,
           "higher": "MEIRA-no-xai",
+          "holm": 0.0004014179822451236,
           "lower": "MEIRA-no-memory",
           "raw": 5.017724778064045e-05,
-          "holm": 0.0004014179822451236,
-          "bonferroni": 0.0014049629378579326,
-          "t": 7.211992723409053,
-          "sig_raw": true,
+          "sig_bonferroni": true,
           "sig_holm": true,
-          "sig_bonferroni": true
+          "sig_raw": true,
+          "t": 7.211992723409053
         },
         {
+          "bonferroni": 1.7164756110828632e-05,
           "higher": "MEIRA-full",
+          "holm": 9.19540505937248e-06,
           "lower": "MEIRA-no-memory",
           "raw": 6.130270039581654e-07,
-          "holm": 9.19540505937248e-06,
-          "bonferroni": 1.7164756110828632e-05,
-          "t": 12.32501807797652,
-          "sig_raw": true,
+          "sig_bonferroni": true,
           "sig_holm": true,
-          "sig_bonferroni": true
+          "sig_raw": true,
+          "t": 12.32501807797652
         },
         {
+          "bonferroni": 0.005299756601634056,
           "higher": "MEIRA-no-xai",
+          "holm": 0.000879223883727084,
           "lower": "MEIRA-no-decay",
           "raw": 0.00018927702148693057,
-          "holm": 0.000879223883727084,
-          "bonferroni": 0.005299756601634056,
-          "t": 6.055222735754961,
-          "sig_raw": true,
+          "sig_bonferroni": true,
           "sig_holm": true,
-          "sig_bonferroni": true
+          "sig_raw": true,
+          "t": 6.055222735754961
         },
         {
+          "bonferroni": 0.0001961473270907641,
           "higher": "MEIRA-full",
+          "holm": 6.304735513631702e-05,
           "lower": "MEIRA-no-decay",
           "raw": 7.005261681813003e-06,
-          "holm": 6.304735513631702e-05,
-          "bonferroni": 0.0001961473270907641,
-          "t": 9.219866437501233,
-          "sig_raw": true,
+          "sig_bonferroni": true,
           "sig_holm": true,
-          "sig_bonferroni": true
+          "sig_raw": true,
+          "t": 9.219866437501233
         },
         {
+          "bonferroni": 0.004103044790726392,
           "higher": "MEIRA-full",
+          "holm": 0.000879223883727084,
           "lower": "MEIRA-no-xai",
           "raw": 0.000146537313954514,
-          "holm": 0.000879223883727084,
-          "bonferroni": 0.004103044790726392,
-          "t": 6.267530916922698,
-          "sig_raw": true,
+          "sig_bonferroni": true,
           "sig_holm": true,
-          "sig_bonferroni": true
+          "sig_raw": true,
+          "t": 6.267530916922698
         }
       ]
+    },
+    "nDCG@10": {
+      "FIRE-AgentIR-2026": [
+        {
+          "bonferroni": 0.2926921315181752,
+          "higher": "BM25",
+          "holm": 0.014137188661079063,
+          "lower": "TF-IDF",
+          "raw": 0.0104532904113634,
+          "sig_bonferroni": false,
+          "sig_holm": true,
+          "sig_raw": true,
+          "t": 3.2221509340779573
+        },
+        {
+          "bonferroni": 1.3100565958979215e-07,
+          "higher": "Dense-IR",
+          "holm": 7.486037690845265e-08,
+          "lower": "BM25",
+          "raw": 4.678773556778291e-09,
+          "sig_bonferroni": true,
+          "sig_holm": true,
+          "sig_raw": true,
+          "t": 21.55901737514869
+        },
+        {
+          "bonferroni": 1.002220150142857e-08,
+          "higher": "ColBERT-like",
+          "holm": 8.232522661887754e-09,
+          "lower": "BM25",
+          "raw": 3.5793576790816325e-10,
+          "sig_bonferroni": true,
+          "sig_holm": true,
+          "sig_raw": true,
+          "t": 28.79522144642376
+        },
+        {
+          "bonferroni": 3.9628096102344536e-08,
+          "higher": "MEIRA-no-memory",
+          "holm": 2.689049378373379e-08,
+          "lower": "BM25",
+          "raw": 1.4152891465123047e-09,
+          "sig_bonferroni": true,
+          "sig_holm": true,
+          "sig_raw": true,
+          "t": 24.672687092524917
+        },
+        {
+          "bonferroni": 1.3354206007792028e-08,
+          "higher": "MEIRA-no-decay",
+          "holm": 1.001565450584402e-08,
+          "lower": "BM25",
+          "raw": 4.769359288497153e-10,
+          "sig_bonferroni": true,
+          "sig_holm": true,
+          "sig_raw": true,
+          "t": 27.882314764229072
+        },
+        {
+          "bonferroni": 7.024609373618426e-09,
+          "higher": "MEIRA-no-xai",
+          "holm": 6.271972655016452e-09,
+          "lower": "BM25",
+          "raw": 2.508789062006581e-10,
+          "sig_bonferroni": true,
+          "sig_holm": true,
+          "sig_raw": true,
+          "t": 29.966218034821786
+        },
+        {
+          "bonferroni": 2.058336167463174e-09,
+          "higher": "MEIRA-full",
+          "holm": 2.0235213448387463e-09,
+          "lower": "BM25",
+          "raw": 7.351200598082764e-11,
+          "sig_bonferroni": true,
+          "sig_holm": true,
+          "sig_raw": true,
+          "t": 34.38249939844863
+        },
+        {
+          "bonferroni": 8.335510326354886e-08,
+          "higher": "Dense-IR",
+          "holm": 5.0608455552868955e-08,
+          "lower": "TF-IDF",
+          "raw": 2.9769679736981737e-09,
+          "sig_bonferroni": true,
+          "sig_holm": true,
+          "sig_raw": true,
+          "t": 22.688776447812042
+        },
+        {
+          "bonferroni": 8.162157959636774e-09,
+          "higher": "ColBERT-like",
+          "holm": 6.996135393974377e-09,
+          "lower": "TF-IDF",
+          "raw": 2.9150564141559903e-10,
+          "sig_bonferroni": true,
+          "sig_holm": true,
+          "sig_raw": true,
+          "t": 29.466078366915124
+        },
+        {
+          "bonferroni": 3.1673710638235954e-08,
+          "higher": "MEIRA-no-memory",
+          "holm": 2.2624079027311393e-08,
+          "lower": "TF-IDF",
+          "raw": 1.1312039513655697e-09,
+          "sig_bonferroni": true,
+          "sig_holm": true,
+          "sig_raw": true,
+          "t": 25.30285857414608
+        },
+        {
+          "bonferroni": 1.26176792380352e-08,
+          "higher": "MEIRA-no-decay",
+          "holm": 9.9138908298848e-09,
+          "lower": "TF-IDF",
+          "raw": 4.506314013584e-10,
+          "sig_bonferroni": true,
+          "sig_holm": true,
+          "sig_raw": true,
+          "t": 28.060477049528682
+        },
+        {
+          "bonferroni": 6.44878867231506e-09,
+          "higher": "MEIRA-no-xai",
+          "holm": 5.988160910006841e-09,
+          "lower": "TF-IDF",
+          "raw": 2.3031388115410927e-10,
+          "sig_bonferroni": true,
+          "sig_holm": true,
+          "sig_raw": true,
+          "t": 30.25493799130628
+        },
+        {
+          "bonferroni": 2.0235213448387463e-09,
+          "higher": "MEIRA-full",
+          "holm": 2.0235213448387463e-09,
+          "lower": "TF-IDF",
+          "raw": 7.226861945852666e-11,
+          "sig_bonferroni": true,
+          "sig_holm": true,
+          "sig_raw": true,
+          "t": 34.44818108730969
+        },
+        {
+          "bonferroni": 1.7382508428097777e-07,
+          "higher": "ColBERT-like",
+          "holm": 9.312058086480951e-08,
+          "lower": "Dense-IR",
+          "raw": 6.2080387243206345e-09,
+          "sig_bonferroni": true,
+          "sig_holm": true,
+          "sig_raw": true,
+          "t": 20.880184398985538
+        },
+        {
+          "bonferroni": 5.453112451049585e-07,
+          "higher": "MEIRA-no-memory",
+          "holm": 2.1422941771980514e-07,
+          "lower": "Dense-IR",
+          "raw": 1.9475401610891378e-08,
+          "sig_bonferroni": true,
+          "sig_holm": true,
+          "sig_raw": true,
+          "t": 18.339364864103327
+        },
+        {
+          "bonferroni": 4.835153299799222e-07,
+          "higher": "MEIRA-no-decay",
+          "holm": 2.0722085570568094e-07,
+          "lower": "Dense-IR",
+          "raw": 1.7268404642140077e-08,
+          "sig_bonferroni": true,
+          "sig_holm": true,
+          "sig_raw": true,
+          "t": 18.592041590937068
+        },
+        {
+          "bonferroni": 2.5547222094628843e-07,
+          "higher": "MEIRA-no-xai",
+          "holm": 1.2059712405377884e-07,
+          "lower": "Dense-IR",
+          "raw": 9.124007890938872e-09,
+          "sig_bonferroni": true,
+          "sig_holm": true,
+          "sig_raw": true,
+          "t": 19.988919610627974
+        },
+        {
+          "bonferroni": 6.66700000669743e-08,
+          "higher": "MEIRA-full",
+          "holm": 4.2859285757340624e-08,
+          "lower": "Dense-IR",
+          "raw": 2.381071430963368e-09,
+          "sig_bonferroni": true,
+          "sig_holm": true,
+          "sig_raw": true,
+          "t": 23.26783018128833
+        },
+        {
+          "bonferroni": 0.0003948805630710695,
+          "higher": "ColBERT-like",
+          "holm": 5.6411509010152786e-05,
+          "lower": "MEIRA-no-memory",
+          "raw": 1.4102877252538196e-05,
+          "sig_bonferroni": true,
+          "sig_holm": true,
+          "sig_raw": true,
+          "t": 8.461473270211892
+        },
+        {
+          "bonferroni": 0.1979206412551069,
+          "higher": "MEIRA-no-decay",
+          "holm": 0.014137188661079063,
+          "lower": "ColBERT-like",
+          "raw": 0.007068594330539532,
+          "sig_bonferroni": false,
+          "sig_holm": true,
+          "sig_raw": true,
+          "t": 3.4682182656048184
+        },
+        {
+          "bonferroni": 5.1079646417490665e-05,
+          "higher": "MEIRA-no-xai",
+          "holm": 9.121365431694761e-06,
+          "lower": "ColBERT-like",
+          "raw": 1.8242730863389523e-06,
+          "sig_bonferroni": true,
+          "sig_holm": true,
+          "sig_raw": true,
+          "t": 10.838015319431927
+        },
+        {
+          "bonferroni": 2.411942481075577e-07,
+          "higher": "MEIRA-full",
+          "holm": 1.2059712405377884e-07,
+          "lower": "ColBERT-like",
+          "raw": 8.614080289555631e-09,
+          "sig_bonferroni": true,
+          "sig_holm": true,
+          "sig_raw": true,
+          "t": 20.11967109984833
+        },
+        {
+          "bonferroni": 0.0023575663151306258,
+          "higher": "MEIRA-no-decay",
+          "holm": 0.0002525963909068528,
+          "lower": "MEIRA-no-memory",
+          "raw": 8.419879696895093e-05,
+          "sig_bonferroni": true,
+          "sig_holm": true,
+          "sig_raw": true,
+          "t": 6.744217780026808
+        },
+        {
+          "bonferroni": 3.808707473981151e-05,
+          "higher": "MEIRA-no-xai",
+          "holm": 8.161516015673896e-06,
+          "lower": "MEIRA-no-memory",
+          "raw": 1.3602526692789827e-06,
+          "sig_bonferroni": true,
+          "sig_holm": true,
+          "sig_raw": true,
+          "t": 11.221754183011026
+        },
+        {
+          "bonferroni": 6.155378403113183e-07,
+          "higher": "MEIRA-full",
+          "holm": 2.1983494296832797e-07,
+          "lower": "MEIRA-no-memory",
+          "raw": 2.1983494296832798e-08,
+          "sig_bonferroni": true,
+          "sig_holm": true,
+          "sig_raw": true,
+          "t": 18.088177815997874
+        },
+        {
+          "bonferroni": 3.484865651536782e-06,
+          "higher": "MEIRA-no-xai",
+          "holm": 9.956759004390806e-07,
+          "lower": "MEIRA-no-decay",
+          "raw": 1.2445948755488507e-07,
+          "sig_bonferroni": true,
+          "sig_holm": true,
+          "sig_raw": true,
+          "t": 14.831163245671858
+        },
+        {
+          "bonferroni": 7.120681017270249e-07,
+          "higher": "MEIRA-full",
+          "holm": 2.2887903269797228e-07,
+          "lower": "MEIRA-no-decay",
+          "raw": 2.5431003633108032e-08,
+          "sig_bonferroni": true,
+          "sig_holm": true,
+          "sig_raw": true,
+          "t": 17.790445355359928
+        },
+        {
+          "bonferroni": 8.330931545744814e-06,
+          "higher": "MEIRA-full",
+          "holm": 2.0827328864362034e-06,
+          "lower": "MEIRA-no-xai",
+          "raw": 2.975332694908862e-07,
+          "sig_bonferroni": true,
+          "sig_holm": true,
+          "sig_raw": true,
+          "t": 13.40885999404492
+        }
+      ],
+      "FIRE-CrossLingIR-2026": [
+        {
+          "bonferroni": 1.0,
+          "higher": "BM25",
+          "holm": 0.0457903972769767,
+          "lower": "TF-IDF",
+          "raw": 0.0457903972769767,
+          "sig_bonferroni": false,
+          "sig_holm": true,
+          "sig_raw": true,
+          "t": 2.3159231015389583
+        },
+        {
+          "bonferroni": 1.347170964724355e-07,
+          "higher": "Dense-IR",
+          "holm": 8.17925228582644e-08,
+          "lower": "BM25",
+          "raw": 4.811324874015553e-09,
+          "sig_bonferroni": true,
+          "sig_holm": true,
+          "sig_raw": true,
+          "t": 21.491024514360223
+        },
+        {
+          "bonferroni": 9.583144326367912e-11,
+          "higher": "ColBERT-like",
+          "holm": 7.871868553802213e-11,
+          "lower": "BM25",
+          "raw": 3.422551545131397e-12,
+          "sig_bonferroni": true,
+          "sig_holm": true,
+          "sig_raw": true,
+          "t": 48.42609714079573
+        },
+        {
+          "bonferroni": 3.266171177159367e-10,
+          "higher": "MEIRA-no-memory",
+          "holm": 2.5662773534823597e-10,
+          "lower": "BM25",
+          "raw": 1.1664897061283454e-11,
+          "sig_bonferroni": true,
+          "sig_holm": true,
+          "sig_raw": true,
+          "t": 42.23495289920052
+        },
+        {
+          "bonferroni": 7.727000790482786e-12,
+          "higher": "MEIRA-no-decay",
+          "holm": 7.451036476536973e-12,
+          "lower": "BM25",
+          "raw": 2.759643139458138e-13,
+          "sig_bonferroni": true,
+          "sig_holm": true,
+          "sig_raw": true,
+          "t": 64.10670821353368
+        },
+        {
+          "bonferroni": 4.116489973753387e-11,
+          "higher": "MEIRA-no-xai",
+          "holm": 3.822454975628145e-11,
+          "lower": "BM25",
+          "raw": 1.4701749906262096e-12,
+          "sig_bonferroni": true,
+          "sig_holm": true,
+          "sig_raw": true,
+          "t": 53.20895901233407
+        },
+        {
+          "bonferroni": 1.0573385042476756e-09,
+          "higher": "MEIRA-full",
+          "holm": 7.552417887483396e-10,
+          "lower": "BM25",
+          "raw": 3.7762089437416983e-11,
+          "sig_bonferroni": true,
+          "sig_holm": true,
+          "sig_raw": true,
+          "t": 37.04151333798711
+        },
+        {
+          "bonferroni": 1.2129610703364623e-07,
+          "higher": "Dense-IR",
+          "holm": 7.797606880734399e-08,
+          "lower": "TF-IDF",
+          "raw": 4.332003822630222e-09,
+          "sig_bonferroni": true,
+          "sig_holm": true,
+          "sig_raw": true,
+          "t": 21.747514223148166
+        },
+        {
+          "bonferroni": 5.68836715518363e-11,
+          "higher": "ColBERT-like",
+          "holm": 4.980737435345693e-11,
+          "lower": "TF-IDF",
+          "raw": 2.031559698279868e-12,
+          "sig_bonferroni": true,
+          "sig_holm": true,
+          "sig_raw": true,
+          "t": 51.32527424704719
+        },
+        {
+          "bonferroni": 5.268659392792315e-10,
+          "higher": "MEIRA-no-memory",
+          "holm": 3.951494544594236e-10,
+          "lower": "TF-IDF",
+          "raw": 1.881664068854398e-11,
+          "sig_bonferroni": true,
+          "sig_holm": true,
+          "sig_raw": true,
+          "t": 40.03933971511243
+        },
+        {
+          "bonferroni": 5.898024152285194e-12,
+          "higher": "MEIRA-no-decay",
+          "holm": 5.898024152285194e-12,
+          "lower": "TF-IDF",
+          "raw": 2.1064371972447122e-13,
+          "sig_bonferroni": true,
+          "sig_holm": true,
+          "sig_raw": true,
+          "t": 66.06363712841707
+        },
+        {
+          "bonferroni": 5.578425927587176e-11,
+          "higher": "MEIRA-no-xai",
+          "holm": 4.980737435345693e-11,
+          "lower": "TF-IDF",
+          "raw": 1.992294974138277e-12,
+          "sig_bonferroni": true,
+          "sig_holm": true,
+          "sig_raw": true,
+          "t": 51.4370400018895
+        },
+        {
+          "bonferroni": 1.2207680192667377e-09,
+          "higher": "MEIRA-full",
+          "holm": 8.283782987881435e-10,
+          "lower": "TF-IDF",
+          "raw": 4.359885783095492e-11,
+          "sig_bonferroni": true,
+          "sig_holm": true,
+          "sig_raw": true,
+          "t": 36.45115210787193
+        },
+        {
+          "bonferroni": 6.562992655347944e-05,
+          "higher": "ColBERT-like",
+          "holm": 2.3439259483385513e-05,
+          "lower": "Dense-IR",
+          "raw": 2.3439259483385513e-06,
+          "sig_bonferroni": true,
+          "sig_holm": true,
+          "sig_raw": true,
+          "t": 10.51942416943273
+        },
+        {
+          "bonferroni": 8.545038679544495e-06,
+          "higher": "MEIRA-no-memory",
+          "holm": 4.577699292613122e-06,
+          "lower": "Dense-IR",
+          "raw": 3.0517995284087483e-07,
+          "sig_bonferroni": true,
+          "sig_holm": true,
+          "sig_raw": true,
+          "t": 13.3693929264144
+        },
+        {
+          "bonferroni": 2.309512099744085e-05,
+          "higher": "MEIRA-no-decay",
+          "holm": 1.0722734748811823e-05,
+          "lower": "Dense-IR",
+          "raw": 8.248257499086017e-07,
+          "sig_bonferroni": true,
+          "sig_holm": true,
+          "sig_raw": true,
+          "t": 11.903433064288928
+        },
+        {
+          "bonferroni": 3.508514577600247e-05,
+          "higher": "MEIRA-no-xai",
+          "holm": 1.4922917190627325e-05,
+          "lower": "Dense-IR",
+          "raw": 1.2530409205715167e-06,
+          "sig_bonferroni": true,
+          "sig_holm": true,
+          "sig_raw": true,
+          "t": 11.331199506631927
+        },
+        {
+          "bonferroni": 3.865249740000749e-06,
+          "higher": "MEIRA-full",
+          "holm": 2.208714137143285e-06,
+          "lower": "Dense-IR",
+          "raw": 1.380446335714553e-07,
+          "sig_bonferroni": true,
+          "sig_holm": true,
+          "sig_raw": true,
+          "t": 14.655092619311448
+        },
+        {
+          "bonferroni": 0.0265684096454459,
+          "higher": "ColBERT-like",
+          "holm": 0.0023013992410776197,
+          "lower": "MEIRA-no-memory",
+          "raw": 0.0009488717730516393,
+          "sig_bonferroni": true,
+          "sig_holm": true,
+          "sig_raw": true,
+          "t": 4.818563757068723
+        },
+        {
+          "bonferroni": 0.02147972625005778,
+          "higher": "MEIRA-no-decay",
+          "holm": 0.0023013992410776197,
+          "lower": "ColBERT-like",
+          "raw": 0.0007671330803592065,
+          "sig_bonferroni": true,
+          "sig_holm": true,
+          "sig_raw": true,
+          "t": 4.972633597030409
+        },
+        {
+          "bonferroni": 0.003704919241879554,
+          "higher": "MEIRA-no-xai",
+          "holm": 0.000661592721764206,
+          "lower": "ColBERT-like",
+          "raw": 0.0001323185443528412,
+          "sig_bonferroni": true,
+          "sig_holm": true,
+          "sig_raw": true,
+          "t": 6.353556633957344
+        },
+        {
+          "bonferroni": 1.046154392785725e-05,
+          "higher": "MEIRA-full",
+          "holm": 5.230771963928625e-06,
+          "lower": "ColBERT-like",
+          "raw": 3.7362656885204466e-07,
+          "sig_bonferroni": true,
+          "sig_holm": true,
+          "sig_raw": true,
+          "t": 13.0584367197903
+        },
+        {
+          "bonferroni": 0.002006060028665331,
+          "higher": "MEIRA-no-decay",
+          "holm": 0.0004990017803504655,
+          "lower": "MEIRA-no-memory",
+          "raw": 7.164500102376183e-05,
+          "sig_bonferroni": true,
+          "sig_holm": true,
+          "sig_raw": true,
+          "t": 6.887717720324686
+        },
+        {
+          "bonferroni": 0.001996007121401862,
+          "higher": "MEIRA-no-xai",
+          "holm": 0.0004990017803504655,
+          "lower": "MEIRA-no-memory",
+          "raw": 7.128596862149507e-05,
+          "sig_bonferroni": true,
+          "sig_holm": true,
+          "sig_raw": true,
+          "t": 6.892217302518881
+        },
+        {
+          "bonferroni": 3.4820140111463754e-05,
+          "higher": "MEIRA-full",
+          "holm": 1.4922917190627325e-05,
+          "lower": "MEIRA-no-memory",
+          "raw": 1.243576432552277e-06,
+          "sig_bonferroni": true,
+          "sig_holm": true,
+          "sig_raw": true,
+          "t": 11.341354329539419
+        },
+        {
+          "bonferroni": 0.009270591621927735,
+          "higher": "MEIRA-no-xai",
+          "holm": 0.001324370231703962,
+          "lower": "MEIRA-no-decay",
+          "raw": 0.0003310925579259905,
+          "sig_bonferroni": true,
+          "sig_holm": true,
+          "sig_raw": true,
+          "t": 5.607470315419964
+        },
+        {
+          "bonferroni": 8.872113651856374e-05,
+          "higher": "MEIRA-full",
+          "holm": 2.85175081666812e-05,
+          "lower": "MEIRA-no-decay",
+          "raw": 3.1686120185201335e-06,
+          "sig_bonferroni": true,
+          "sig_holm": true,
+          "sig_raw": true,
+          "t": 10.146974454312646
+        },
+        {
+          "bonferroni": 0.0011506991166784003,
+          "higher": "MEIRA-full",
+          "holm": 0.0003287711761938287,
+          "lower": "MEIRA-no-xai",
+          "raw": 4.1096397024228585e-05,
+          "sig_bonferroni": true,
+          "sig_holm": true,
+          "sig_raw": true,
+          "t": 7.398568809660628
+        }
+      ]
+    }
+  },
+  "summary": {
+    "F1": {
+      "FIRE-AgentIR-2026": {
+        "bonferroni": 28,
+        "holm": 28,
+        "n_pairs": 28,
+        "raw": 28
+      },
+      "FIRE-CrossLingIR-2026": {
+        "bonferroni": 28,
+        "holm": 28,
+        "n_pairs": 28,
+        "raw": 28
+      }
+    },
+    "MAP": {
+      "FIRE-AgentIR-2026": {
+        "bonferroni": 26,
+        "holm": 28,
+        "n_pairs": 28,
+        "raw": 28
+      },
+      "FIRE-CrossLingIR-2026": {
+        "bonferroni": 27,
+        "holm": 28,
+        "n_pairs": 28,
+        "raw": 28
+      }
+    },
+    "MRR": {
+      "FIRE-AgentIR-2026": {
+        "bonferroni": 26,
+        "holm": 27,
+        "n_pairs": 28,
+        "raw": 27
+      },
+      "FIRE-CrossLingIR-2026": {
+        "bonferroni": 26,
+        "holm": 27,
+        "n_pairs": 28,
+        "raw": 27
+      }
+    },
+    "nDCG@10": {
+      "FIRE-AgentIR-2026": {
+        "bonferroni": 26,
+        "holm": 28,
+        "n_pairs": 28,
+        "raw": 28
+      },
+      "FIRE-CrossLingIR-2026": {
+        "bonferroni": 27,
+        "holm": 28,
+        "n_pairs": 28,
+        "raw": 28
+      }
     }
   },
   "unexpected": {
@@ -2697,15 +2697,15 @@
       "FIRE-AgentIR-2026": [],
       "FIRE-CrossLingIR-2026": []
     },
-    "nDCG@10": {
-      "FIRE-AgentIR-2026": [],
-      "FIRE-CrossLingIR-2026": []
-    },
     "MAP": {
       "FIRE-AgentIR-2026": [],
       "FIRE-CrossLingIR-2026": []
     },
     "MRR": {
+      "FIRE-AgentIR-2026": [],
+      "FIRE-CrossLingIR-2026": []
+    },
+    "nDCG@10": {
       "FIRE-AgentIR-2026": [],
       "FIRE-CrossLingIR-2026": []
     }

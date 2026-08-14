@@ -2,3 +2,4 @@ numpy>=1.24
 scipy>=1.10
 scikit-learn>=1.2
 matplotlib>=3.7
+bibtexparser>=1.1   # used by md2tex.py to map citations to paper_references.bib

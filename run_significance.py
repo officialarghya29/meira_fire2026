@@ -277,7 +277,7 @@ def main(args):
                                      "mean_std": {m: stat_desc(s) for m, s in res["series"].items()},
                                      "vs_full": res["vs_full"]}
                                 for ds, res in ds_results.items()}},
-                  f, indent=2)
+                  f, indent=2, sort_keys=True)
     print(f"  ✓ {stem}.json")
     fig_heatmaps(models, ds_results, args.metric, args.correction)
 

@@ -182,7 +182,7 @@ def main(args):
                           for met, dd in per_metric.items()}}
     json_path = os.path.join(RES_DIR, "correction_comparison.json")
     with open(json_path, "w") as f:
-        json.dump(out, f, indent=2)
+        json.dump(out, f, indent=2, sort_keys=True)
     print(f"  ✓ {os.path.basename(json_path)}")
 
     # ---------------- Markdown (paper-ready appendix) ----------------

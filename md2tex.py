@@ -470,6 +470,28 @@ def block_to_comments(text):
     return "\n".join(out)
 
 
+def block_trim_texts(blk):
+    """Return the apply_trims-ready text strings for a non-special block.
+
+    Prose blocks yield one single-space-joined string; numbered-list blocks
+    yield one string per item (item text plus its continuation lines). This
+    is the single source of truth shared by convert_section and the test
+    suite (tests/test_md2tex.py), so the trims-integrity test can never
+    drift from the converter's actual paragraph stream.
+    """
+    items, cur = [], None
+    for l in blk:
+        m = LIST_ITEM_RE.match(l)
+        if m:
+            cur = [m.group(2)]
+            items.append(cur)
+        elif cur is not None and l.strip():
+            cur.append(l.strip())
+    if len(items) >= 2:
+        return [" ".join(it) for it in items]
+    return [re.sub(r"\s*\n\s*", " ", "\n".join(blk).strip())]
+
+
 def convert_section(body_lines, out_path, title, label):
     lines = body_lines
     tables = locate_tables(lines)
@@ -574,26 +596,14 @@ def convert_section(body_lines, out_path, title, label):
             i = j
             continue  # caption consumed with its table
 
-        # numbered list with continuation lines
-        items = []
-        cur = None
-        for l in blk:
-            m = LIST_ITEM_RE.match(l)
-            if m:
-                cur = [m.group(2)]
-                items.append(cur)
-            elif cur is not None and l.strip():
-                cur.append(l.strip())
-        if len(items) >= 2:
+        texts = block_trim_texts(blk)
+        if len(texts) > 1:
             out.append("\\begin{enumerate}")
-            for it in items:
-                out.append("  \\item " + tex_inline(apply_trims(" ".join(it))))
+            for t in texts:
+                out.append("  \\item " + tex_inline(apply_trims(t)))
             out.append("\\end{enumerate}")
-            i = j
-            continue
-
-        joined = apply_trims(re.sub(r"\s*\n\s*", " ", para))
-        out.append(tex_inline(joined))
+        else:
+            out.append(tex_inline(apply_trims(texts[0])))
         i = j
         continue
 
@@ -778,12 +788,18 @@ def split_sections(md):
     return chunks, order
 
 
-def main():
-    with open(MD_PATH) as f:
-        md = f.read()
-    chunks, order = split_sections(md)
+def extract_abstract(chunks):
+    """Parse the Abstract section into (primary_body, blurb_body, warnings).
 
-    # ---- abstract ---------------------------------------------------------
+    `primary_body` is the single-space-joined, de-hyphenated text of the
+    "Primary variant (submission abstract)" paragraph - the text rendered in
+    the compiled paper's \\begin{abstract} block. `blurb_body` is the
+    optional short "Tight blurb" variant (kept for CfP submissions).
+
+    Warnings are returned (not printed) so callers and tests can inspect
+    them; md2tex.main() prints them.
+    """
+    warnings = []
     abs_paras = [p.strip() for p in re.split(r"\n\s*\n", "\n".join(chunks.get("Abstract", [])))
                   if p.strip()]
     primary, blurb, mode = [], [], None
@@ -799,19 +815,35 @@ def main():
         elif mode == "blurb":
             blurb.append(p)
     if not primary:
-        print("WARN: no '**Primary variant' abstract paragraph found - "
-              "the \\begin{abstract} block will be EMPTY. Check the "
-              "Abstract section of paper_full_draft.md.")
-    abs_body = " ".join(primary)
-    abs_body = re.sub(r"-\s*\n\s*", "-", abs_body)   # de-hyphenate wrapped lines
-    abs_body = re.sub(r"\s*\n\s*", " ", abs_body)
-    abstract_tex = tex_inline(abs_body)
+        warnings.append("no '**Primary variant' abstract paragraph found - "
+                        "the \\begin{abstract} block will be EMPTY. Check the "
+                        "Abstract section of paper_full_draft.md.")
     # safety net: trims do not apply to the abstract - flag any overlap so a
     # future markdown edit cannot silently leave abstract/body text divergent
     for name, old, _ in TRIMS:
         if old in " ".join(primary):
-            print(f"WARN: trim '{name}' also matches abstract text "
-                  "(abstract bypasses trims - check consistency)")
+            warnings.append(f"trim '{name}' also matches abstract text "
+                            "(abstract bypasses trims - check consistency)")
+
+    def _join(paras):
+        body = " ".join(paras)
+        body = re.sub(r"-\s*\n\s*", "-", body)   # de-hyphenate wrapped lines
+        body = re.sub(r"\s*\n\s*", " ", body)
+        return body
+
+    return _join(primary), _join(blurb), warnings
+
+
+def main():
+    with open(MD_PATH) as f:
+        md = f.read()
+    chunks, order = split_sections(md)
+
+    # ---- abstract ---------------------------------------------------------
+    primary_body, blurb_body, abs_warnings = extract_abstract(chunks)
+    for w in abs_warnings:
+        print("WARN: " + w)
+    abstract_tex = tex_inline(primary_body)
 
     # ---- front-matter drafting notes --------------------------------------
     front_comment = block_to_comments("\n".join(chunks.get("FRONT", [])))

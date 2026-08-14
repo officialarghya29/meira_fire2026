@@ -303,7 +303,8 @@ def main(args):
 
     with open(os.path.join(RES_DIR, "sota.json"), "w") as f:
         json.dump({"results": results, "significance": sig,
-                    "config": {"seeds": seeds, "models": SOTA_MODELS}}, f, indent=2)
+                    "config": {"seeds": seeds, "models": SOTA_MODELS}}, f, indent=2,
+                    sort_keys=True)
     write_markdown_table(results, sig, os.path.join(RES_DIR, "sota_table.md"))
 
     print("\n" + "="*70)

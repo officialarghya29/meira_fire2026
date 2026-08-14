@@ -403,7 +403,7 @@ def main(args):
         "config": {"k": args.k, "seeds": seeds, "models": models_to_test},
     }
     with open(os.path.join(RES_DIR, "experiments.json"), "w") as f:
-        json.dump(output, f, indent=2)
+        json.dump(output, f, indent=2, sort_keys=True)
     print(f"\n  Results → {RES_DIR}/experiments.json")
 
     # ── Print summary table ────────────────────────────────────────

@@ -202,7 +202,7 @@ def main(args):
            "sensitive_pairs": sensitive}
     json_path = os.path.join(RES_DIR, "alpha_sweep.json")
     with open(json_path, "w") as f:
-        json.dump(out, f, indent=2)
+        json.dump(out, f, indent=2, sort_keys=True)
     print(f"  ✓ {os.path.basename(json_path)}")
 
     # ---------------- Markdown (paper-ready) ----------------

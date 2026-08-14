@@ -1,6 +1,18 @@
 {
   "config": {
+    "correction": "bonferroni",
     "k": 10,
+    "metric": "F1",
+    "models": [
+      "BM25",
+      "TF-IDF",
+      "Dense-IR",
+      "ColBERT-like",
+      "MEIRA-no-memory",
+      "MEIRA-no-decay",
+      "MEIRA-no-xai",
+      "MEIRA-full"
+    ],
     "seeds": [
       42,
       43,
@@ -12,22 +24,20 @@
       49,
       50,
       51
-    ],
-    "models": [
-      "BM25",
-      "TF-IDF",
-      "Dense-IR",
-      "ColBERT-like",
-      "MEIRA-no-memory",
-      "MEIRA-no-decay",
-      "MEIRA-no-xai",
-      "MEIRA-full"
-    ],
-    "metric": "F1",
-    "correction": "bonferroni"
+    ]
   },
   "datasets": {
     "FIRE-AgentIR-2026": {
+      "mean_std": {
+        "BM25": "0.491\u00b10.016",
+        "ColBERT-like": "0.740\u00b10.013",
+        "Dense-IR": "0.650\u00b10.017",
+        "MEIRA-full": "0.826\u00b10.014",
+        "MEIRA-no-decay": "0.748\u00b10.012",
+        "MEIRA-no-memory": "0.716\u00b10.014",
+        "MEIRA-no-xai": "0.777\u00b10.013",
+        "TF-IDF": "0.480\u00b10.017"
+      },
       "p_matrix": [
         [
           1.0,
@@ -274,62 +284,62 @@
           0.0
         ]
       ],
-      "mean_std": {
-        "BM25": "0.491\u00b10.016",
-        "TF-IDF": "0.480\u00b10.017",
-        "Dense-IR": "0.650\u00b10.017",
-        "ColBERT-like": "0.740\u00b10.013",
-        "MEIRA-no-memory": "0.716\u00b10.014",
-        "MEIRA-no-decay": "0.748\u00b10.012",
-        "MEIRA-no-xai": "0.777\u00b10.013",
-        "MEIRA-full": "0.826\u00b10.014"
-      },
       "vs_full": {
         "BM25": {
           "F1": 0.0,
-          "nDCG@10": 0.0,
           "MAP": 0.0,
-          "MRR": 0.0
-        },
-        "TF-IDF": {
-          "F1": 0.0,
-          "nDCG@10": 0.0,
-          "MAP": 0.0,
-          "MRR": 0.0
-        },
-        "Dense-IR": {
-          "F1": 0.0,
-          "nDCG@10": 0.0,
-          "MAP": 0.0,
-          "MRR": 1e-06
+          "MRR": 0.0,
+          "nDCG@10": 0.0
         },
         "ColBERT-like": {
           "F1": 0.0,
-          "nDCG@10": 0.0,
           "MAP": 0.0,
-          "MRR": 2e-06
+          "MRR": 2e-06,
+          "nDCG@10": 0.0
         },
-        "MEIRA-no-memory": {
+        "Dense-IR": {
           "F1": 0.0,
-          "nDCG@10": 1e-06,
           "MAP": 0.0,
-          "MRR": 3e-06
+          "MRR": 1e-06,
+          "nDCG@10": 0.0
         },
         "MEIRA-no-decay": {
           "F1": 0.0,
-          "nDCG@10": 1e-06,
           "MAP": 1e-06,
-          "MRR": 5e-06
+          "MRR": 5e-06,
+          "nDCG@10": 1e-06
+        },
+        "MEIRA-no-memory": {
+          "F1": 0.0,
+          "MAP": 0.0,
+          "MRR": 3e-06,
+          "nDCG@10": 1e-06
         },
         "MEIRA-no-xai": {
           "F1": 0.0,
-          "nDCG@10": 8e-06,
           "MAP": 5e-06,
-          "MRR": 6.1e-05
+          "MRR": 6.1e-05,
+          "nDCG@10": 8e-06
+        },
+        "TF-IDF": {
+          "F1": 0.0,
+          "MAP": 0.0,
+          "MRR": 0.0,
+          "nDCG@10": 0.0
         }
       }
     },
     "FIRE-CrossLingIR-2026": {
+      "mean_std": {
+        "BM25": "0.464\u00b10.011",
+        "ColBERT-like": "0.680\u00b10.029",
+        "Dense-IR": "0.591\u00b10.026",
+        "MEIRA-full": "0.780\u00b10.030",
+        "MEIRA-no-decay": "0.694\u00b10.027",
+        "MEIRA-no-memory": "0.655\u00b10.030",
+        "MEIRA-no-xai": "0.726\u00b10.029",
+        "TF-IDF": "0.454\u00b10.008"
+      },
       "p_matrix": [
         [
           1.0,
@@ -576,58 +586,48 @@
           0.0
         ]
       ],
-      "mean_std": {
-        "BM25": "0.464\u00b10.011",
-        "TF-IDF": "0.454\u00b10.008",
-        "Dense-IR": "0.591\u00b10.026",
-        "ColBERT-like": "0.680\u00b10.029",
-        "MEIRA-no-memory": "0.655\u00b10.030",
-        "MEIRA-no-decay": "0.694\u00b10.027",
-        "MEIRA-no-xai": "0.726\u00b10.029",
-        "MEIRA-full": "0.780\u00b10.030"
-      },
       "vs_full": {
         "BM25": {
           "F1": 0.0,
-          "nDCG@10": 0.0,
           "MAP": 0.0,
-          "MRR": 0.0
-        },
-        "TF-IDF": {
-          "F1": 0.0,
-          "nDCG@10": 0.0,
-          "MAP": 0.0,
-          "MRR": 0.0
-        },
-        "Dense-IR": {
-          "F1": 0.0,
-          "nDCG@10": 4e-06,
-          "MAP": 4e-06,
-          "MRR": 2e-06
+          "MRR": 0.0,
+          "nDCG@10": 0.0
         },
         "ColBERT-like": {
           "F1": 0.0,
-          "nDCG@10": 1e-05,
           "MAP": 9e-06,
-          "MRR": 2.4e-05
+          "MRR": 2.4e-05,
+          "nDCG@10": 1e-05
         },
-        "MEIRA-no-memory": {
+        "Dense-IR": {
           "F1": 0.0,
-          "nDCG@10": 3.5e-05,
-          "MAP": 4e-05,
-          "MRR": 1.7e-05
+          "MAP": 4e-06,
+          "MRR": 2e-06,
+          "nDCG@10": 4e-06
         },
         "MEIRA-no-decay": {
           "F1": 0.0,
-          "nDCG@10": 8.9e-05,
           "MAP": 7e-05,
-          "MRR": 0.000196
+          "MRR": 0.000196,
+          "nDCG@10": 8.9e-05
+        },
+        "MEIRA-no-memory": {
+          "F1": 0.0,
+          "MAP": 4e-05,
+          "MRR": 1.7e-05,
+          "nDCG@10": 3.5e-05
         },
         "MEIRA-no-xai": {
           "F1": 0.0,
-          "nDCG@10": 0.001151,
           "MAP": 0.000739,
-          "MRR": 0.004103
+          "MRR": 0.004103,
+          "nDCG@10": 0.001151
+        },
+        "TF-IDF": {
+          "F1": 0.0,
+          "MAP": 0.0,
+          "MRR": 0.0,
+          "nDCG@10": 0.0
         }
       }
     }

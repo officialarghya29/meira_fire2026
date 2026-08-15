@@ -702,6 +702,8 @@ Agentic and Cross-Lingual Information Retrieval}}
 
 % --- Conference / copyright metadata (camera-ready; replace DOI/ISBN with the
 % publisher-assigned values before final submission) --------------------------
+\\settopmatter{{printacmref=false}}   % do not print the auto-generated
+                                  % "ACM Reference Format" citation block
 \\setcopyright{{acmcopyright}}
 \\copyrightyear{{2026}}
 \\acmYear{{2026}}

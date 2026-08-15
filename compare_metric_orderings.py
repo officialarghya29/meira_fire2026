@@ -197,11 +197,13 @@ def fig_ordering_stability(ds_results, models, tag, method="holm"):
     # ~100px of slack between rows and crush the panels). Gaps sized for the
     # real text extents: bottom=0.17 reserves the legend band; the row gap
     # (hspace) clears the x labels and colorbar end ticks; explicit colorbar
-    # ticks avoid 0.0/10.0 overhang labels. TUNED to the current data/fonts -
-    # re-run audit_figures.py after any data, seed, or font change.
+    # ticks avoid 0.0/10.0 overhang labels. wspace=0.45 keeps the rank-matrix
+    # row labels (model names, ~94px at fontsize 7) clear of the parallel-
+    # coordinates panel to its left. TUNED to the current data/fonts - re-run
+    # audit_figures.py after any data, seed, or font change.
     fig = plt.figure(figsize=(7.2, 3.50))
     gs = fig.add_gridspec(n_ds, 2, left=0.09, right=0.975, top=0.87,
-                          bottom=0.17, wspace=0.14, hspace=0.42)
+                          bottom=0.17, wspace=0.45, hspace=0.42)
     axes = [[fig.add_subplot(gs[di, ci]) for ci in range(2)]
             for di in range(n_ds)]
     fig.suptitle("Model-Ordering Stability Across Metrics (Holm-corrected)",

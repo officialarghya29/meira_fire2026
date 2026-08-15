@@ -14,6 +14,9 @@ generating functions, instruments matplotlib's Text objects, and measures:
   6. data text overlapping data lines in the same axes (text_line;
      e.g. a caption drawn through a polyline - only labeled Line2D
      artists are considered, so gridlines/errorbar caps are skipped)
+  7. text (including tick/axis labels) bleeding into a NEIGHBORING axes
+     (into_neighbor; e.g. a rank-matrix row label overlapping the
+     parallel-coordinates panel to its left)
 
 Measurement happens on the normal canvas BEFORE the tight-bbox savefig re-
 renders at a different size, and text records are reset per figure so stale
@@ -87,7 +90,8 @@ def audit(fig, name):
     r = fig.canvas.get_renderer()
     W, H = fig.canvas.get_width_height()
     issues = {"text_text": [], "clip": [], "title_overflow": [],
-              "beyond_axes": [], "text_bar": [], "text_line": []}
+              "beyond_axes": [], "text_bar": [], "text_line": [],
+              "into_neighbor": []}
 
     # texts whose position outside the axes is intentional
     intentional = set()
@@ -184,6 +188,43 @@ def audit(fig, name):
                              repr(ln.get_label())[:18],
                              round(tb.height, 1)))
                         break
+
+    # text (incl. tick/axis labels) bleeding into a different axes' box.
+    # Tick labels from set_xticklabels/set_yticklabels can have .axes == None
+    # (they are not added via add_artist), so we build an explicit owner map
+    # from the axes' own artist lists instead of trusting Text.axes.
+    owner = {}
+    for ax in fig.axes:
+        arts = [ax.title, ax.xaxis.label, ax.yaxis.label]
+        try:
+            arts += list(ax.get_xticklabels()) + list(ax.get_yticklabels())
+        except Exception:
+            pass
+        arts += list(ax.texts)
+        leg = ax.get_legend()
+        if leg is not None:
+            try:
+                arts += list(leg.get_texts())
+            except Exception:
+                pass
+        for a in arts:
+            owner[id(a)] = ax
+    aboxes = {ax: ax.get_window_extent(r) for ax in fig.axes}
+    for t, tb in boxes:
+        ax = owner.get(id(t))
+        if ax is None or ax not in aboxes:
+            continue
+        for ax2, a2 in aboxes.items():
+            if ax2 is ax:
+                continue
+            ix = min(tb.x1, a2.x1) - max(tb.x0, a2.x0)
+            iy = min(tb.y1, a2.y1) - max(tb.y0, a2.y0)
+            if ix > 0.5 and iy > 0.5 and ix * iy > 4:
+                issues["into_neighbor"].append(
+                    (repr(t.get_text())[:24], _role_of(t, fig),
+                     repr(ax2.title.get_text())[:26] or "untitled",
+                     round(ix, 1), round(iy, 1)))
+                break
 
     print(f"\n===== {name} =====  (canvas {W}x{H}, non-empty texts {len(boxes)})")
     n_bad = 0

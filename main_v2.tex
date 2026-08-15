@@ -13,10 +13,10 @@
 %   * alt text for figures/tables is strongly encouraged
 %   * disclose any AI-assisted writing per ACM policy (see "Use of Generative AI")
 %
-% Compile (4 passes for correct refs/citations):
-%   pdflatex main && bibtex main && pdflatex main && pdflatex main
-% or: latexmk -pdf main.tex
-% or (from this directory): tectonic main.tex
+% Compile (4 passes for correct refs/citations) from the repo root:
+%   pdflatex main_v2 && bibtex main_v2 && pdflatex main_v2 && pdflatex main_v2
+% or: latexmk -pdf main_v2.tex
+% or (from this directory): tectonic main_v2.tex
 %
 % Submissions:
 %   * Regular / Perspective tracks -> double-blind: keep `anonymous=true`
@@ -193,12 +193,12 @@ Multi-turn agentic information retrieval --- retrieving relevant documents given
 
 \maketitle
 
-\input{sections/sec01_introduction}
-\input{sections/sec02_related_work}
-\input{sections/sec03_datasets}
-\input{sections/sec04_results}
-\input{sections/sec05_robustness}
-\input{sections/sec06_conclusion}
+\input{latex/sections/sec01_introduction}
+\input{latex/sections/sec02_related_work}
+\input{latex/sections/sec03_datasets}
+\input{latex/sections/sec04_results}
+\input{latex/sections/sec05_robustness}
+\input{latex/sections/sec06_conclusion}
 
 % references start on a fresh page: the 9-page content limit excludes them,
 % and a clean page break keeps the last content page from overflowing

@@ -26,7 +26,9 @@ def check(cond, msg):
 
 
 # ---- 1+2: labels and references --------------------------------------------
-aux = open(os.path.join(LATEX, "main.aux")).read()
+# main_v2.tex is compiled from the repo ROOT, so the aux lands there.
+ROOT = os.path.dirname(LATEX)
+aux = open(os.path.join(ROOT, "main_v2.aux")).read()
 defined = set(re.findall(r"\\newlabel\{([^}]+)\}", aux))
 refs = set()
 for fn in os.listdir(os.path.join(LATEX, "sections")):

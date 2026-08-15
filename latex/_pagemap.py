@@ -5,8 +5,10 @@ import re
 import sys
 
 LATEX = os.path.dirname(os.path.abspath(__file__))
+ROOT = os.path.dirname(LATEX)
 
-aux = open(os.path.join(LATEX, "main.aux")).read()
+# main_v2.tex is compiled from the repo ROOT, so the aux lands there.
+aux = open(os.path.join(ROOT, "main_v2.aux")).read()
 # \newlabel{name}{{refnum}{page}}...
 labels = {}
 for m in re.finditer(r"\\newlabel\{([^}]+)\}\{\{([^}]*)\}\{(\d+)\}", aux):

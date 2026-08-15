@@ -3,7 +3,7 @@
 Target: ACM ICPS "sigconf" (acmart) template as required by the FIRE 2026 CFP
 (https://fire.irsi.org.in/fire/2026/call_for_papers). Produces:
 
-    latex/main.tex                      - documentclass, title, CCS, keywords,
+    main_v2.tex (repo root)            - documentclass, title, CCS, keywords,
                                           abstract, \\input of the sections,
                                           bibliography
     latex/sections/sec01_..sec06.tex    - the six converted section files
@@ -435,7 +435,8 @@ def convert_figure(alt, path, attrs):
     """Convert a markdown image line into a full-width figure* environment.
     The alt text doubles as the caption (ACM TAPS encourages alt text); the
     {#label} attribute becomes the \\label. Image paths are project-relative
-    (figures/...) and rewritten to ../figures/... for the latex/ build dir."""
+    (figures/...) and kept as-is: the paper is compiled from the repo ROOT
+    (main_v2.tex), so includegraphics resolves them against the project root."""
     label = ""
     if attrs:
         m = re.search(r"#([A-Za-z0-9:_-]+)", attrs)
@@ -445,8 +446,8 @@ def convert_figure(alt, path, attrs):
         print(f"WARN: figure file not found: {path}")
     if not path.startswith("figures/"):
         print(f"WARN: image path not under figures/: {path} "
-              "(includegraphics resolves relative to the latex/ build dir)")
-    tex_path = "../" + path if path.startswith("figures/") else path
+              "(includegraphics resolves relative to the repo root)")
+    tex_path = path
     body = [r"\begin{figure*}[tb]", r"\centering",
             # 0.94\textwidth (not full width): the three figures were sized
             # for nominal font rendering at full width; this small reduction
@@ -629,7 +630,7 @@ def display_math(formula):
 
 
 # ---------------------------------------------------------------------------
-# main.tex
+# main_v2.tex
 # ---------------------------------------------------------------------------
 def render_main(abstract_tex, front_comment, inputs):
     return f"""% ============================================================================
@@ -647,10 +648,10 @@ def render_main(abstract_tex, front_comment, inputs):
 %   * alt text for figures/tables is strongly encouraged
 %   * disclose any AI-assisted writing per ACM policy (see "Use of Generative AI")
 %
-% Compile (4 passes for correct refs/citations):
-%   pdflatex main && bibtex main && pdflatex main && pdflatex main
-% or: latexmk -pdf main.tex
-% or (from this directory): tectonic main.tex
+% Compile (4 passes for correct refs/citations) from the repo root:
+%   pdflatex main_v2 && bibtex main_v2 && pdflatex main_v2 && pdflatex main_v2
+% or: latexmk -pdf main_v2.tex
+% or (from this directory): tectonic main_v2.tex
 %
 % Submissions:
 %   * Regular / Perspective tracks -> double-blind: keep `anonymous=true`
@@ -895,10 +896,14 @@ def main():
         fname, title, label = sec_map[name]
         convert_section(chunks[name], os.path.join(SECDIR, fname + ".tex"), title, label)
 
-    inputs = "\n".join(r"\input{sections/" + sec_map[s][0] + "}" for s in names)
-    with open(os.path.join(OUTDIR, "main.tex"), "w") as f:
+    # main_v2.tex is the canonical entry and lives at the repo ROOT (the
+    # compiled job runs from ROOT, so section inputs carry the latex/ prefix
+    # and figure paths stay root-relative figures/...).
+    inputs = "\n".join(r"\input{latex/sections/" + sec_map[s][0] + "}" for s in names)
+    main_path = os.path.join(ROOT, "main_v2.tex")
+    with open(main_path, "w") as f:
         f.write(render_main(abstract_tex, front_comment, inputs))
-    print("wrote", os.path.join(OUTDIR, "main.tex"))
+    print("wrote", main_path)
 
     shutil.copy(BIB_SRC, os.path.join(OUTDIR, "paper_references.bib"))
     print("copied", os.path.join(OUTDIR, "paper_references.bib"))
@@ -915,7 +920,7 @@ def main():
           "| uncited bib keys:", uncited or "none")
     report_trims()
     # make \nocite explicit (a \nocite{*} would pull any future bib entries)
-    main_path = os.path.join(OUTDIR, "main.tex")
+    main_path = os.path.join(ROOT, "main_v2.tex")
     txt = open(main_path).read()
     if uncited:
         txt = txt.replace("% @@NOCITE@@",

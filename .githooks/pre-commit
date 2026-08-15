@@ -29,8 +29,8 @@ if [ "${SKIP_PAPER:-0}" != "1" ]; then
     echo "== [pre-commit] paper build (md2tex + tectonic) =="
     "$PY" md2tex.py >/tmp/precommit_md2tex.log 2>&1 || {
       echo "FAIL: md2tex - see /tmp/precommit_md2tex.log"; exit 1; }
-    ( cd latex && "$TECTONIC" main.tex --keep-intermediates \
-        >/tmp/precommit_tex.log 2>&1 ) || {
+    "$TECTONIC" main_v2.tex --keep-intermediates \
+        >/tmp/precommit_tex.log 2>&1 || {
       echo "FAIL: tectonic build - see /tmp/precommit_tex.log"; exit 1; }
     if grep -q "Overfull" /tmp/precommit_tex.log; then
       echo "FAIL: overfull boxes - see /tmp/precommit_tex.log"; exit 1; fi

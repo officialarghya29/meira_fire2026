@@ -11,6 +11,9 @@ generating functions, instruments matplotlib's Text objects, and measures:
      legend texts are intentional and excluded)
   5. text drawn on top of bar patches (text_bar; multi-segment error-bar
      lines are excluded - their bounding box spans every bar)
+  6. data text overlapping data lines in the same axes (text_line;
+     e.g. a caption drawn through a polyline - only labeled Line2D
+     artists are considered, so gridlines/errorbar caps are skipped)
 
 Measurement happens on the normal canvas BEFORE the tight-bbox savefig re-
 renders at a different size, and text records are reset per figure so stale
@@ -31,11 +34,13 @@ import json
 import os
 import sys
 
+import numpy as np
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 from matplotlib.figure import Figure
 import matplotlib.text
+from matplotlib.path import Path
 
 BASE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, BASE)
@@ -82,7 +87,7 @@ def audit(fig, name):
     r = fig.canvas.get_renderer()
     W, H = fig.canvas.get_width_height()
     issues = {"text_text": [], "clip": [], "title_overflow": [],
-              "beyond_axes": [], "text_bar": []}
+              "beyond_axes": [], "text_bar": [], "text_line": []}
 
     # texts whose position outside the axes is intentional
     intentional = set()
@@ -153,6 +158,32 @@ def audit(fig, name):
                 if ix > 0.5 and iy > 0.5 and ix * iy > 9:
                     issues["text_bar"].append((repr(t.get_text())[:24],
                                                round(ix * iy, 1)))
+
+    # data text overlapping data lines (labeled Line2D only: excludes
+    # gridlines and errorbar cap segments)
+    for ax in fig.axes:
+        lines = [ln for ln in ax.lines
+                 if isinstance(ln, matplotlib.lines.Line2D)
+                 and ln.get_label() and not ln.get_label().startswith("_")]
+        if not lines:
+            continue
+        for t, tb in boxes:
+            if getattr(t, "axes", None) is not ax or id(t) in intentional:
+                continue
+            for ln in lines:
+                try:
+                    pts = ax.transData.transform(
+                        np.column_stack([ln.get_xdata(), ln.get_ydata()]))
+                except Exception:
+                    continue
+                for (x0, y0), (x1, y1) in zip(pts[:-1], pts[1:]):
+                    seg = Path([(x0, y0), (x1, y1)])
+                    if seg.intersects_bbox(tb, filled=False):
+                        issues["text_line"].append(
+                            (repr(t.get_text())[:24], _role_of(t, fig),
+                             repr(ln.get_label())[:18],
+                             round(tb.height, 1)))
+                        break
 
     print(f"\n===== {name} =====  (canvas {W}x{H}, non-empty texts {len(boxes)})")
     n_bad = 0

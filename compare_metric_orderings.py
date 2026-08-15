@@ -199,9 +199,9 @@ def fig_ordering_stability(ds_results, models, tag, method="holm"):
     # (hspace) clears the x labels and colorbar end ticks; explicit colorbar
     # ticks avoid 0.0/10.0 overhang labels. TUNED to the current data/fonts -
     # re-run audit_figures.py after any data, seed, or font change.
-    fig = plt.figure(figsize=(7.2, 3.30))
+    fig = plt.figure(figsize=(7.2, 3.50))
     gs = fig.add_gridspec(n_ds, 2, left=0.09, right=0.975, top=0.87,
-                          bottom=0.17, wspace=0.14, hspace=0.50)
+                          bottom=0.17, wspace=0.14, hspace=0.42)
     axes = [[fig.add_subplot(gs[di, ci]) for ci in range(2)]
             for di in range(n_ds)]
     fig.suptitle("Model-Ordering Stability Across Metrics (Holm-corrected)",
@@ -234,8 +234,12 @@ def fig_ordering_stability(ds_results, models, tag, method="holm"):
             handles, labels = ax.get_legend_handles_labels()
         ax.set_xticks(x); ax.set_xticklabels(METRICS, fontsize=8)
         ax.set_yticks(range(1, len(models) + 1))
-        ax.tick_params(axis="y", labelsize=8)   # 1..8 ranks in a short panel
-        ax.set_ylim(len(models) + 0.5, 0.5)   # rank 1 on top
+        # labelsize 7 so the 8 rank digits clear each other once the panel
+        # carries the extra bottom headroom (audit: text_text=0)
+        ax.tick_params(axis="y", labelsize=7)
+        # Extra bottom headroom keeps the rank-8 (last) line clear of the
+        # italic status caption below it (audit_figures.py: text_vs_line=0).
+        ax.set_ylim(len(models) + 2.0, 0.5)   # rank 1 on top
         ax.set_ylabel("Rank (1 = best)")
         ax.grid(True, axis="y", alpha=0.6)
         ds_short = ds_name.split('-')[1] if '-' in ds_name else ds_name
@@ -243,8 +247,10 @@ def fig_ordering_stability(ds_results, models, tag, method="holm"):
                      color=PALETTE["primary"], fontweight="bold")
         msg = ("identical ranking across metrics — no crossings"
                if stable else "orderings differ across metrics")
-        ax.text(0.02, 0.05, msg, transform=ax.transAxes, fontsize=7,
-                color=PALETTE["neutral"], style="italic")
+        # va="bottom" + y=0.065 anchors the caption below the rank-8 line
+        # (line sits at 2.0/9.5 ≈ 0.21 of the panel height) with a clear gap.
+        ax.text(0.02, 0.065, msg, transform=ax.transAxes, fontsize=7,
+                va="bottom", color=PALETTE["neutral"], style="italic")
 
         ax2 = axes[di][1]
         mat = np.array([[res["rank"][met][m] for met in METRICS] for m in order])

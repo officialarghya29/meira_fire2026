@@ -4,7 +4,7 @@
 \subsection{Benchmark datasets}
 \label{sec:datasets-benchmarks}
 
-We evaluate on two synthetic-but-realistic IR benchmarks built to mirror the task conventions of FIRE / ACM SIGIR tracks: \textbf{FIRE-AgentIR-2026} (multi-turn agentic conversation retrieval) and \textbf{FIRE-CrossLingIR-2026} (cross-lingual / Indian-language retrieval). Both are generated programmatically with a fixed seed (42) and expose a unified \texttt{IRSample} API (token ids, attention mask, label, conversation id, turn, hard-negative flag), so every downstream script --- k-fold cross-validation, multi-seed evaluation, ablation, and the SOTA comparison --- runs identically on either dataset.
+We evaluate on two synthetic-but-realistic IR benchmarks built to mirror the task conventions of FIRE / ACM SIGIR tracks: \textbf{FIRE-AgentIR-2026} (multi-turn agentic conversation retrieval) and \textbf{FIRE-CrossLingIR-2026} (cross-lingual / Indian-language retrieval). Both are generated programmatically with a fixed seed (42) and expose a unified \texttt{IRSample} API (token ids, attention mask, label, conversation id, turn, hard-negative flag), so every downstream script (k-fold, multi-seed, ablation, SOTA) runs identically on either dataset.
 
 \subsubsection{FIRE-AgentIR-2026}
 
@@ -56,11 +56,11 @@ Text is tokenised with a fixed, deterministically-assigned vocabulary of 30,522 
 
 \textbf{Data splits.} Both datasets expose the same utilities: stratified by class into train / validation / test at \textbf{70 / 15 / 15}, re-seeded per evaluation seed; the k-fold experiment uses stratified \textbf{k-fold cross-validation} (k = 10).
 
-\textbf{Evaluation seeds.} All multi-seed experiments use seeds 42--51 (ten). For each seed, models are scored on the held-out \textbf{test} partition of that seed's stratified split ($\approx$15\% of each class: $\approx$1,260 samples per seed for FIRE-AgentIR-2026, $\approx$480 for FIRE-CrossLingIR-2026); the k-fold experiment scores each of the 10 folds once (seed 42 + fold index). Reported values are \textbf{mean $\pm$ std across the ten seeds} (or folds).
+\textbf{Evaluation seeds.} All multi-seed experiments use seeds 42--51 (ten). For each seed, models are scored on the held-out \textbf{test} partition of that seed's stratified split ($\approx$15\% of each class); the k-fold experiment scores each of the 10 folds once (seed 42 + fold index). Reported values are \textbf{mean $\pm$ std across the ten seeds} (or folds).
 
 \textbf{Query pooling.} Ranked metrics are computed at the conversation level: each conversation is one query whose candidate pool (one positive and three negatives per turn) is ranked by the model's relevance scores, so the ranked metrics reflect real retrieval lists rather than instance-level classification.
 
-\textbf{Outputs.} Every script archives results to a configuration-named subfolder (\texttt{results/k10\_s10/} for the robustness suite; \texttt{results/s10/} for the SOTA and ablation runs) so configurations never overwrite each other.
+\textbf{Outputs.} Every script archives results to a configuration-named subfolder (\texttt{results/k10\_s10/}, \texttt{results/s10/}) so configurations never overwrite each other.
 
 \subsection{Metrics}
 \label{sec:datasets-metrics}

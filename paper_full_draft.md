@@ -721,6 +721,7 @@ sensitivity.
 | **MEIRA-no-decay** (− Temporal decay) | 0.694±0.027 | 0.866±0.021 | 0.937±0.011 | 0.911±0.015 | 0.511±0.015 | 0.865±0.011 | 1.000±0.000 |
 
 **Table 6. Ablation, FIRE-CrossLingIR-2026. Mean ± std over 10 seeds.**
+
 Δ vs full (component contribution; AgentIR / CrossLingIR):
 
 | Removed component | F1 | AUC | nDCG@10 | MAP | MRR | XAIR@10 | MDS |
@@ -823,6 +824,7 @@ pair-instances are enumerated in Table 9.
 **Table 8. Significant pairwise comparisons (of 28) at α = 0.05 under each
 correction, per dataset × metric. "lost" = significant under Holm but not
 under Bonferroni.**
+
 The eight lost pair-instances belong to exactly two comparison families —
 **BM25 vs TF-IDF** (the two classical baselines) and **MEIRA-no-decay vs
 ColBERT-like** (the strongest ablation variant against the strongest
@@ -841,6 +843,7 @@ neural baseline) — and never involve MEIRA-full:
 
 **Table 9. The eight pair-instances that are significant under Holm but not
 under Bonferroni at α = 0.05.**
+
 The important observation is what is **not** in Table 9. Every comparison
 involving **MEIRA-full — including MEIRA-full vs the best baseline
 ColBERT-like — remains significant at p < 0.0001 even after Bonferroni

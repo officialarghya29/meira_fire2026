@@ -1257,5 +1257,161 @@ TRIMS = [
      "robustness result rather than a caveat.",
      "- **XAIR weight sensitivity.** Sweep w to make limitation 7 a "
      "robustness result."),
+
+    # ---- 2026-08: reclaim the page taken by the camera-ready author block ---
+    ("5.1 setup compress",
+     "For each dataset and each of the four headline metrics (F1, nDCG@10, "
+     "MAP, MRR), we run the two-sided paired t-test across the ten "
+     "evaluation seeds (df = 9) for **every pair of the eight models** (the "
+     "direction of each difference is given by the sign of the t-statistic) "
+     "— 28 comparisons per dataset × metric, 224 in total. Because all "
+     "models are scored on the same per-seed test splits, the comparisons "
+     "are naturally paired and the t-statistic preserves direction (the "
+     "higher-mean model appears on the left of each reported inequality).",
+     "For each dataset and headline metric (F1, nDCG@10, MAP, MRR) we run "
+     "the two-sided paired t-test across the ten seeds (df = 9) for **every "
+     "pair of the eight models** — 28 comparisons per dataset × metric, 224 "
+     "in total. Because all models share the same per-seed test splits, the "
+     "comparisons are naturally paired and the t-statistic preserves "
+     "direction (the higher-mean model appears on the left of each "
+     "inequality)."),
+    ("5.1 holm tighten",
+     "Holm applies its smallest multipliers (1–2) to the largest raw "
+     "p-values, so the marginal comparisons (raw p ≈ 0.002–0.046) still "
+     "land below α (e.g. MRR on AgentIR: p = 0.0236 → 0.0472), while all "
+     "remaining comparisons have raw p ≤ 0.001.",
+     "Holm applies its smallest multipliers (1–2) to the largest raw "
+     "p-values, so marginal comparisons (raw p ≈ 0.002–0.046, e.g. MRR on "
+     "AgentIR: p = 0.0236 → 0.0472) still pass, while all remaining "
+     "comparisons have raw p ≤ 0.001."),
+    ("5.1 observation key",
+     "The important observation is what is **not** in Table 9: every "
+     "comparison involving **MEIRA-full — including vs the best baseline "
+     "ColBERT-like — remains significant at p < 0.0001 even after "
+     "Bonferroni correction** on every metric and dataset (nDCG@10: "
+     "t = 20.12 / 13.06). The headline superiority claim therefore does not "
+     "depend on which correction is chosen.",
+     "The key observation is what is **not** in Table 9: every comparison "
+     "involving **MEIRA-full — including vs the best baseline ColBERT-like "
+     "— remains significant at p < 0.0001 even after Bonferroni "
+     "correction** on every metric and dataset. The headline superiority "
+     "claim therefore does not depend on which correction is chosen."),
+    ("5.2 holm tighten",
+     "The other α = 0.01 reductions are raw-threshold effects — those raw "
+     "p-values (0.0105–0.0458) already exceed 0.01 — and the MRR "
+     "non-significance of BM25 vs TF-IDF is inherited by Holm at every "
+     "threshold.",
+     "The other α = 0.01 reductions are raw-threshold effects (raw p-values "
+     "0.0105–0.0458 already exceed 0.01); the MRR non-significance of BM25 "
+     "vs TF-IDF is inherited by Holm at every threshold."),
+    ("5.2 bonferroni families",
+     "Consistently with Section 5.1, the unstable comparisons are exactly "
+     "the BM25/TF-IDF tie, the no-decay/ColBERT boundary, and a few tight "
+     "CrossLing ablation-tier gaps; no ordering *direction* ever flips, "
+     "only the verdict.",
+     "The unstable comparisons are again the two fragile families plus a "
+     "few tight CrossLing ablation-tier gaps; no ordering *direction* ever "
+     "flips, only the verdict."),
+    ("5.2 bonferroni micro-gaps",
+     "at α = 0.01 it drops more comparisons (e.g. MAP on "
+     "FIRE-CrossLingIR-2026: 24/28, plus the CrossLing micro-gaps "
+     "ColBERT-like > MEIRA-no-memory and MEIRA-no-xai > MEIRA-no-decay "
+     "joining the fragile families),",
+     "at α = 0.01 it drops more comparisons (e.g. MAP on "
+     "FIRE-CrossLingIR-2026: 24/28, plus a few CrossLing micro-gaps "
+     "joining the fragile families),"),
+    ("4.2 significance sentence",
+     "Significance of every variant-vs-full difference is established in "
+     "Section 5 (all are significant under Holm at α = 0.05).",
+     "All variant-vs-full differences are significant under Holm at "
+     "α = 0.05 (Section 5)."),
+    ("4.2 hedge tighten",
+     "This ranking is stable across the two datasets and across F1, AUC, "
+     "nDCG@10 and MAP. One honest hedge, carried over from Section 5: the "
+     "strongest ablated variant (MEIRA-no-decay) sits close to the best "
+     "neural baseline (ColBERT-like), and that boundary — like BM25 vs "
+     "TF-IDF — is significant under Holm but not under Bonferroni, so "
+     "claims that \"MEIRA without temporal decay still beats the best "
+     "neural baseline\" should cite the Holm-corrected p-values and note "
+     "the sensitivity.",
+     "This ranking is stable across both datasets and metrics. One honest "
+     "hedge, carried over from Section 5: MEIRA-no-decay sits close to "
+     "ColBERT-like, and that boundary — like BM25 vs TF-IDF — is "
+     "significant under Holm but not under Bonferroni, so \"no-decay MEIRA "
+     "beats the best neural baseline\" must cite the Holm-corrected "
+     "p-values."),
+    ("4.1 caveats micro",
+     "Two caveats keep the headline honest: (i) at shallow cutoffs the "
+     "models are effectively tied (P@10 = 0.101±0.001 on AgentIR, "
+     "0.074±0.002 on CrossLingIR for every model), so the claim is "
+     "superiority on ranking quality, not raw precision; and (ii)",
+     "Two caveats keep the headline honest: (i) at shallow cutoffs the "
+     "models are effectively tied (P@10 = 0.101±0.001 / 0.074±0.002 on "
+     "AgentIR / CrossLingIR), so the claim is superiority on ranking "
+     "quality, not raw precision; and (ii)"),
+    ("4.1 gains micro",
+     "— and, as Section 5 shows, **every MEIRA-full-vs-baseline comparison "
+     "stays significant at p < 0.0001 even under the strictest (Bonferroni) "
+     "multiplicity correction**.",
+     "— and, as Section 5 shows, **every MEIRA-full-vs-baseline comparison "
+     "stays significant at p < 0.0001 even under Bonferroni correction**."),
+    ("6.1 intro compress",
+     "We presented **MEIRA**, a Memory-Enhanced Interpretable Retrieval "
+     "Agent that couples an episodic memory bank (64 slots), a "
+     "temporal-decay mechanism over memory, and an XAI attribution head, "
+     "and evaluated it end-to-end on two new FIRE-style benchmarks — "
+     "FIRE-AgentIR-2026 (multi-turn agentic conversation retrieval) and "
+     "FIRE-CrossLingIR-2026 (cross-lingual Indian-language retrieval) — "
+     "built with sibling-topic hard negatives and label noise, and "
+     "measured with two new metrics: **XAIR@K** (explainability-adjusted IR "
+     "score, w = 0.25) and **MDS** (memory diversity score).",
+     "We presented **MEIRA**, a retrieval agent coupling a 64-slot episodic "
+     "memory bank, a temporal-decay mechanism, and an XAI attribution "
+     "head, evaluated end-to-end on two new FIRE-style benchmarks "
+     "(FIRE-AgentIR-2026, FIRE-CrossLingIR-2026) with sibling-topic hard "
+     "negatives and label noise, using two new metrics: **XAIR@K** "
+     "(explainability-adjusted IR score, w = 0.25) and **MDS** (memory "
+     "diversity score)."),
+    ("6.1 bullet1 tstat",
+     "it gains +0.087 / +0.099 F1 (+11.7% / +14.6% relative), significant "
+     "at p < 0.0001 (t = 20.120 / 13.058) and **surviving both "
+     "multiplicity corrections at every threshold**",
+     "it gains +0.087 / +0.099 F1 (+11.7% / +14.6% relative), significant "
+     "at p < 0.0001 and **surviving both multiplicity corrections at every "
+     "threshold**"),
+    ("6.1 bullet3 micro",
+     "Holm changes exactly one verdict (the no-decay > ColBERT-like "
+     "boundary at α = 0.01); Bonferroni loses at most the BM25-vs-TF-IDF "
+     "tie and the no-decay/ColBERT boundary — the same two fragile "
+     "families at every α — and **never any comparison involving "
+     "MEIRA-full** (14 α-sensitive pair-instances, none ours).",
+     "Holm changes exactly one verdict (no-decay > ColBERT-like at "
+     "α = 0.01); Bonferroni loses at most the BM25-vs-TF-IDF tie and the "
+     "no-decay/ColBERT boundary — the same two fragile families at every "
+     "α — and **never any comparison involving MEIRA-full** (14 "
+     "α-sensitive pair-instances, none ours)."),
+    ("3.2 outputs micro",
+     "**Outputs.** Every script archives results to a configuration-named "
+     "subfolder (`results/k10_s10/` for the robustness suite; `results/s10/` "
+     "for the SOTA and ablation runs) so configurations never overwrite "
+     "each other.",
+     "**Outputs.** Every script archives results to a configuration-named "
+     "subfolder (`results/k10_s10/`, `results/s10/`) so configurations "
+     "never overwrite each other."),
+    ("3.2 seeds samples micro",
+     "For each seed, models are scored on the held-out **test** partition "
+     "of that seed's stratified split (≈15% of each class: ≈1,260 samples "
+     "per seed for FIRE-AgentIR-2026, ≈480 for FIRE-CrossLingIR-2026); the "
+     "k-fold experiment scores each of the 10 folds once (seed 42 + fold "
+     "index).",
+     "For each seed, models are scored on the held-out **test** partition "
+     "of that seed's stratified split (≈15% of each class); the k-fold "
+     "experiment scores each of the 10 folds once (seed 42 + fold index)."),
+    ("3.1 api micro",
+     "so every downstream script — k-fold cross-validation, multi-seed "
+     "evaluation, ablation, and the SOTA comparison — runs identically on "
+     "either dataset.",
+     "so every downstream script (k-fold, multi-seed, ablation, SOTA) runs "
+     "identically on either dataset."),
 ]
 

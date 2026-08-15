@@ -448,7 +448,11 @@ def convert_figure(alt, path, attrs):
               "(includegraphics resolves relative to the latex/ build dir)")
     tex_path = "../" + path if path.startswith("figures/") else path
     body = [r"\begin{figure*}[tb]", r"\centering",
-            f"\\includegraphics[width=\\textwidth]{{{tex_path}}}",
+            # 0.94\textwidth (not full width): the three figures were sized
+            # for nominal font rendering at full width; this small reduction
+            # helps the paper stay within the 9-page content limit while the
+            # 300-dpi source images keep their tuned layouts.
+            f"\\includegraphics[width=0.94\\textwidth]{{{tex_path}}}",
             f"\\caption{{{tex_inline(alt)}}}"]
     if label:
         body.append(f"\\label{{{label}}}")
@@ -651,11 +655,12 @@ def render_main(abstract_tex, front_comment, inputs):
 % Submissions:
 %   * Regular / Perspective tracks -> double-blind: keep `anonymous=true`
 %   * Resource / Demo track        -> single-blind: drop `anonymous`
+% Camera-ready: real author block below; re-enable `anonymous=true` for
+% double-blind review and comment the author block out again.
 % ============================================================================
 
-\\documentclass[sigconf,natbib=true,anonymous=true]{{acmart}}
-% Single-blind (Resource / Demo track): comment the line above and uncomment:
-% \\documentclass[sigconf,natbib=true]{{acmart}}
+\\documentclass[sigconf,natbib=true]{{acmart}}
+% Double-blind review: \\documentclass[sigconf,natbib=true,anonymous=true]{{acmart}}
 
 \\usepackage{{booktabs}}   % publication-quality tables (ACM whitelist)
 \\usepackage{{cleveref}}   % \\Cref/\\Crefrange for section/table references
@@ -672,15 +677,37 @@ def render_main(abstract_tex, front_comment, inputs):
 Agentic and Cross-Lingual Information Retrieval}}
 
 % --- Author block --------------------------------------------------------------
-% Double-blind: keep the author block commented out until camera-ready.
-% \\author{{First Author}}
-% \\affiliation{{%
-%   \\institution{{...}}
-%   \\department{{...}}
-%   \\city{{...}}
-%   \\country{{...}}}}
-% \\email{{first.author@example.org}}
-% ... repeat per author; include ORCID where available.
+\\author{{Arghya Bose}}
+\\affiliation{{%
+  \\institution{{KIIT (Deemed to be University)}}
+  \\city{{Bhubaneswar, Odisha}}
+  \\country{{India}}}}
+\\email{{officialarghya29@gmail.com}}
+
+\\author{{Arindam Tripathi}}
+\\affiliation{{%
+  \\institution{{KIIT (Deemed to be University)}}
+  \\city{{Bhubaneswar, Odisha}}
+  \\country{{India}}}}
+\\email{{arindamtripathi.619@gmail.com}}
+
+\\author{{Rajdeep Chatterjee}}
+\\authornote{{Corresponding author}}
+\\affiliation{{%
+  \\institution{{KIIT (Deemed to be University)}}
+  \\city{{Bhubaneswar, Odisha}}
+  \\country{{India}}}}
+\\email{{cse.rajdeep@gmail.com}}
+
+% --- Conference / copyright metadata (camera-ready; replace DOI/ISBN with the
+% publisher-assigned values before final submission) --------------------------
+\\setcopyright{{acmcopyright}}
+\\copyrightyear{{2026}}
+\\acmYear{{2026}}
+\\acmConference[FIRE '26]{{Proceedings of the 18th Forum for Information Retrieval Evaluation}}{{December 17--20, 2026}}{{Kolkata, India}}
+\\acmBooktitle{{Proceedings of the 18th Forum for Information Retrieval Evaluation (FIRE '26), December 17--20, 2026, Kolkata, India}}
+\\acmDOI{{10.1145/XXXXXXX.XXXXXXX}}
+\\acmISBN{{979-8-4007-XXXX-X/26/12}}
 
 % --- ACM CCS concepts (REQUIRED) -----------------------------------------------
 % Verify against the ACM CCS 2012 thesaurus: https://dl.acm.org/ccs

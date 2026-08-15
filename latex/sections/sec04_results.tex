@@ -12,9 +12,9 @@ We compare \textbf{MEIRA-full} against four baselines spanning the classical and
 
 \textbf{MEIRA-full is the best model on every ranking metric on both datasets.} On FIRE-AgentIR-2026 it reaches F1 = 0.826$\pm$0.015 (vs 0.740$\pm$0.013 for the strongest baseline, ColBERT-like; +0.087), nDCG@10 = 0.969$\pm$0.008 (vs 0.937$\pm$0.012; +0.032), MAP = 0.954$\pm$0.011 (vs 0.909$\pm$0.017; +0.045) and MRR = 0.644$\pm$0.020 (vs 0.617$\pm$0.021; +0.027). The margins are consistent on FIRE-CrossLingIR-2026 (F1 = 0.780$\pm$0.030 vs 0.680$\pm$0.029, +0.099; nDCG@10 +0.030; MAP +0.042; MRR +0.021). In relative terms the gains are large: +11.7\% / +14.6\% F1 and +3.4\% / +3.2\% nDCG@10 (AgentIR / CrossLingIR).
 
-The baselines order consistently with expectations --- ColBERT-like > Dense-IR > BM25 $\geq$ TF-IDF on every ranking metric --- and MEIRA-full dominates all of them. Two caveats keep the headline honest: (i) at shallow cutoffs the models are effectively tied (P@10 = 0.101$\pm$0.001 on AgentIR, 0.074$\pm$0.002 on CrossLingIR for every model), so the claim is superiority on ranking quality, not raw precision; and (ii) \textbf{XAIR@10 and MDS are defined only for MEIRA variants} --- baselines produce no attributions and maintain no memory bank --- so those columns are ``---'' by construction.
+The baselines order consistently with expectations --- ColBERT-like > Dense-IR > BM25 $\geq$ TF-IDF on every ranking metric --- and MEIRA-full dominates all of them. Two caveats keep the headline honest: (i) at shallow cutoffs the models are effectively tied (P@10 = 0.101$\pm$0.001 / 0.074$\pm$0.002 on AgentIR / CrossLingIR), so the claim is superiority on ranking quality, not raw precision; and (ii) \textbf{XAIR@10 and MDS are defined only for MEIRA variants} --- baselines produce no attributions and maintain no memory bank --- so those columns are ``---'' by construction.
 
-The gains are not noise: the paired t-test (nDCG@10, ten seeds) against the best baseline gives $t = 20.120$ / 13.058 (AgentIR / CrossLingIR), both $p < 0.0001$ --- and, as \Cref{sec:rob} shows, \textbf{every MEIRA-full-vs-baseline comparison stays significant at $p < 0.0001$ even under the strictest (Bonferroni) multiplicity correction}. On the novel metrics, MEIRA-full attains XAIR@10 = 0.894$\pm$0.007 / 0.886$\pm$0.010 and MDS = 1.000$\pm$0.000 on both datasets.
+The gains are not noise: the paired t-test (nDCG@10, ten seeds) against the best baseline gives $t = 20.120$ / 13.058 (AgentIR / CrossLingIR), both $p < 0.0001$ --- and, as \Cref{sec:rob} shows, \textbf{every MEIRA-full-vs-baseline comparison stays significant at $p < 0.0001$ even under Bonferroni correction}. On the novel metrics, MEIRA-full attains XAIR@10 = 0.894$\pm$0.007 / 0.886$\pm$0.010 and MDS = 1.000$\pm$0.000 on both datasets.
 
 \begin{table*}[tb]
 \setlength{\tabcolsep}{2pt}
@@ -58,7 +58,7 @@ MEIRA-full \textbf{(ours)} & 0.780$\pm$0.030 & 0.923$\pm$0.015 & 0.828$\pm$0.028
 
 \begin{figure*}[tb]
 \centering
-\includegraphics[width=\textwidth]{../figures/s10/sota1_leaderboard_bars.png}
+\includegraphics[width=0.94\textwidth]{../figures/s10/sota1_leaderboard_bars.png}
 \caption{Mean F1, nDCG@10, MAP and MRR of the five models on FIRE-AgentIR-2026 (top) and FIRE-CrossLingIR-2026 (bottom), with 10-seed error bars; the star marks the best model per panel.}
 \label{fig:sota}
 \end{figure*}
@@ -66,7 +66,7 @@ MEIRA-full \textbf{(ours)} & 0.780$\pm$0.030 & 0.923$\pm$0.015 & 0.828$\pm$0.028
 \subsection{Component ablation: memory, XAI, decay}
 \label{sec:results-ablation}
 
-To attribute MEIRA-full's performance to its three novel components, we ablate each one --- episodic memory, the XAI attribution head, and temporal decay --- while keeping the other two intact, and measure the drop relative to the full model (\Crefrange{tab:abl-agent}{tab:abl-cross}; the ``$\Delta$ vs full'' rows report the full-model value minus the ablated value, so larger is worse). Significance of every variant-vs-full difference is established in \Cref{sec:rob} (all are significant under Holm at $\alpha = 0.05$).
+To attribute MEIRA-full's performance to its three novel components, we ablate each one --- episodic memory, the XAI attribution head, and temporal decay --- while keeping the other two intact, and measure the drop relative to the full model (\Crefrange{tab:abl-agent}{tab:abl-cross}; the ``$\Delta$ vs full'' rows report the full-model value minus the ablated value, so larger is worse). All variant-vs-full differences are significant under Holm at $\alpha = 0.05$ (\Cref{sec:rob}).
 
 \textbf{Episodic memory is the dominant component.} Removing it costs the most on every ranking metric ($\Delta$F1 = +0.110 / +0.124 on AgentIR / CrossLingIR; per-metric deltas in \Cref{tab:deltas}) and collapses the memory-diversity score from 1.000 to 0.000 ($\Delta$MDS = +1.000) on both datasets --- a mode-collapse signature: without the episodic bank, MEIRA no longer spreads its retrievals across memory states.
 
@@ -74,7 +74,7 @@ To attribute MEIRA-full's performance to its three novel components, we ablate e
 
 \textbf{Temporal decay contributes the second-largest, consistent gain} ($\Delta$F1 = +0.078 / +0.086). Removing \emph{any} of the three components degrades every ranking metric on both datasets (all deltas positive); on F1, AUC, nDCG@10, MAP and MRR the component ranking is the same: memory > decay > XAI.
 
-This ranking is stable across the two datasets and across F1, AUC, nDCG@10 and MAP. One honest hedge, carried over from \Cref{sec:rob}: the strongest ablated variant (MEIRA-no-decay) sits close to the best neural baseline (ColBERT-like), and that boundary --- like BM25 vs TF-IDF --- is significant under Holm but not under Bonferroni, so claims that ``MEIRA without temporal decay still beats the best neural baseline'' should cite the Holm-corrected p-values and note the sensitivity.
+This ranking is stable across both datasets and metrics. One honest hedge, carried over from \Cref{sec:rob}: MEIRA-no-decay sits close to ColBERT-like, and that boundary --- like BM25 vs TF-IDF --- is significant under Holm but not under Bonferroni, so ``no-decay MEIRA beats the best neural baseline'' must cite the Holm-corrected p-values.
 
 \begin{table*}[tb]
 \setlength{\tabcolsep}{3pt}
@@ -112,7 +112,7 @@ Variant & F1 & AUC & nDCG@10 & MAP & MRR & XAIR@10 & MDS \\
 \end{tabular}
 \end{table*}
 
-\textbf{\Cref{tab:abl-cross}. Ablation, FIRE-CrossLingIR-2026. Mean $\pm$ std over 10 seeds.} $\Delta$ vs full (component contribution; AgentIR / CrossLingIR):
+$\Delta$ vs full (component contribution; AgentIR / CrossLingIR):
 
 \begin{table*}[tb]
 \setlength{\tabcolsep}{3pt}
@@ -135,7 +135,7 @@ $- $ Temporal decay & +0.078 / +0.086 & +0.043 / +0.058 & +0.028 / +0.025 & +0.0
 
 \begin{figure*}[tb]
 \centering
-\includegraphics[width=\textwidth]{../figures/s10/abl2_delta_heatmap.png}
+\includegraphics[width=0.94\textwidth]{../figures/s10/abl2_delta_heatmap.png}
 \caption{$\Delta$ (full $-$ ablated) per removed component across the seven metrics on FIRE-AgentIR-2026 (left) and FIRE-CrossLingIR-2026 (right); red cells mark the largest drops.}
 \label{fig:ablation}
 \end{figure*}
